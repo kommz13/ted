@@ -41,11 +41,9 @@ public class JavaEE8Resource {
             Query q = em.createQuery("Select u from User u");
             List users = q.getResultList();                                                                                      
             
-            User bob = em.find("bob");
-            
-            bob.setAge(30)''
             
             
+                      
             return Response
                 .ok(users)
                 .build();
