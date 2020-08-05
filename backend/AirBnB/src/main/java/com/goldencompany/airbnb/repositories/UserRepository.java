@@ -10,8 +10,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -20,27 +22,20 @@ import javax.persistence.Query;
  */
 
 public class UserRepository {
-    private final String SQL_FIND_USER_BY_USERNAME = "SELECT u FROM User u WHERE u.username = ?";
-    
-    @PersistenceContext(unitName = "airbnb_db_pool_pu")
+     @PersistenceUnit(unitName = "airbnb_db_pool_pu")
+    private EntityManagerFactory entityManagerFactory;
+     
+    @PersistenceContext(unitName = "airbnb_db_pool_pu", type = PersistenceContextType.EXTENDED)
     EntityManager em;
     
-    public User findByUsername(String username) {
-        User user = null;
-        Query query = em.createQuery(SQL_FIND_USER_BY_USERNAME);
-        query.setParameter(1, username);
-        List<User> users = query.getResultList();
-        
-        if (users != null && users.size() > 0) {
-            user = users.get(0);
-        }
-        
-        return user;
-
-//        User u =  new User();
-//        u.setFirstname("Bob");
-//        u.setLastname("bobious");
-//        u.setIduser(1);
-//        return u;
+    
+    public  List findAll() {
+         Query q = em.createQuery("Select u from User u");
+            List users = q.getResultList();     
+            
+            return users;
+//         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+//         List<User> results = query.getResultList();
+//         return results;
     }
 }
