@@ -32,6 +32,14 @@ public class JavaEE8Resource {
     }
     
     @GET
+    @Path("peng")
+    public Response peng(){
+        return Response
+                .ok("peng")
+                .build();
+    }
+    
+    @GET
     @Path("users")
     public Response pong(){
         
