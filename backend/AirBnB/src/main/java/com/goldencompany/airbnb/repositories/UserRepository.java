@@ -22,15 +22,12 @@ import javax.persistence.TypedQuery;
  */
 
 public class UserRepository {
-     @PersistenceUnit(unitName = "airbnb_db_pool_pu")
-    private EntityManagerFactory entityManagerFactory;
-     
-    @PersistenceContext(unitName = "airbnb_db_pool_pu", type = PersistenceContextType.EXTENDED)
-    EntityManager em;
+    @PersistenceContext(unitName = "airbnb_db_pool_pu")
+    private EntityManager em;
     
     
     public  List findAll() {
-         Query q = em.createQuery("Select u from User u");
+         Query q = em.createNamedQuery("User.findAll");
             List users = q.getResultList();     
             
             return users;
@@ -38,4 +35,6 @@ public class UserRepository {
 //         List<User> results = query.getResultList();
 //         return results;
     }
+    
+    
 }
