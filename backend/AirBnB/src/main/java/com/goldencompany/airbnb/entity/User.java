@@ -7,20 +7,26 @@ package com.goldencompany.airbnb.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,7 +47,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findByPhotoUrl", query = "SELECT u FROM User u WHERE u.photoUrl = :photoUrl"),
     @NamedQuery(name = "User.findByRegistrationStatus", query = "SELECT u FROM User u WHERE u.registrationStatus = :registrationStatus"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByRegistrationDate", query = "SELECT u FROM User u WHERE u.registrationDate = :registrationDate")})
+    @NamedQuery(name = "User.findByRegistrationDate", query = "SELECT u FROM User u WHERE u.registrationDate = :registrationDate"),
+    @NamedQuery(name = "User.findByBirthdate", query = "SELECT u FROM User u WHERE u.birthdate = :birthdate")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,6 +103,23 @@ public class User implements Serializable {
     @Column(name = "registration_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "birthdate")
+    @Temporal(TemporalType.DATE)
+    private Date birthdate;
+    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
+    private List<Role> roleList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<Booking> bookingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Critic> criticList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom", fetch = FetchType.LAZY)
+    private List<Message> messageList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo", fetch = FetchType.LAZY)
+    private List<Message> messageList1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    private List<Listing> listingList;
 
     public User() {
     }
@@ -104,7 +128,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstname, String lastname, String email, String phone, String username, String password, int registrationStatus, Date registrationDate) {
+    public User(Integer id, String firstname, String lastname, String email, String phone, String username, String password, int registrationStatus, Date registrationDate, Date birthdate) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -114,6 +138,7 @@ public class User implements Serializable {
         this.password = password;
         this.registrationStatus = registrationStatus;
         this.registrationDate = registrationDate;
+        this.birthdate = birthdate;
     }
 
     public Integer getId() {
@@ -202,6 +227,68 @@ public class User implements Serializable {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    @XmlTransient
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    @XmlTransient
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    @XmlTransient
+    public List<Critic> getCriticList() {
+        return criticList;
+    }
+
+    public void setCriticList(List<Critic> criticList) {
+        this.criticList = criticList;
+    }
+
+    @XmlTransient
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    @XmlTransient
+    public List<Message> getMessageList1() {
+        return messageList1;
+    }
+
+    public void setMessageList1(List<Message> messageList1) {
+        this.messageList1 = messageList1;
+    }
+
+    @XmlTransient
+    public List<Listing> getListingList() {
+        return listingList;
+    }
+
+    public void setListingList(List<Listing> listingList) {
+        this.listingList = listingList;
     }
 
     @Override

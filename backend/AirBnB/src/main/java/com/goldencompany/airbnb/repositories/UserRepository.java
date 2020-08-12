@@ -5,15 +5,10 @@
  */
 package com.goldencompany.airbnb.repositories;
 
-import com.goldencompany.airbnb.entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -34,6 +29,15 @@ public class UserRepository {
 //         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 //         List<User> results = query.getResultList();
 //         return results;
+    }
+
+    public List find(Integer id) {
+        Query q = em.createNamedQuery("User.findById");
+        q.setParameter("id", id);
+        
+        List users = q.getResultList();     
+            
+        return users;
     }
     
     

@@ -5,24 +5,22 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-// | /api/admin/users | GET | - | all users
-// | /api/admin/users/:id | GET | id | user details of user with that ID
-
-        
 /**
  *
  * @author 
  */
-@Path("/admin/users")
-public class UserResource {
+
+// | /api/admin/data/export | GET | - | complete dataset
+
+@Path("/admin/export")
+public class ExportResource {
     @Inject
     UserManagementController controller;
     
-    @GET    
-    @Path("")
+    @GET
+    @Path("list")
     public Response list(){     
         List users = controller.retrieveUsers();
         
@@ -31,14 +29,7 @@ public class UserResource {
                 .build();
     }
     
-    @GET    
-    @Path("{id}")
-    public Response id(@PathParam("id") Integer id){     
-        List user = controller.retrieveUserByID(id);
-        
-        return Response
-                .ok(user)
-                .build();
-    }
+    
+    
         
 }

@@ -1,3 +1,28 @@
+# Endpoints
+
+### Administrator API
+| Endpoint address | method | input | output |
+| - | - | - | - |
+| /api/admin/users/list | GET | - | all users
+| /api/admin/users/:id | GET | id | user details of user with that ID
+| /api/admin/account/active | GET | - | all active accounts
+| /api/admin/account/inactive | GET | - | all inactive accounts
+| /api/admin/account/activate/:id | POST | - | success / fail
+| /api/admin/account/deactivate/:id | POST | - | success / fail
+| /api/admin/data/export | GET | - | complete dataset
+
+
+
+
+/hotels/*
+
+p.x. /hotels/boomerang
+
+
+/hotels/attiki
+
+
+
 # References
 
 Links:

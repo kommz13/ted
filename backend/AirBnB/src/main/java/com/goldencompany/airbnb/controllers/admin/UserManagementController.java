@@ -26,5 +26,9 @@ public class UserManagementController {
     public List retrieveUsers() {
         return userRepository.findAll();
     }
+
+    public List retrieveUserByID(Integer id) {
+        return userRepository.find(id);
+    }
     
 }
