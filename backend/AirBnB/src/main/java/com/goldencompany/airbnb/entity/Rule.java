@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -50,7 +49,7 @@ public class Rule implements Serializable {
     @NotNull
     @Column(name = "active")
     private int active;
-    @ManyToMany(mappedBy = "ruleList", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "ruleList")
     private List<Listing> listingList;
 
     public Rule() {

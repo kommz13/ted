@@ -5,7 +5,14 @@
  */
 package com.goldencompany.airbnb.controllers.admin;
 
+import com.goldencompany.airbnb.dto.RoleDTO;
+import com.goldencompany.airbnb.dto.UserDTO;
+import com.goldencompany.airbnb.entity.Role;
+import com.goldencompany.airbnb.entity.User;
+import com.goldencompany.airbnb.mappers.RoleMapper;
+import com.goldencompany.airbnb.mappers.UserMapper;
 import com.goldencompany.airbnb.repositories.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -22,13 +29,44 @@ public class UserManagementController {
 
     @Inject
     UserRepository userRepository;
+    
+    @Inject
+    UserMapper userMapper;
+    
+    @Inject
+    RoleMapper roleMapper;
+    
      
     public List retrieveUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        
+        List dtos = userMapper.toDTO(users);
+        
+        return dtos;
     }
 
     public List retrieveUserByID(Integer id) {
-        return userRepository.find(id);
+        List<User> users = userRepository.find(id);
+        
+        List dtos = userMapper.toDTO(users);
+        
+        return dtos;        
+    }
+
+    public List retrieveActiveUsers() {
+        List<User> users = userRepository.findActive();
+        
+        List dtos = userMapper.toDTO(users);
+        
+        return dtos;
+    }
+
+    public List retrieveInactiveUsers() {
+        List<User> users = userRepository.findInactive();
+        
+        List dtos = userMapper.toDTO(users);
+        
+        return dtos;
     }
     
 }

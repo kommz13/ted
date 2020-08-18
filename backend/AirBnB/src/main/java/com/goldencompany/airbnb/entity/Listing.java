@@ -12,7 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -133,25 +132,27 @@ public class Listing implements Serializable {
     @NotNull
     @Column(name = "extra_cost_per_person")
     private int extraCostPerPerson;
-    @ManyToMany(mappedBy = "listingList", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "listingList")
     private List<Amenity> amenityList;
     @JoinTable(name = "listing_has_rule", joinColumns = {
         @JoinColumn(name = "listing_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "rule_id", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private List<Rule> ruleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing")
     private List<Critic> criticList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
     private List<Photo> photoList;
     @JoinColumn(name = "type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Type typeId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing")
+    private List<UserViewsListing> userViewsListingList;
 
     public Listing() {
     }
@@ -374,6 +375,15 @@ public class Listing implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    @XmlTransient
+    public List<UserViewsListing> getUserViewsListingList() {
+        return userViewsListingList;
+    }
+
+    public void setUserViewsListingList(List<UserViewsListing> userViewsListingList) {
+        this.userViewsListingList = userViewsListingList;
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.repositories;
 
+import com.goldencompany.airbnb.entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,11 +22,10 @@ public class UserRepository {
     private EntityManager em;
     
     
-    public  List findAll() {
-         Query q = em.createNamedQuery("User.findAll");
-            List users = q.getResultList();     
-            
-            return users;
+    public List<User> findAll() {
+        Query q = em.createNamedQuery("User.findAll");
+        List users = q.getResultList();                 
+        return users;
 //         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 //         List<User> results = query.getResultList();
 //         return results;
@@ -34,6 +34,24 @@ public class UserRepository {
     public List find(Integer id) {
         Query q = em.createNamedQuery("User.findById");
         q.setParameter("id", id);
+        
+        List users = q.getResultList();     
+            
+        return users;
+    }
+
+    public List<User> findActive() {
+         Query q = em.createNamedQuery("User.findByActive");
+        q.setParameter("active", 1);
+        
+        List users = q.getResultList();     
+            
+        return users;
+    }
+
+    public List<User> findInactive() {
+        Query q = em.createNamedQuery("User.findByActive");
+        q.setParameter("active", 0);
         
         List users = q.getResultList();     
             

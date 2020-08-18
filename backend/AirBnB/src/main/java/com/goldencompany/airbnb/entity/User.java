@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -96,8 +96,10 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "registration_status")
     private int registrationStatus;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "active")
-    private Integer active;
+    private int active;
     @Basic(optional = false)
     @NotNull
     @Column(name = "registration_date")
@@ -108,18 +110,20 @@ public class User implements Serializable {
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
-    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "userList")
     private List<Role> roleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Critic> criticList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom")
     private List<Message> messageList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo")
     private List<Message> messageList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Listing> listingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<UserViewsListing> userViewsListingList;
 
     public User() {
     }
@@ -128,7 +132,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstname, String lastname, String email, String phone, String username, String password, int registrationStatus, Date registrationDate, Date birthdate) {
+    public User(Integer id, String firstname, String lastname, String email, String phone, String username, String password, int registrationStatus, int active, Date registrationDate, Date birthdate) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -137,6 +141,7 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         this.registrationStatus = registrationStatus;
+        this.active = active;
         this.registrationDate = registrationDate;
         this.birthdate = birthdate;
     }
@@ -213,11 +218,11 @@ public class User implements Serializable {
         this.registrationStatus = registrationStatus;
     }
 
-    public Integer getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Integer active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -289,6 +294,15 @@ public class User implements Serializable {
 
     public void setListingList(List<Listing> listingList) {
         this.listingList = listingList;
+    }
+
+    @XmlTransient
+    public List<UserViewsListing> getUserViewsListingList() {
+        return userViewsListingList;
+    }
+
+    public void setUserViewsListingList(List<UserViewsListing> userViewsListingList) {
+        this.userViewsListingList = userViewsListingList;
     }
 
     @Override

@@ -41,4 +41,23 @@ public class UserResource {
                 .build();
     }
         
+    @GET    
+    @Path("active")
+    public Response active(){     
+        List users = controller.retrieveActiveUsers();
+        
+        return Response
+                .ok(users)
+                .build();
+    }
+    
+    @GET    
+    @Path("inactive")
+    public Response inactive(){     
+        List users = controller.retrieveInactiveUsers();
+        
+        return Response
+                .ok(users)
+                .build();
+    }
 }
