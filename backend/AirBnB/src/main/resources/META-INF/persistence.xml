@@ -8,7 +8,19 @@
   </persistence-unit>
   -->
   <persistence-unit name="airbnb_db_non_pool_pu" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.goldencompany.airbnb.entity.Amenity</class>
+    <class>com.goldencompany.airbnb.entity.Booking</class>
+    <class>com.goldencompany.airbnb.entity.Critic</class>
+    <class>com.goldencompany.airbnb.entity.Listing</class>
+    <class>com.goldencompany.airbnb.entity.Message</class>
+    <class>com.goldencompany.airbnb.entity.Photo</class>
+    <class>com.goldencompany.airbnb.entity.Role</class>
+    <class>com.goldencompany.airbnb.entity.Rule</class>
+    <class>com.goldencompany.airbnb.entity.Type</class>
     <class>com.goldencompany.airbnb.entity.User</class>
+    <class>com.goldencompany.airbnb.entity.UserViewsListing</class>
+    <class>com.goldencompany.airbnb.entity.queries.MessageQueryHolder</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/airbnbdb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
@@ -19,11 +31,9 @@
   </persistence-unit>
   <persistence-unit name="airbnb_db_pool_pu">
     <jta-data-source>jdbc/airbnb_resource</jta-data-source>
-    
-     <shared-cache-mode>NONE</shared-cache-mode>
-        <properties>
-            <property name="eclipselink.cache.shared.default" value="false"/>
-        
-        </properties> 
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+    </properties>
   </persistence-unit>
 </persistence>
