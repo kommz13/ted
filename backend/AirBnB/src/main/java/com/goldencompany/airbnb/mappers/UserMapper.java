@@ -5,11 +5,13 @@
  */
 package com.goldencompany.airbnb.mappers;
 
-import com.goldencompany.airbnb.dto.RoleDTO;
-import com.goldencompany.airbnb.dto.UserDTO;
+import com.goldencompany.airbnb.dto.input.RegisterDTO;
+import com.goldencompany.airbnb.dto.output.RoleDTO;
+import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.entity.Role;
 import com.goldencompany.airbnb.entity.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -62,4 +64,40 @@ public class UserMapper {
         return list;
     }
     
+    public User toEntity(RegisterDTO dto) {
+        User entity = new User();
+        
+        entity.setFirstname(dto.getFirstname());
+        entity.setLastname(dto.getLastname());
+        entity.setPassword(dto.getPassword());
+        entity.setEmail(dto.getEmail());
+        entity.setPhone(dto.getPhone());
+        entity.setUsername(dto.getUsername());
+        entity.setPhotoUrl(dto.getPhotoUrl());
+        entity.setRegistrationDate(new Date());
+        entity.setBirthdate(dto.getBirthdate());
+        entity.setActive(1);
+        entity.setRegistrationStatus(0);
+        
+        List<Role> roleList = new ArrayList();
+        
+        if (dto.isIs_host()) {
+            Role r = new Role();
+            r.setId(1);
+            roleList.add(r);
+        }
+        
+        
+        if (dto.isIs_customer()) {
+            Role r = new Role();
+            r.setId(2);
+            roleList.add(r);
+        }
+        
+        entity.setRoleList(roleList);
+        
+        
+        
+        return entity;
+    }
 }

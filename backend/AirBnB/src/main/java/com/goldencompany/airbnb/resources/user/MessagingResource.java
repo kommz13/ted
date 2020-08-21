@@ -33,8 +33,18 @@ public class MessagingResource {
 //    
     @GET    
     @Path("received/{id}")    
-    public Response id(@PathParam("id") Integer id){     
-        List message = controller.retrieveMessageByUserID(id);
+    public Response received(@PathParam("id") Integer id){     
+        List message = controller.retrieveReceivedMessageByUserID(id);
+        
+        return Response
+                .ok(message)
+                .build();
+    }
+    
+      @GET    
+    @Path("sent/{id}")    
+    public Response sent(@PathParam("id") Integer id){     
+        List message = controller.retrieveSentMessageByUserID(id);
         
         return Response
                 .ok(message)

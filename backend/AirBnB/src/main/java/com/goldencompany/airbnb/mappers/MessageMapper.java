@@ -5,8 +5,8 @@
  */
 package com.goldencompany.airbnb.mappers;
 
-import com.goldencompany.airbnb.dto.MessageDTO;
-import com.goldencompany.airbnb.dto.UserDTO;
+import com.goldencompany.airbnb.dto.output.MessageDTO;
+import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.goldencompany.airbnb.dto;
+package com.goldencompany.airbnb.dto.output;
 
 import java.util.ArrayList;
 import java.util.Date;

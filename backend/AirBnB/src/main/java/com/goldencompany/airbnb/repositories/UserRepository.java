@@ -5,9 +5,13 @@
  */
 package com.goldencompany.airbnb.repositories;
 
+import com.goldencompany.airbnb.entity.Role;
 import com.goldencompany.airbnb.entity.User;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -16,7 +20,7 @@ import javax.persistence.Query;
  * @author george
  * 
  */
-
+@Stateless
 public class UserRepository {
     @PersistenceContext(unitName = "airbnb_db_pool_pu")
     private EntityManager em;
@@ -57,6 +61,34 @@ public class UserRepository {
             
         return users;
     }
-    
+
+    public void create(User entity) {
+        em.persist(entity);//insert
+        
+//        for (Role r : entity.getRoleList()) {
+//            
+//        }
+//        em.persist(entity.getRoleList());
+
+// ####
+    }
+
+    public List<User> findByUserName(String username) {
+        Query q = em.createNamedQuery("User.findByUsername");
+        q.setParameter("username", username);
+        
+        List users = q.getResultList();     
+            
+        return users;
+    }
+
+    public List<User> findByPhone(String phone) {
+        Query q = em.createNamedQuery("User.findByPhone");
+        q.setParameter("phone", phone);
+                
+        List users = q.getResultList();     
+            
+        return users;
+    }    
     
 }

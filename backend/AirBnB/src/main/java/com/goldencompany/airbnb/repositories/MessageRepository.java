@@ -5,8 +5,10 @@
  */
 package com.goldencompany.airbnb.repositories;
 
+import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,33 +16,40 @@ import javax.persistence.Query;
 /**
  *
  * @author george
- * 
+ *
  */
-
+@Stateless
 public class MessageRepository {
+
     @PersistenceContext(unitName = "airbnb_db_pool_pu")
     private EntityManager em;
-    
 
     public List findByUserID(Integer id) {
         Query q = em.createNamedQuery("Message.findByUserId");
         q.setParameter("x", id);
         q.setParameter("y", id);
-        
-        List users = q.getResultList();     
-            
+
+        List users = q.getResultList();
+
         return users;
     }
 
-    
-    
     public List findReceivedByUserID(Integer id) {
         Query q = em.createNamedQuery("Message.findReceivedByUserId");
         q.setParameter("x", id);
-        
-        List users = q.getResultList();     
-            
+
+        List users = q.getResultList();
+
         return users;
     }
-    
+
+    public List findSentByUserID(Integer id) {
+        Query q = em.createNamedQuery("Message.findSentByUserId");
+        q.setParameter("x", id);
+
+        List users = q.getResultList();
+
+        return users;
+    }
+
 }

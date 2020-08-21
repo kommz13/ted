@@ -23,8 +23,16 @@ public class MessageManagementController {
     @Inject
     MessageMapper messageMapper;
 
-    public List retrieveMessageByUserID(Integer id) {
+    public List retrieveReceivedMessageByUserID(Integer id) {
         List<Message> messages = messageRepository.findReceivedByUserID(id);
+
+        List dtos = messageMapper.toDTO(messages);
+
+        return dtos;
+    }
+    
+        public List retrieveSentMessageByUserID(Integer id) {
+        List<Message> messages = messageRepository.findSentByUserID(id);
 
         List dtos = messageMapper.toDTO(messages);
 

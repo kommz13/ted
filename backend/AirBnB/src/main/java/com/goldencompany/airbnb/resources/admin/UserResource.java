@@ -34,7 +34,7 @@ public class UserResource {
     @GET    
     @Path("{id}")
     public Response id(@PathParam("id") Integer id){     
-        List user = controller.retrieveUserByID(id);
+        List user = controller.retrieveUserByID(id);        
         
         return Response
                 .ok(user)

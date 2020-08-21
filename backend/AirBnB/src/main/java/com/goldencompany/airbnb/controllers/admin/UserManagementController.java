@@ -5,21 +5,13 @@
  */
 package com.goldencompany.airbnb.controllers.admin;
 
-import com.goldencompany.airbnb.dto.RoleDTO;
-import com.goldencompany.airbnb.dto.UserDTO;
-import com.goldencompany.airbnb.entity.Role;
+import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.entity.User;
 import com.goldencompany.airbnb.mappers.RoleMapper;
 import com.goldencompany.airbnb.mappers.UserMapper;
 import com.goldencompany.airbnb.repositories.UserRepository;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -68,5 +60,6 @@ public class UserManagementController {
         
         return dtos;
     }
+   
     
 }

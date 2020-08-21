@@ -21,7 +21,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({   
     @NamedQuery(name = "Message.findByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x or m.userIdTo.id = :y"),
-    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x")
+    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
+    @NamedQuery(name = "Message.findSentByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x")   
+    
 })
 public class MessageQueryHolder  implements Serializable {
      @Id

@@ -5,7 +5,7 @@
  */
 package com.goldencompany.airbnb.mappers;
 
-import com.goldencompany.airbnb.dto.RoleDTO;
+import com.goldencompany.airbnb.dto.output.RoleDTO;
 import com.goldencompany.airbnb.entity.Role;
 
 /**
