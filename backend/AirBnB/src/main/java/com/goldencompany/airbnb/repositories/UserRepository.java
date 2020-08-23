@@ -7,6 +7,7 @@ package com.goldencompany.airbnb.repositories;
 
 import com.goldencompany.airbnb.entity.Role;
 import com.goldencompany.airbnb.entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -33,6 +34,7 @@ public class UserRepository {
 //         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 //         List<User> results = query.getResultList();
 //         return results;
+
     }
 
     public List find(Integer id) {
@@ -62,15 +64,16 @@ public class UserRepository {
         return users;
     }
 
-    public void create(User entity) {
+    public void create(User entity, List<Role> roles) {
         em.persist(entity);//insert
         
-//        for (Role r : entity.getRoleList()) {
-//            
-//        }
-//        em.persist(entity.getRoleList());
-
-// ####
+        entity.setRoleList(new ArrayList<>());
+        
+        for (Role unmanaged : roles) {
+            Role managed = em.find(Role.class, unmanaged.getId());
+            entity.getRoleList().add(managed);     
+            managed.getUserList().add(entity);
+        }
     }
 
     public List<User> findByUserName(String username) {
@@ -90,5 +93,28 @@ public class UserRepository {
             
         return users;
     }    
+
+//    public List<User> findApproved(String registrationStatus) {
+//
+//    }
+
+    public List<User> findApproved(int registrationStatus) {
+        Query q = em.createNamedQuery("User.findByRegistrationStatus");
+        q.setParameter("registrationStatus", registrationStatus);
+                
+        List users = q.getResultList();     
+            
+        return users;    
+    }
+
+    public List<User> update(User thisUser) {
+        em.merge(thisUser);
+        
+        List users = new ArrayList();
+        
+        users.add(thisUser);
+        
+        return users;        
+    }
     
 }

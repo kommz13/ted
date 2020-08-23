@@ -3,15 +3,12 @@ package com.goldencompany.airbnb.resources.account;
 import com.goldencompany.airbnb.controllers.AccountManagementController;
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 /**
@@ -40,5 +37,20 @@ public class AccountResource {
 
         
         
+    }
+    //peiramata
+    @GET    
+    @Path("{id}")
+    public Response id(@PathParam("id") Integer id){     
+//        List user = controller.retrieveUserByID(id);        
+        if(id==1){
+        return Response
+                .ok("id = 1")
+                .build();
+        }else{
+            return Response
+                .ok("id = something else")
+                .build();
+        }
     }
 }

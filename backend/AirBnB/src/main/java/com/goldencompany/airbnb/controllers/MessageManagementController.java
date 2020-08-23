@@ -38,6 +38,35 @@ public class MessageManagementController {
 
         return dtos;
     }
+        
+        //edw
+        public List retrieveMessageDetailsByID(Integer id) {
+        List<Message> messages = messageRepository.findDetailsByID(id);
+
+        List dtos = messageMapper.toDTO(messages);
+
+        return dtos;
+    }
+        
+//        public List retrieveAllMessageByUserID(Integer id) {
+//        List<Message> messages = messageRepository.retrieveAllMessagesByUserID(id);
+//
+//        List dtos = messageMapper.toDTO(messages);
+//
+//        return dtos;
+//    }    
+
+//    public List findDetailsByID(Integer id) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    public List retrieveAllMessagesByUserID(Integer id) {
+          List<Message> messages = messageRepository.findByUserID(id);
+
+        List dtos = messageMapper.toDTO(messages);
+
+        return dtos;
+    }
     
     
     

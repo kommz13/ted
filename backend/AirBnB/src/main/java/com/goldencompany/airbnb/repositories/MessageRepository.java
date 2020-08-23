@@ -52,4 +52,23 @@ public class MessageRepository {
         return users;
     }
 
+    //edw
+    public List findDetailsByID(Integer id) {
+        Query q = em.createNamedQuery("Message.findDetailsByID");
+        q.setParameter("x", id);
+
+        List users = q.getResultList();
+
+        return users;
+    }
+    
+      public List retrieveAllMessagesByUserID(Integer id) {
+        Query q = em.createNamedQuery("Message.findAllMessagesByUserID");
+        q.setParameter("x", id);
+
+        List users = q.getResultList();
+
+        return users;
+    }
+
 }

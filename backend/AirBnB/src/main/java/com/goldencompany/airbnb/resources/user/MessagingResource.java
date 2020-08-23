@@ -10,14 +10,13 @@ import javax.ws.rs.core.Response;
 
 // | /api/admin/users | GET | - | all users
 // | /api/admin/users/:id | GET | id | user details of user with that ID
-
-        
 /**
  *
- * @author 
+ * @author
  */
 @Path("/messages")
 public class MessagingResource {
+
     @Inject
     MessageManagementController controller;
 //    
@@ -31,21 +30,43 @@ public class MessagingResource {
 //                .build();
 //    }
 //    
-    @GET    
-    @Path("received/{id}")    
-    public Response received(@PathParam("id") Integer id){     
+
+    @GET
+    @Path("received/{id}")
+    public Response received(@PathParam("id") Integer id) {
         List message = controller.retrieveReceivedMessageByUserID(id);
-        
+
         return Response
                 .ok(message)
                 .build();
     }
-    
-      @GET    
-    @Path("sent/{id}")    
-    public Response sent(@PathParam("id") Integer id){     
+
+    @GET
+    @Path("sent/{id}")
+    public Response sent(@PathParam("id") Integer id) {
         List message = controller.retrieveSentMessageByUserID(id);
-        
+
+        return Response
+                .ok(message)
+                .build();
+    }
+
+    //peirama 
+    @GET
+    @Path("details/{id}")
+    public Response details(@PathParam("id") Integer id) {
+        List message = controller.retrieveMessageDetailsByID(id);
+
+        return Response
+                .ok(message)
+                .build();
+    }
+
+    @GET
+    @Path("all/{id}")
+    public Response all(@PathParam("id") Integer id) {
+        List message = controller.retrieveAllMessagesByUserID(id);
+
         return Response
                 .ok(message)
                 .build();

@@ -22,8 +22,11 @@ import javax.inject.Inject;
                                        
 
 public class UserMapper {
+    final String [] registrationStatusMap = new String [] {  "pending",  "approved", "rejected"};
+       
+   
     @Inject
-    RoleMapper roleMapper;
+    RoleMapper roleMapper;        
     
     public UserDTO toDTO(User entity){
         UserDTO dto = new UserDTO();
@@ -37,11 +40,7 @@ public class UserMapper {
         dto.setPhotoUrl(entity.getPhotoUrl());
         dto.setRegistrationDate(entity.getRegistrationDate());
         dto.setBirthdate(entity.getBirthdate());
-        if (entity.getRegistrationStatus()== 0){
-            dto.setRegistrationStatus("inactive");
-        }else{
-            dto.setRegistrationStatus("active");
-        }
+        dto.setRegistrationStatus(registrationStatusMap[entity.getRegistrationStatus()]);
         dto.setActive(entity.getActive());
                         
         return dto;
@@ -77,26 +76,7 @@ public class UserMapper {
         entity.setRegistrationDate(new Date());
         entity.setBirthdate(dto.getBirthdate());
         entity.setActive(1);
-        entity.setRegistrationStatus(0);
-        
-        List<Role> roleList = new ArrayList();
-        
-        if (dto.isIs_host()) {
-            Role r = new Role();
-            r.setId(1);
-            roleList.add(r);
-        }
-        
-        
-        if (dto.isIs_customer()) {
-            Role r = new Role();
-            r.setId(2);
-            roleList.add(r);
-        }
-        
-        entity.setRoleList(roleList);
-        
-        
+        entity.setRegistrationStatus(0);      
         
         return entity;
     }

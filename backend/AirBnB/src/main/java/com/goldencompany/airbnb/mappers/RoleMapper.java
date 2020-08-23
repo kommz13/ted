@@ -5,8 +5,11 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.dto.output.RoleDTO;
 import com.goldencompany.airbnb.entity.Role;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,4 +24,24 @@ public class RoleMapper {
          
          return dto;
      }
+
+    public List<Role> toEntities(RegisterDTO dto) {
+         List<Role> roleList = new ArrayList();
+        
+        if (dto.isIs_host()) {
+            Role r = new Role();
+            r.setId(1);
+            roleList.add(r);
+        }
+        
+        
+        if (dto.isIs_customer()) {
+            Role r = new Role();
+            r.setId(2);
+            roleList.add(r);
+        }
+        
+        return roleList;
+        
+    }
 }

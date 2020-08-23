@@ -7,6 +7,8 @@ package com.goldencompany.airbnb.controllers;
 
 import com.goldencompany.airbnb.controllers.admin.*;
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
+import com.goldencompany.airbnb.dto.output.UserDTO;
+import com.goldencompany.airbnb.entity.Role;
 import com.goldencompany.airbnb.entity.User;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
 import com.goldencompany.airbnb.mappers.RoleMapper;
@@ -28,6 +30,9 @@ public class AccountManagementController {
     
      @Inject
     UserMapper userMapper;
+     
+    @Inject
+    RoleMapper roleMapper;
     
 
     public List createUser(RegisterDTO dto) throws UserValidationException {
@@ -35,6 +40,8 @@ public class AccountManagementController {
         List errors = new ArrayList();
         
         User entity = userMapper.toEntity(dto);
+        
+        List<Role> roles = roleMapper.toEntities(dto);
         
         if (!userRepository.findByUserName(entity.getUsername()).isEmpty()) {
             errors.add("username already exists");
@@ -47,12 +54,15 @@ public class AccountManagementController {
         if (!errors.isEmpty()) {
             throw new UserValidationException(errors);            
         } else {                                                
-            userRepository.create(entity);
+            userRepository.create(entity, roles);
 
             List l = new ArrayList();
-            l.add(entity);
+            
+            UserDTO dto_out = userMapper.toDTO(entity);
+            
+            l.add(dto_out);
 
             return l;
         }
-    }           
+    }         
 }
