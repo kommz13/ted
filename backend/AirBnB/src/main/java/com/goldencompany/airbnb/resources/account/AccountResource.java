@@ -38,6 +38,20 @@ public class AccountResource {
         
         
     }
+    
+    @POST
+    @Path("/edit")
+    public Response edit(RegisterDTO input) {
+        try {
+            List user = controller.editUser(input);
+            return Response.ok(user).build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+
+        
+        
+    }
     //peiramata
     @GET    
     @Path("{id}")
@@ -53,4 +67,16 @@ public class AccountResource {
                 .build();
         }
     }
-}
+    
+    @GET
+    @Path("/view/{id}")
+    public Response view(@PathParam("id") Integer id){
+        List user = controller.viewUserByID(id);
+
+        return Response
+                .ok(user)
+                .build();
+        }
+    
+        
+ }

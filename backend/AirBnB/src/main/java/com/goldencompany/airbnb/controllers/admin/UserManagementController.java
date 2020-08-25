@@ -5,7 +5,6 @@
  */
 package com.goldencompany.airbnb.controllers.admin;
 
-import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.entity.User;
 import com.goldencompany.airbnb.entity.constants.UserConstants;
 import com.goldencompany.airbnb.exceptions.UserValidationException;

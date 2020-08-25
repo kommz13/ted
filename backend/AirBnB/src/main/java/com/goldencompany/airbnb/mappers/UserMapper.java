@@ -6,6 +6,7 @@
 package com.goldencompany.airbnb.mappers;
 
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
+import com.goldencompany.airbnb.dto.output.ProfileDTO;
 import com.goldencompany.airbnb.dto.output.RoleDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.entity.Role;
@@ -80,4 +81,39 @@ public class UserMapper {
         
         return entity;
     }
-}
+    
+    public ProfileDTO profiletoDTO(User entity){
+        ProfileDTO dto = new ProfileDTO();
+        
+        //dto.setId(entity.getId());
+        dto.setFirstname(entity.getFirstname());
+        dto.setLastname(entity.getLastname());
+        dto.setEmail(entity.getEmail());
+        dto.setPhone(entity.getPhone());
+        dto.setUsername(entity.getUsername());
+        dto.setPhotoUrl(entity.getPhotoUrl());
+        //dto.setRegistrationDate(entity.getRegistrationDate());
+        dto.setBirthdate(entity.getBirthdate());
+        //dto.setRegistrationStatus(registrationStatusMap[entity.getRegistrationStatus()]);
+        //dto.setActive(entity.getActive());
+                        
+        return dto;
+    }
+    
+    public List profiletoDTO(List<User> entities) {
+        List list = new ArrayList();
+        
+        for (User entity : entities) {
+            ProfileDTO userdto = profiletoDTO(entity);                        
+            
+//            for (Role roleEntity : entity.getRoleList()) {
+//                RoleDTO roledto = roleMapper.toDTO(roleEntity);
+//                userdto.getRoles().add(roledto);
+//            }
+                                    
+            list.add(userdto);
+        }        
+     
+        return list;
+    }
+    }
