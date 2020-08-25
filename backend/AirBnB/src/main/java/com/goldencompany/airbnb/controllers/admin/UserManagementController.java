@@ -72,27 +72,98 @@ public class UserManagementController {
 
     public List approveUser(Integer id) throws UserValidationException {
         List<User> users = userRepository.find(id);
-         List errors = new ArrayList();
-        
-        if(users.isEmpty()){
+        List errors = new ArrayList();
+
+        if (users.isEmpty()) {
             errors.add("user does not exist");
             throw new UserValidationException(errors);
         }
-        User thisUser=users.get(0);
-        
-        if (thisUser.getRegistrationStatus() == UserConstants.PENDING){
+        User thisUser = users.get(0);
+
+        if (thisUser.getRegistrationStatus() == UserConstants.PENDING) {
             thisUser.setRegistrationStatus(UserConstants.APPROVED);
-            
+
             users = userRepository.update(thisUser);
-            
+
             List dtos = userMapper.toDTO(users);
 
-            return dtos;            
-        }else{
+            return dtos;
+        } else {
             errors.add("user is approved or rejected");
             throw new UserValidationException(errors);
         }
     }
 
+    public List rejectUser(Integer id) throws UserValidationException {
+        List<User> users = userRepository.find(id);
+        List errors = new ArrayList();
+
+        if (users.isEmpty()) {
+            errors.add("user does not exist");
+            throw new UserValidationException(errors);
+        }
+        User thisUser = users.get(0);
+
+        if (thisUser.getRegistrationStatus() == UserConstants.PENDING) {
+            thisUser.setRegistrationStatus(UserConstants.REJECTED);
+
+            users = userRepository.update(thisUser);
+
+            List dtos = userMapper.toDTO(users);
+
+            return dtos;
+        } else {
+            errors.add("user is approved or already rejected"); // exei nohma na kanome reject kapoion p einai approved?
+            throw new UserValidationException(errors);
+        }
+    }
+
+    public List rejectApprovedUser(Integer id) throws UserValidationException {
+        List<User> users = userRepository.find(id);
+        List errors = new ArrayList();
+
+        if (users.isEmpty()) {
+            errors.add("user does not exist");
+            throw new UserValidationException(errors);
+        }
+        User thisUser = users.get(0);
+
+        if (thisUser.getRegistrationStatus() == UserConstants.APPROVED) {
+            thisUser.setRegistrationStatus(UserConstants.REJECTED);
+
+            users = userRepository.update(thisUser);
+
+            List dtos = userMapper.toDTO(users);
+
+            return dtos;
+        } else {
+            errors.add("this user is already rejected or pending"); // exei nohma na kanome reject kapoion p einai approved?
+            throw new UserValidationException(errors);
+        }
+    }
+
+    public List approveRejectedUser(Integer id) throws UserValidationException {
+        List<User> users = userRepository.find(id);
+        List errors = new ArrayList();
+
+        if (users.isEmpty()) {
+            errors.add("user does not exist");
+            throw new UserValidationException(errors);
+        }
+        User thisUser = users.get(0);
+
+        if (thisUser.getRegistrationStatus() == UserConstants.REJECTED) {
+            thisUser.setRegistrationStatus(UserConstants.APPROVED);
+
+            users = userRepository.update(thisUser);
+
+            List dtos = userMapper.toDTO(users);
+
+            return dtos;
+        } else {
+            errors.add("this user is already Approved or pending"); // exei nohma na kanome reject kapoion p einai approved?
+            throw new UserValidationException(errors);
+        }
+    }
 
 }

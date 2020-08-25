@@ -40,7 +40,7 @@ public class AccountResource {
     }
     
     @POST
-    @Path("/edit")
+    @Path("/edit")//na valoyme id path param
     public Response edit(RegisterDTO input) {
         try {
             List user = controller.editUser(input);

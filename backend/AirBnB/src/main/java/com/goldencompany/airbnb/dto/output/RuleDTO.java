@@ -9,13 +9,20 @@ package com.goldencompany.airbnb.dto.output;
  *
  * @author george
  */
-public class RoleDTO {
+public class RuleDTO {
     private Integer id;
-    private String name;
+    private String rule;
+    private Integer active;
 
+    public Integer getActive() {
+        return active;
+    }
 
+    public void setActive(Integer active) {
+        this.active = active;
+    }
 
-    public RoleDTO() {
+    public RuleDTO() {
     }
 
     public Integer getId() {
@@ -26,15 +33,14 @@ public class RoleDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRule() {
+        return rule;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 
-    
     
     
     

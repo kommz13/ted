@@ -43,7 +43,6 @@ public class UserResource {
                 .build();
     }
 
-    
     @GET
     @Path("active")
     public Response active() {
@@ -99,6 +98,51 @@ public class UserResource {
     public Response approve(@PathParam("id") Integer id) {
         try {
             List users = controller.approveUser(id);
+
+            return Response
+                    .ok(users)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @POST
+    @Path("reject/{id}")
+    public Response reject(@PathParam("id") Integer id) {
+        try {
+            List users = controller.rejectUser(id);
+//            List users = controller.approveUser(id);
+
+            return Response
+                    .ok(users)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @POST
+    @Path("reject_approved/{id}")
+    public Response reject_approved(@PathParam("id") Integer id) {
+        try {
+            List users = controller.rejectApprovedUser(id);
+//            List users = controller.approveUser(id);
+
+            return Response
+                    .ok(users)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @POST
+    @Path("approve_rejected/{id}")
+    public Response approve_rejected(@PathParam("id") Integer id) {
+        try {
+            List users = controller.approveRejectedUser(id);
+//            List users = controller.approveUser(id);
 
             return Response
                     .ok(users)
