@@ -40,10 +40,10 @@ public class AccountResource {
     }
     
     @POST
-    @Path("/edit")//na valoyme id path param
-    public Response edit(RegisterDTO input) {
+    @Path("/edit/{id}")//na valoyme id path param
+    public Response edit(@PathParam("id") Integer id,  RegisterDTO input) {
         try {
-            List user = controller.editUser(input);
+            List user = controller.editUser(id ,input);
             return Response.ok(user).build();
         } catch (UserValidationException ex) {
             return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();

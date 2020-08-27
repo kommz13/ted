@@ -12,6 +12,7 @@ import java.util.Date;
  * @author george
  */
 public class RegisterDTO {
+   
     private String firstname;
     private String lastname;
     private String email;

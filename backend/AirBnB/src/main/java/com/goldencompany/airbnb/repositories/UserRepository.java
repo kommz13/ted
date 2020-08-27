@@ -92,7 +92,16 @@ public class UserRepository {
         List users = q.getResultList();     
             
         return users;
-    }    
+    }   
+    
+     public List<User> findByEmail(String email) {
+        Query q = em.createNamedQuery("User.findByEmail");
+        q.setParameter("email", email);
+                
+        List users = q.getResultList();     
+            
+        return users;
+    }  
 
 //    public List<User> findApproved(String registrationStatus) {
 //
