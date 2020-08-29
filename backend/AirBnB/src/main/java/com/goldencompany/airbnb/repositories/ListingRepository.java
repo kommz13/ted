@@ -38,32 +38,32 @@ public class ListingRepository {
 
     }
 
-//    public List find(Integer id) {
-//        Query q = em.createNamedQuery("User.findById");
-//        q.setParameter("id", id);
-//        
-//        List users = q.getResultList();     
-//            
-//        return users;
-//    }
+    public List find(Integer id) {
+        Query q = em.createNamedQuery("Listing.findById");
+        q.setParameter("id", id);
+        
+        List users = q.getResultList();     
+            
+        return users;
+    }
 //
-//    public List<User> findActive() {
-//         Query q = em.createNamedQuery("User.findByActive");
-//        q.setParameter("active", 1);
-//        
-//        List users = q.getResultList();     
-//            
-//        return users;
-//    }
+    public List<Listing> findActive() {
+         Query q = em.createNamedQuery("Listing.findByActive");
+        q.setParameter("active", 1);
+        
+        List listing = q.getResultList();     
+            
+        return listing;
+    }
 //
-//    public List<User> findInactive() {
-//        Query q = em.createNamedQuery("User.findByActive");
-//        q.setParameter("active", 0);
-//        
-//        List users = q.getResultList();     
-//            
-//        return users;
-//    }
+    public List<Listing> findInactive() {
+        Query q = em.createNamedQuery("Listing.findByActive");
+        q.setParameter("active", 0);
+        
+        List listings = q.getResultList();     
+            
+        return listings;
+    }
 //
 //    public void create(User entity, List<Role> roles) {
 //        em.persist(entity);//insert

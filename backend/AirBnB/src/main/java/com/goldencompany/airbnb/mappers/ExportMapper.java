@@ -12,6 +12,7 @@ import com.goldencompany.airbnb.dto.xml.ListingExportDTO;
 import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Message;
+import com.goldencompany.airbnb.entity.Photo;
 import com.goldencompany.airbnb.entity.Rule;
 import com.goldencompany.airbnb.entity.User;
 import java.util.ArrayList;
@@ -32,6 +33,9 @@ public class ExportMapper {
     
     @Inject
     RuleMapper ruleMapper;
+    
+     @Inject
+    PhotoMapper photoMapper;
 
     public ListingExportDTO toDTO(Listing entity) {
         ListingExportDTO dto = new ListingExportDTO();
@@ -74,6 +78,11 @@ public class ExportMapper {
 //                        .getRule().add(rule);
             }
             
+             for ( Photo p : entity.getPhotoList()) {
+                listing.getPhoto().add(photoMapper.toDTO(p));
+//                        .getRule().add(rule);
+            }
+//            
         }
 
         return list;

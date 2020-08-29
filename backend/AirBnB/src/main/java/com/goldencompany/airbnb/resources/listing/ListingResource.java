@@ -33,36 +33,36 @@ public class ListingResource {
                 .build();
     }
 
-//    @GET
-//    @Path("{id}")
-//    public Response id(@PathParam("id") Integer id) {
-//        List user = controller.retrieveUserByID(id);
+    @GET
+    @Path("{id}")
+    public Response id(@PathParam("id") Integer id) {
+        List user = controller.retrieveListingByID(id);
+
+        return Response
+                .ok(user)
+                .build();
+    }
 //
-//        return Response
-//                .ok(user)
-//                .build();
-//    }
+    @GET
+    @Path("active")
+    public Response active() {
+        List listings = controller.retrieveActiveListings();
+
+        return Response
+                .ok(listings)
+                .build();
+    }
 //
-//    @GET
-//    @Path("active")
-//    public Response active() {
-//        List users = controller.retrieveActiveUsers();
-//
-//        return Response
-//                .ok(users)
-//                .build();
-//    }
-//
-//    @GET
-//    @Path("inactive")
-//    public Response inactive() {
-//        List users = controller.retrieveInactiveUsers();
-//
-//        return Response
-//                .ok(users)
-//                .build();
-//    }
-//
+    @GET
+    @Path("inactive")
+    public Response inactive() {
+        List listings = controller.retrieveInactiveListings();
+
+        return Response
+                .ok(listings)
+                .build();
+    }
+
 //    @GET
 //    @Path("approved")
 //    public Response approved() {

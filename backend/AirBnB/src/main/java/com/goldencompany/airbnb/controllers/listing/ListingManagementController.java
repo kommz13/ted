@@ -39,29 +39,28 @@ public class ListingManagementController {
         return dtos;
     }
 
-//    public List retrieveUserByID(Integer id) {
-//        List<User> users = userRepository.find(id);
+    public List retrieveListingByID(Integer id) {
+        List<Listing> listing = listingRepository.find(id);
+
+         List dtos = listingMapper.toDTO(listing);
+        return dtos;
+    }
 //
-//        List dtos = userMapper.toDTO(users);
+    public List retrieveActiveListings() {
+        List<Listing> listing = listingRepository.findActive();
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
 //
-//        return dtos;
-//    }
-//
-//    public List retrieveActiveUsers() {
-//        List<User> users = userRepository.findActive();
-//
-//        List dtos = userMapper.toDTO(users);
-//
-//        return dtos;
-//    }
-//
-//    public List retrieveInactiveUsers() {
-//        List<User> users = userRepository.findInactive();
-//
-//        List dtos = userMapper.toDTO(users);
-//
-//        return dtos;
-//    }
+    public List retrieveInactiveListings() {
+        List<Listing> listing = listingRepository.findInactive();
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
 //
 //    public List retrieveUsersByStatus(int registrationStatus) {
 //        List<User> users = userRepository.findApproved(registrationStatus);

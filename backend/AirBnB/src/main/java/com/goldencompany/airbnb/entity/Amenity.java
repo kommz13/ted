@@ -49,8 +49,10 @@ public class Amenity implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "active")
-    private Integer active;
+    private int active;
     @JoinTable(name = "listing_has_amenity", joinColumns = {
         @JoinColumn(name = "amenity_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "listing_id", referencedColumnName = "id")})
@@ -64,9 +66,10 @@ public class Amenity implements Serializable {
         this.id = id;
     }
 
-    public Amenity(Integer id, String name) {
+    public Amenity(Integer id, String name, int active) {
         this.id = id;
         this.name = name;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -85,11 +88,11 @@ public class Amenity implements Serializable {
         this.name = name;
     }
 
-    public Integer getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Integer active) {
+    public void setActive(int active) {
         this.active = active;
     }
 

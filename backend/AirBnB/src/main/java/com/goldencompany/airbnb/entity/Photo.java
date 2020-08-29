@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Photo.findById", query = "SELECT p FROM Photo p WHERE p.id = :id"),
     @NamedQuery(name = "Photo.findByActive", query = "SELECT p FROM Photo p WHERE p.active = :active"),
     @NamedQuery(name = "Photo.findByUploadDate", query = "SELECT p FROM Photo p WHERE p.uploadDate = :uploadDate"),
-    @NamedQuery(name = "Photo.findByDefault1", query = "SELECT p FROM Photo p WHERE p.default1 = :default1")})
+    @NamedQuery(name = "Photo.findByDefaultUrl", query = "SELECT p FROM Photo p WHERE p.defaultUrl = :defaultUrl")})
 public class Photo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,8 +63,8 @@ public class Photo implements Serializable {
     private Date uploadDate;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "default")
-    private short default1;
+    @Column(name = "default_url")
+    private short defaultUrl;
     @JoinColumn(name = "listing_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Listing listingId;
@@ -76,12 +76,12 @@ public class Photo implements Serializable {
         this.id = id;
     }
 
-    public Photo(Integer id, String photoUrl, int active, Date uploadDate, short default1) {
+    public Photo(Integer id, String photoUrl, int active, Date uploadDate, short defaultUrl) {
         this.id = id;
         this.photoUrl = photoUrl;
         this.active = active;
         this.uploadDate = uploadDate;
-        this.default1 = default1;
+        this.defaultUrl = defaultUrl;
     }
 
     public Integer getId() {
@@ -116,12 +116,12 @@ public class Photo implements Serializable {
         this.uploadDate = uploadDate;
     }
 
-    public short getDefault1() {
-        return default1;
+    public short getDefaultUrl() {
+        return defaultUrl;
     }
 
-    public void setDefault1(short default1) {
-        this.default1 = default1;
+    public void setDefaultUrl(short defaultUrl) {
+        this.defaultUrl = defaultUrl;
     }
 
     public Listing getListingId() {

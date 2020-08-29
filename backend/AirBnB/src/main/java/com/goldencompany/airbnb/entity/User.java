@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -114,7 +113,7 @@ public class User implements Serializable {
     private List<Role> roleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Critic> criticList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom")
     private List<Message> messageList;

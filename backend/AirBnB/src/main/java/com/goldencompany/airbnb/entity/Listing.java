@@ -141,7 +141,7 @@ public class Listing implements Serializable {
     private List<Rule> ruleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
     private List<Critic> criticList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
     private List<Photo> photoList;

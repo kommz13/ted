@@ -56,8 +56,10 @@ public class Message implements Serializable {
     @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "active")
-    private Integer active;
+    private int active;
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Booking bookingId;
@@ -75,10 +77,11 @@ public class Message implements Serializable {
         this.id = id;
     }
 
-    public Message(Integer id, String text, Date dateTime) {
+    public Message(Integer id, String text, Date dateTime, int active) {
         this.id = id;
         this.text = text;
         this.dateTime = dateTime;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -105,11 +108,11 @@ public class Message implements Serializable {
         this.dateTime = dateTime;
     }
 
-    public Integer getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Integer active) {
+    public void setActive(int active) {
         this.active = active;
     }
 

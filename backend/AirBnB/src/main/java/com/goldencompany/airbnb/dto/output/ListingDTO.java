@@ -42,8 +42,11 @@ public class ListingDTO {
     
     private Date submittedDate;
     private int extraCostPerPerson;
-    
+    private TypeDTO type;
+
+   
     private List<AmenityDTO> amenities = new ArrayList<>();
+    private List<RuleDTO> rules = new ArrayList<>();
     
 
     public Integer getId() {
@@ -187,6 +190,22 @@ public class ListingDTO {
 
     public void setAmenities(List<AmenityDTO> amenities) {
         this.amenities = amenities;
+    }
+    
+      public List<RuleDTO> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<RuleDTO> rules) {
+        this.rules = rules;
+    }
+    
+     public TypeDTO getType() {
+        return type;
+    }
+
+    public void setType(TypeDTO type) {
+        this.type = type;
     }
 
 //    

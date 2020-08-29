@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -32,16 +34,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Critic.findAll", query = "SELECT c FROM Critic c"),
-    @NamedQuery(name = "Critic.findById", query = "SELECT c FROM Critic c WHERE c.criticPK.id = :id"),
-    @NamedQuery(name = "Critic.findByListingId", query = "SELECT c FROM Critic c WHERE c.criticPK.listingId = :listingId"),
-    @NamedQuery(name = "Critic.findByUserId", query = "SELECT c FROM Critic c WHERE c.criticPK.userId = :userId"),
+    @NamedQuery(name = "Critic.findById", query = "SELECT c FROM Critic c WHERE c.id = :id"),
     @NamedQuery(name = "Critic.findByRating", query = "SELECT c FROM Critic c WHERE c.rating = :rating"),
     @NamedQuery(name = "Critic.findByDate", query = "SELECT c FROM Critic c WHERE c.date = :date")})
 public class Critic implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected CriticPK criticPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -55,36 +58,32 @@ public class Critic implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @JoinColumn(name = "listing_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "listing_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Listing listing;
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Listing listingId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User user;
+    private User userId;
 
     public Critic() {
     }
 
-    public Critic(CriticPK criticPK) {
-        this.criticPK = criticPK;
+    public Critic(Integer id) {
+        this.id = id;
     }
 
-    public Critic(CriticPK criticPK, String text, int rating) {
-        this.criticPK = criticPK;
+    public Critic(Integer id, String text, int rating) {
+        this.id = id;
         this.text = text;
         this.rating = rating;
     }
 
-    public Critic(int id, int listingId, int userId) {
-        this.criticPK = new CriticPK(id, listingId, userId);
+    public Integer getId() {
+        return id;
     }
 
-    public CriticPK getCriticPK() {
-        return criticPK;
-    }
-
-    public void setCriticPK(CriticPK criticPK) {
-        this.criticPK = criticPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -111,26 +110,26 @@ public class Critic implements Serializable {
         this.date = date;
     }
 
-    public Listing getListing() {
-        return listing;
+    public Listing getListingId() {
+        return listingId;
     }
 
-    public void setListing(Listing listing) {
-        this.listing = listing;
+    public void setListingId(Listing listingId) {
+        this.listingId = listingId;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (criticPK != null ? criticPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +140,7 @@ public class Critic implements Serializable {
             return false;
         }
         Critic other = (Critic) object;
-        if ((this.criticPK == null && other.criticPK != null) || (this.criticPK != null && !this.criticPK.equals(other.criticPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -149,7 +148,7 @@ public class Critic implements Serializable {
 
     @Override
     public String toString() {
-        return "com.goldencompany.airbnb.entity.Critic[ criticPK=" + criticPK + " ]";
+        return "com.goldencompany.airbnb.entity.Critic[ id=" + id + " ]";
     }
     
 }

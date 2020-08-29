@@ -8,8 +8,10 @@ package com.goldencompany.airbnb.mappers;
 import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
+import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Message;
+import com.goldencompany.airbnb.entity.Rule;
 import com.goldencompany.airbnb.entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +23,14 @@ import javax.inject.Inject;
  */
 public class ListingMapper {
 
-//    @Inject
-//    UserMapper userMapper;
+    @Inject
+    AmenityMapper amenityMapper;
+
+    @Inject
+    RuleMapper ruleMapper;
+
+    @Inject
+    TypeMapper typeMapper;
 
     public ListingDTO toDTO(Listing entity) {
         ListingDTO dto = new ListingDTO();
@@ -44,15 +52,8 @@ public class ListingMapper {
         dto.setSubmittedDate(entity.getSubmittedDate());
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
 
-
-
-
-
-
-        
 //        User from = entity.getUserIdFrom();
 //        User to = entity.getUserIdTo();
-        
 //        List<User> entities = new ArrayList<>();
 //        
 //        entities.add(from);
@@ -65,7 +66,6 @@ public class ListingMapper {
 //        
 //        dto.setSender(fromdto);
 //        dto.setReceiver(todto);
-
         return dto;
     }
 
@@ -75,6 +75,16 @@ public class ListingMapper {
         for (Listing entity : entities) {
             ListingDTO listing = toDTO(entity);
             list.add(listing);
+            for (Amenity a : entity.getAmenityList()) {
+                listing.getAmenities().add(amenityMapper.toDTO(a));
+            }
+
+            listing.setType(typeMapper.toDTO(entity.getTypeId()));
+
+            for (Rule r : entity.getRuleList()) {
+                listing.getRules().add(ruleMapper.toDTO(r));
+//                        .getRule().add(rule);
+            }
         }
 
         return list;

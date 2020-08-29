@@ -16,12 +16,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  *
  * @author george
  */
-
-        
-
 public class ListingExportDTO {
+
     private static final long serialVersionUID = 1L;
-    
+
     private Integer id;
     private double geolocation_lat;
     private double geolocation_long;
@@ -31,26 +29,33 @@ public class ListingExportDTO {
     private String district;
     private int floor;
     private int maxPeople;
-    
-    
-    
-   
+
     private int bedNum;
     private int bathroomNum;
     private String description;
-    
+
     private int minDays;
     private int active;
-    
-    
+
     private Date submittedDate;
     private int extraCostPerPerson;
-    
+
     private List<AmenityDTO> amenities = new ArrayList<>();
     private List<RuleDTO> rules = new ArrayList<>();
-    
+    private List<PhotoDTO> photo = new ArrayList<>();
+
+    //
+    @XmlElementWrapper(name = "photos")
+    @XmlElement(name = "photo")
+    public List<PhotoDTO> getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(List<PhotoDTO> photo) {
+        this.photo = photo;
+    }
+
     private TypeDTO type;
-    
 
     public Integer getId() {
         return id;
@@ -179,16 +184,15 @@ public class ListingExportDTO {
     public void setExtraCostPerPerson(int extraCostPerPerson) {
         this.extraCostPerPerson = extraCostPerPerson;
     }
-    
-//    private List<RoleDTO> roles = new ArrayList<>();
 
+//    private List<RoleDTO> roles = new ArrayList<>();
     public ListingExportDTO() {
-        
+
     }
 
 //
-    @XmlElementWrapper(name="amenities")
-    @XmlElement(name="amenity")
+    @XmlElementWrapper(name = "amenities")
+    @XmlElement(name = "amenity")
     public List<AmenityDTO> getAmenities() {
         return amenities;
     }
@@ -197,9 +201,7 @@ public class ListingExportDTO {
         this.amenities = amenities;
     }
 
-    
 //    
-
     public TypeDTO getType() {
         return type;
     }
@@ -208,6 +210,8 @@ public class ListingExportDTO {
         this.type = type;
     }
 
+    @XmlElementWrapper(name = "rules")
+    @XmlElement(name = "rule")
     public List<RuleDTO> getRules() {
         return rules;
     }
@@ -215,7 +219,5 @@ public class ListingExportDTO {
     public void setRules(List<RuleDTO> rules) {
         this.rules = rules;
     }
-    
-    
-  
+
 }
