@@ -2,6 +2,7 @@ package com.goldencompany.airbnb.resources.admin;
 
 import com.goldencompany.airbnb.controllers.admin.ExportController;
 import com.goldencompany.airbnb.controllers.admin.UserManagementController;
+import com.goldencompany.airbnb.dto.output.BookingDTO;
 import com.goldencompany.airbnb.dto.xml.DatasetExportDTO;
 import java.util.List;
 import javax.inject.Inject;
@@ -14,39 +15,47 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author 
+ * @author
  */
-
 // | /api/admin/data/export | GET | - | complete dataset
-
 @Path("/admin/export")
 public class ExportResource {
+
     @Inject
     ExportController controller;
-    
+
     @GET
-    @Path("json")   
+    @Path("json")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response json(){     
+    public Response json() {
         DatasetExportDTO dataset = controller.export();
-        
+
         return Response
                 .ok(dataset)
                 .build();
     }
+
+    @GET
+    @Path("xml")
+    @Produces({MediaType.APPLICATION_XML})
+    public Response xml() {
+        DatasetExportDTO dataset = controller.export();
+
+        return Response
+                .ok(dataset)
+                .build();
+    }
+
     
     @GET
-    @Path("xml")    
-    @Produces({MediaType.APPLICATION_XML})
-    public Response xml(){     
-        DatasetExportDTO dataset = controller.export();
-        
+    @Path("jsonBooking")
+//    @Produces({MediaType.APPLICATION_JSON})
+    public Response jsonBooking() {
+         List dataset = controller.bookingOnly();
+
         return Response
                 .ok(dataset)
                 .build();
     }
-    
-    
-    
-        
+
 }

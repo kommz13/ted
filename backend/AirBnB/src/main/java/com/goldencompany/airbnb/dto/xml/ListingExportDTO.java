@@ -43,6 +43,9 @@ public class ListingExportDTO {
     private List<AmenityDTO> amenities = new ArrayList<>();
     private List<RuleDTO> rules = new ArrayList<>();
     private List<PhotoDTO> photo = new ArrayList<>();
+    private List <BookingDTO> booking = new ArrayList<>();
+
+  
 
     //
     @XmlElementWrapper(name = "photos")
@@ -218,6 +221,14 @@ public class ListingExportDTO {
 
     public void setRules(List<RuleDTO> rules) {
         this.rules = rules;
+    }
+    
+      public List<BookingDTO> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<BookingDTO> booking) {
+        this.booking = booking;
     }
 
 }

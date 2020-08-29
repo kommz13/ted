@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.dto.output;
 
+import com.goldencompany.airbnb.entity.Booking;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
@@ -21,10 +22,10 @@ public class BookingDTO {
     private Date checkOut;
     private int bookingStatus;
     private int howManyPeople;
-    private Listing listingId;
+    private ListingDTO listingId;
 //    private List <User> userId;
-    private User userId;
-    private List <Message> messageId;
+    private UserDTO userId;
+//    private List <Message> messageId;
 //    this.id = id;
 //        this.checkin = checkin;
 //        this.checkout = checkout;
@@ -63,13 +64,30 @@ public class BookingDTO {
         this.howManyPeople = howManyPeople;
     }
 
-    public Listing getListingId() {
+    public ListingDTO getListingId() {
         return listingId;
     }
 
-    public void setListingId(Listing listingId) {
+    public void setListingId(ListingDTO listingId) {
         this.listingId = listingId;
     }
+
+    public UserDTO getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserDTO userId) {
+        this.userId = userId;
+    }
+
+    
+//    public Listing getListingId() {
+//        return listingId;
+//    }
+//
+//    public void setListingId(Listing listingId) {
+//        this.listingId = listingId;
+//    }
 
 //    public List<User> getUserId() {
 //        return userId;
@@ -79,25 +97,26 @@ public class BookingDTO {
 //        this.userId = userId;
 //    }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
+//    public User getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(User userId) {
+//        this.userId = userId;
+//    }
     
 
-    public List<Message> getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(List<Message> messageId) {
-        this.messageId = messageId;
-    }
+//    public List<Message> getMessageId() {
+//        return messageId;
+//    }
+//
+//    public void setMessageId(List<Message> messageId) {
+//        this.messageId = messageId;
+//    }
 
     public BookingDTO() {
     }
+    
 
     public Integer getId() {
         return id;
