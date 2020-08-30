@@ -10,6 +10,8 @@ import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.dto.xml.ListingExportDTO;
 import com.goldencompany.airbnb.entity.Amenity;
+import com.goldencompany.airbnb.entity.Booking;
+import com.goldencompany.airbnb.entity.Critic;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.Photo;
@@ -27,15 +29,21 @@ public class ExportMapper {
 
     @Inject
     AmenityMapper amenityMapper;
-    
+
     @Inject
     TypeMapper typeMapper;
-    
+
     @Inject
     RuleMapper ruleMapper;
-    
-     @Inject
+
+    @Inject
     PhotoMapper photoMapper;
+
+    @Inject
+    BookingMapper bookingMapper;
+
+    @Inject
+    CriticMapper criticMapper;
 
     public ListingExportDTO toDTO(Listing entity) {
         ListingExportDTO dto = new ListingExportDTO();
@@ -61,25 +69,35 @@ public class ExportMapper {
     }
 
     public List<ListingExportDTO> toDTO(List<Listing> entities) {
-        List<ListingExportDTO>  list = new ArrayList();
+        List<ListingExportDTO> list = new ArrayList();
 
         for (Listing entity : entities) {
             ListingExportDTO listing = toDTO(entity);
             list.add(listing);
-            
+
             for (Amenity a : entity.getAmenityList()) {
                 listing.getAmenities().add(amenityMapper.toDTO(a));
             }
-            
+
             listing.setType(typeMapper.toDTO(entity.getTypeId()));
-            
-            for ( Rule r : entity.getRuleList()) {
+
+            for (Rule r : entity.getRuleList()) {
                 listing.getRules().add(ruleMapper.toDTO(r));
 //                        .getRule().add(rule);
             }
-            
-             for ( Photo p : entity.getPhotoList()) {
+
+            for (Photo p : entity.getPhotoList()) {
                 listing.getPhoto().add(photoMapper.toDTO(p));
+//                        .getRule().add(rule);
+            }
+
+            for (Booking b : entity.getBookingList()) {
+                listing.getBooking().add(bookingMapper.toDTO(b));
+//                        .getRule().add(rule);
+            }
+
+            for (Critic c : entity.getCriticList()) {
+                listing.getCritic().add(criticMapper.toDTO(c));
 //                        .getRule().add(rule);
             }
 //            

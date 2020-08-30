@@ -6,10 +6,12 @@
 package com.goldencompany.airbnb.mappers;
 
 import com.goldencompany.airbnb.dto.output.BookingDTO;
+import com.goldencompany.airbnb.dto.output.CriticDTO;
 import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.entity.Booking;
+import com.goldencompany.airbnb.entity.Critic;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
@@ -21,22 +23,25 @@ import javax.inject.Inject;
  *
  * @author george
  */
-public class BookingMapper {
+public class CriticMapper {
 
     @Inject
     UserMapper userMapper;
 
     @Inject
     ListingMapper listingMapper;
+    
+    
+    
 
-    public BookingDTO toDTO(Booking entity) {
-        BookingDTO dto = new BookingDTO();
+    public CriticDTO toDTO(Critic entity) {
+        CriticDTO dto = new CriticDTO();
 
         dto.setId(entity.getId());
-        dto.setCheckIn(entity.getCheckin());
-        dto.setCheckOut(entity.getCheckout());
-        dto.setBookingStatus(entity.getBookingStatus());
-        dto.setHowManyPeople(entity.getHowManyPeople());
+        dto.setText(entity.getText());
+        dto.setRating(entity.getRating());
+        dto.setDate(entity.getDate());
+        
 
 //        User bookingUser = entity.getUserId();
 //        Listing listing = entity.getListingId();
@@ -57,12 +62,12 @@ public class BookingMapper {
         return dto;
     }
 
-    public List toDTO(List<Booking> entities) {
+    public List toDTO(List<Critic> entities) {
         List list = new ArrayList();
 
-        for (Booking entity : entities) {
-            BookingDTO booking = toDTO(entity);
-            list.add(booking);
+        for (Critic entity : entities) {
+            CriticDTO critic = toDTO(entity);
+            list.add(critic);
         }
 
         return list;

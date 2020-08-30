@@ -22,7 +22,11 @@ public class BookingDTO {
     private Date checkOut;
     private int bookingStatus;
     private int howManyPeople;
-    private ListingDTO listingId;
+
+//prosoxh , isws xreiazetai
+//    private ListingDTO listingId;
+//prosoxh , isws xreiazetai    
+
 //    private List <User> userId;
     private UserDTO userId;
 //    private List <Message> messageId;
@@ -64,13 +68,13 @@ public class BookingDTO {
         this.howManyPeople = howManyPeople;
     }
 
-    public ListingDTO getListingId() {
-        return listingId;
-    }
-
-    public void setListingId(ListingDTO listingId) {
-        this.listingId = listingId;
-    }
+//    public ListingDTO getListingId() {
+//        return listingId;
+//    }
+//
+//    public void setListingId(ListingDTO listingId) {
+//        this.listingId = listingId;
+//    }
 
     public UserDTO getUserId() {
         return userId;

@@ -17,81 +17,12 @@ import java.util.List;
  */
 public class CriticDTO {
     private Integer id;
-    private Date checkIn;
-    private Date checkOut;
-    private int bookingStatus;
-    private int howManyPeople;
-    private Listing listingId;
+    private String text;
+    private int rating;
+    private Date date;
+    private ListingDTO listingId;
 //    private List <User> userId;
-    private User userId;
-//    private List <Message> messageId;
-//    this.id = id;
-//        this.checkin = checkin;
-//        this.checkout = checkout;
-//        this.bookingStatus = bookingStatus;
-//        this.howManyPeople = howManyPeople;
-
-    public Date getCheckIn() {
-        return checkIn;
-    }
-
-    public void setCheckIn(Date checkIn) {
-        this.checkIn = checkIn;
-    }
-
-    public Date getCheckOut() {
-        return checkOut;
-    }
-
-    public void setCheckOut(Date checkOut) {
-        this.checkOut = checkOut;
-    }
-
-    public int getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(int bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
-    public int getHowManyPeople() {
-        return howManyPeople;
-    }
-
-    public void setHowManyPeople(int howManyPeople) {
-        this.howManyPeople = howManyPeople;
-    }
-
-    public Listing getListingId() {
-        return listingId;
-    }
-
-    public void setListingId(Listing listingId) {
-        this.listingId = listingId;
-    }
-
-//    public List<User> getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(List<User> userId) {
-//        this.userId = userId;
-//    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-    
-
-   
-
-    public CriticDTO() {
-    }
+    private UserDTO userId;
 
     public Integer getId() {
         return id;
@@ -101,7 +32,49 @@ public class CriticDTO {
         this.id = id;
     }
 
- 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+              
+   
+
+    public ListingDTO getListingId() {
+        return listingId;
+    }
+
+    public void setListingId(ListingDTO listingId) {
+        this.listingId = listingId;
+    }
+
+    public UserDTO getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserDTO userId) {
+        this.userId = userId;
+    }
+
     
     
     

@@ -44,7 +44,18 @@ public class ListingExportDTO {
     private List<RuleDTO> rules = new ArrayList<>();
     private List<PhotoDTO> photo = new ArrayList<>();
     private List <BookingDTO> booking = new ArrayList<>();
+    private List <CriticDTO> critic = new ArrayList<>();
 
+    
+    @XmlElementWrapper(name = "critics")
+    @XmlElement(name = "critic")
+    public List<CriticDTO> getCritic() {
+        return critic;
+    }
+
+    public void setCritic(List<CriticDTO> critic) {
+        this.critic = critic;
+    }
   
 
     //
@@ -222,7 +233,8 @@ public class ListingExportDTO {
     public void setRules(List<RuleDTO> rules) {
         this.rules = rules;
     }
-    
+    @XmlElementWrapper(name = "bookings")
+    @XmlElement(name = "booking")
       public List<BookingDTO> getBooking() {
         return booking;
     }
