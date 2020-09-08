@@ -5,11 +5,15 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.MessageCreationDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
+import com.goldencompany.airbnb.entity.Booking;
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
+import com.goldencompany.airbnb.repositories.UserRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -21,6 +25,9 @@ public class MessageMapper {
 
     @Inject
     UserMapper userMapper;
+    
+    @Inject
+    UserRepository userRepository;
 
     public MessageDTO toDTO(Message entity) {
         MessageDTO dto = new MessageDTO();
@@ -57,5 +64,20 @@ public class MessageMapper {
         }
 
         return list;
+    }
+    
+     public Message toEntity(MessageCreationDTO dto  , User ent1 , User ent2 , Booking booking) {
+        Message entity = new Message();
+        
+        entity.setText(dto.getText());
+        entity.setUserIdFrom(ent1);
+        entity.setUserIdTo(ent2);
+        entity.setDateTime(new Date());
+        entity.setActive(1);
+        entity.setBookingId(booking);
+
+             
+        
+        return entity;
     }
 }

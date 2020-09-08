@@ -20,17 +20,17 @@ import javax.persistence.Query;
 /**
  *
  * @author george
- * 
+ *
  */
 @Stateless
 public class ListingRepository {
+
     @PersistenceContext(unitName = "airbnb_db_pool_pu")
     private EntityManager em;
-    
-    
+
     public List<Listing> findAll() {
         Query q = em.createNamedQuery("Listing.findAll");
-        List listing = q.getResultList();                 
+        List listing = q.getResultList();
         return listing;
 //         TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
 //         List<User> results = query.getResultList();
@@ -41,27 +41,29 @@ public class ListingRepository {
     public List find(Integer id) {
         Query q = em.createNamedQuery("Listing.findById");
         q.setParameter("id", id);
-        
-        List users = q.getResultList();     
-            
+
+        List users = q.getResultList();
+
         return users;
     }
 //
+
     public List<Listing> findActive() {
-         Query q = em.createNamedQuery("Listing.findByActive");
+        Query q = em.createNamedQuery("Listing.findByActive");
         q.setParameter("active", 1);
-        
-        List listing = q.getResultList();     
-            
+
+        List listing = q.getResultList();
+
         return listing;
     }
 //
+
     public List<Listing> findInactive() {
         Query q = em.createNamedQuery("Listing.findByActive");
         q.setParameter("active", 0);
-        
-        List listings = q.getResultList();     
-            
+
+        List listings = q.getResultList();
+
         return listings;
     }
 //
@@ -120,8 +122,19 @@ public class ListingRepository {
 
     public List<Listing> export() {
         Query q = em.createNamedQuery("Listing.findAll");
-        List<Listing>  listing = q.getResultList();         
+        List<Listing> listing = q.getResultList();
         return listing;
     }
     
+    
+    
+   
+
+    public List<Listing> findInactiveByUserId(Integer id) {
+        Query q = em.createNamedQuery("Listing.findByUserId");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
 }

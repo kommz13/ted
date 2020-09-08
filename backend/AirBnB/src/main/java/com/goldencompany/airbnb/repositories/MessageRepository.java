@@ -7,6 +7,7 @@ package com.goldencompany.airbnb.repositories;
 
 import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -69,6 +70,22 @@ public class MessageRepository {
         List users = q.getResultList();
 
         return users;
+    }
+      
+      
+      public void create(Message entity) {
+        em.persist(entity);//insert
+        
+    }
+
+    public Message update(Message thisMessage) {
+        em.merge(thisMessage);
+        
+         List users = new ArrayList();
+        
+        users.add(thisMessage);
+        
+        return thisMessage;   
     }
 
 }

@@ -24,13 +24,15 @@ public class ListingManagementController {
 
     @Inject
     ListingRepository listingRepository;
+    
+//    @Inject
+//    ListingQueryHolder listingQueries;
 
     @Inject
     ListingMapper listingMapper;
 
 //    @Inject
 //    RoleMapper roleMapper;
-
     public List retrieveListings() {
         List<Listing> listing = listingRepository.findAll();
 
@@ -42,10 +44,11 @@ public class ListingManagementController {
     public List retrieveListingByID(Integer id) {
         List<Listing> listing = listingRepository.find(id);
 
-         List dtos = listingMapper.toDTO(listing);
+        List dtos = listingMapper.toDTO(listing);
         return dtos;
     }
 //
+
     public List retrieveActiveListings() {
         List<Listing> listing = listingRepository.findActive();
 
@@ -54,6 +57,7 @@ public class ListingManagementController {
         return dtos;
     }
 //
+
     public List retrieveInactiveListings() {
         List<Listing> listing = listingRepository.findInactive();
 
@@ -61,6 +65,23 @@ public class ListingManagementController {
 
         return dtos;
     }
+    
+    
+    
+    public List findInactiveByUserId(Integer id) {
+        List<Listing> listing = listingRepository.findInactiveByUserId(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+    
+//        public List<Listing> findInactiveByUserId(Integer id) {
+//        Query q = em.createNamedQuery("Listing.findByUserId");
+//        q.setParameter("x", id);
+//        List<Listing> listing = q.getResultList();
+//        return listing;
+//    }
 //
 //    public List retrieveUsersByStatus(int registrationStatus) {
 //        List<User> users = userRepository.findApproved(registrationStatus);
@@ -166,4 +187,5 @@ public class ListingManagementController {
 //        }
 //    }
 
+   
 }

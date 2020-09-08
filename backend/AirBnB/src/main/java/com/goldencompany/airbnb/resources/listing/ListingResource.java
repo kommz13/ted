@@ -43,6 +43,7 @@ public class ListingResource {
                 .build();
     }
 //
+
     @GET
     @Path("active")
     public Response active() {
@@ -53,10 +54,26 @@ public class ListingResource {
                 .build();
     }
 //
+
     @GET
     @Path("inactive")
     public Response inactive() {
         List listings = controller.retrieveInactiveListings();
+
+        return Response
+                .ok(listings)
+                .build();
+    }
+    
+    
+    
+    //exw meinei sto oti prepei na ftia3w to function ston controller gia na kanei query me to id touy user
+
+    @GET
+    @Path("inactive/{id}")
+    public Response inactive(@PathParam("id") Integer id) {
+//        List listings = controller.retrieveInactiveByUserListings( id);
+        List listings = controller.findInactiveByUserId( id );
 
         return Response
                 .ok(listings)

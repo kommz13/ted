@@ -26,9 +26,9 @@ public class BookingRepository {
     private EntityManager em;
 
     public List findByBookingID(Integer id) {
-        Query q = em.createNamedQuery("Booking.findByBookingId");
-        q.setParameter("x", id);
-        q.setParameter("y", id);
+        Query q = em.createNamedQuery("Booking.findById");
+        q.setParameter("id", id);
+//        q.setParameter("y", id);
 
         List users = q.getResultList();
 
