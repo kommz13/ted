@@ -125,13 +125,16 @@ public class ListingRepository {
         List<Listing> listing = q.getResultList();
         return listing;
     }
-    
-    
-    
-   
 
     public List<Listing> findInactiveByUserId(Integer id) {
         Query q = em.createNamedQuery("Listing.findByUserId");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findActiveByUserId(Integer id) {
+        Query q = em.createNamedQuery("Listing.findActiveByUserId");
         q.setParameter("x", id);
         List<Listing> listing = q.getResultList();
         return listing;

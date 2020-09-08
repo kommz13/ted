@@ -19,17 +19,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-@NamedQueries({   
+@NamedQueries({
     @NamedQuery(name = "Listing.findByUserId", query = "SELECT l FROM Listing l WHERE l.userId.id = :x and l.active= 0"),
-//    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
+    @NamedQuery(name = "Listing.findActiveByUserId", query = "SELECT l FROM Listing l WHERE l.userId.id = :x and l.active= 1"), //    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
 //    @NamedQuery(name = "Message.findSentByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x"),
 //    @NamedQuery(name = "Message.findDetailsByID", query = "SELECT m FROM Message m WHERE m.id = :x"),
 //        findAllMessagesByUserID
 //    @NamedQuery(name = "Message.findAllMessagesByUserID", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x or m.userIdTo.id = :x")
-    
 })
-public class ListingQueryHolder  implements Serializable {
-     @Id
-     private long id;
-    
+public class ListingQueryHolder implements Serializable {
+
+    @Id
+    private long id;
+
 }

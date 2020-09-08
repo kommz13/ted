@@ -64,16 +64,24 @@ public class ListingResource {
                 .ok(listings)
                 .build();
     }
-    
-    
-    
-    //exw meinei sto oti prepei na ftia3w to function ston controller gia na kanei query me to id touy user
 
+    //exw meinei sto oti prepei na ftia3w to function ston controller gia na kanei query me to id touy user
     @GET
     @Path("inactive/{id}")
     public Response inactive(@PathParam("id") Integer id) {
 //        List listings = controller.retrieveInactiveByUserListings( id);
-        List listings = controller.findInactiveByUserId( id );
+        List listings = controller.findInactiveByUserId(id);
+
+        return Response
+                .ok(listings)
+                .build();
+    }
+
+    @GET
+    @Path("active/{id}")
+    public Response active(@PathParam("id") Integer id) {
+//        List listings = controller.retrieveInactiveByUserListings( id);
+        List listings = controller.findactiveByUserId(id);
 
         return Response
                 .ok(listings)

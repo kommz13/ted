@@ -24,10 +24,9 @@ public class ListingManagementController {
 
     @Inject
     ListingRepository listingRepository;
-    
+
 //    @Inject
 //    ListingQueryHolder listingQueries;
-
     @Inject
     ListingMapper listingMapper;
 
@@ -65,9 +64,7 @@ public class ListingManagementController {
 
         return dtos;
     }
-    
-    
-    
+
     public List findInactiveByUserId(Integer id) {
         List<Listing> listing = listingRepository.findInactiveByUserId(id);
 
@@ -75,7 +72,7 @@ public class ListingManagementController {
 
         return dtos;
     }
-    
+
 //        public List<Listing> findInactiveByUserId(Integer id) {
 //        Query q = em.createNamedQuery("Listing.findByUserId");
 //        q.setParameter("x", id);
@@ -186,6 +183,12 @@ public class ListingManagementController {
 //            throw new UserValidationException(errors);
 //        }
 //    }
+    public List findactiveByUserId(Integer id) {
+        List<Listing> listing = listingRepository.findActiveByUserId(id);
 
-   
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
 }
