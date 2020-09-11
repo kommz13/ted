@@ -8,12 +8,7 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link :to="{ path: '/admin/users/approved' }"
-                >*Approved*</router-link
-              >
-            </li>
-            <li class="breadcrumb-item">
-              <router-link :to="{ path: '/admin/users/approved' }"
-                >!Approved!</router-link
+                >Approved</router-link
               >
             </li>
             <li class="breadcrumb-item active">

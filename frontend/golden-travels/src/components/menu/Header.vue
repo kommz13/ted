@@ -42,7 +42,7 @@
                 href="#"
                 class="nav-link dropdown-toggle arrow"
                 data-toggle="dropdown"
-                >Administator</a
+                >Administrator</a
               >
               <ul class="dropdown-menu megamenu-content" role="menu">
                 <li>

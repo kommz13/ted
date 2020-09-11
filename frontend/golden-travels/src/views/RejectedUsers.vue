@@ -215,5 +215,5 @@ export default {
   components: {
     UserTitleBox
   }
-}
+};
 </script>

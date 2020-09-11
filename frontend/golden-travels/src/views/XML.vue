@@ -4,8 +4,6 @@
     <ExportTitleBox></ExportTitleBox>
     <!-- End All Title Box -->
 
-   
-
     <!-- Start Cart  -->
     <div class="cart-box-main">
       <div class="container">
@@ -217,5 +215,5 @@ export default {
   components: {
     ExportTitleBox
   }
-}
+};
 </script>

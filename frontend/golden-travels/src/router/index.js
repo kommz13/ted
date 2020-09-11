@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/AirBnb",
     name: "Home",
     component: Home
   },
@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: "/admin/users/approved",
-    name: "About",
+    name: "ApprovedUsers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: "/admin/users/rejected",
-    name: "About",
+    name: "RejectedUsers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: "/admin/users/pending",
-    name: "About",
+    name: "PendingUsers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -48,7 +48,7 @@ const routes = [
   },
   {
     path: "/admin/export/xml",
-    name: "About",
+    name: "ExportXML",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -57,7 +57,7 @@ const routes = [
   },
   {
     path: "/admin/export/json",
-    name: "About",
+    name: "ExportJSON",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
