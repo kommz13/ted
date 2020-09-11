@@ -62,7 +62,7 @@
                     <td class="total-pr">
                       <button
                         type="button"
-                        @click="approveUser(u.id)"
+                        @click="rejectUser(u.id)"
                         class="btn btn-primary"
                       >
                         Deactivate
@@ -106,7 +106,7 @@ export default {
         this.users = response.data;
       });
     },
-    approveUser(id) {
+    rejectUser(id) {
       console.log("id clicked: " + id);
 
       axios.post(API.REJECT_APPROVED_USER + id).then((response) => {

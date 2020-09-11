@@ -4,15 +4,15 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h2>Users</h2>
+          <h2>Export</h2>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link :to="{ path: '/admin/users/JSON' }"
+              <router-link :to="{ path: '/admin/export/JSON' }"
                 >JSON</router-link
               >
             </li>
             <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/admin/users/xml' }">XML</router-link>
+              <router-link :to="{ path: '/admin/export/xml' }">XML</router-link>
             </li>
           </ul>
         </div>
