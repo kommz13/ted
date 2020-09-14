@@ -9,6 +9,8 @@ let APPROVE_PENDING_USER = BASE_URL + "/admin/users/approve/";
 let REJECT_PENDING_USER = BASE_URL + "/admin/users/reject/";
 let EXPORT_JSON = BASE_URL + "/admin/export/json";
 let EXPORT_XML = BASE_URL + "/admin/export/xml";
+let REGISTRATION = BASE_URL + "/account/register";
+let GET_USER_BY_ID = BASE_URL + "/admin/users/";
 
 export default {
   GET_APPROVED_USERS,
@@ -20,4 +22,6 @@ export default {
   REJECT_PENDING_USER,
   EXPORT_JSON,
   EXPORT_XML,
+  REGISTRATION,
+  GET_USER_BY_ID
 };
