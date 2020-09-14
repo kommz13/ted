@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.controllers.listing;
 
+import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.User;
 import com.goldencompany.airbnb.mappers.ListingMapper;
@@ -13,6 +14,7 @@ import com.goldencompany.airbnb.mappers.UserMapper;
 import com.goldencompany.airbnb.repositories.ListingRepository;
 import com.goldencompany.airbnb.repositories.UserRepository;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -189,6 +191,11 @@ public class ListingManagementController {
         List dtos = listingMapper.toDTO(listing);
 
         return dtos;
+    }
+
+    public List updateListing(Integer id, ListingUpdateDTO input) {
+        List <ListingUpdateDTO> listing = Arrays.asList(input);
+        return listing;
     }
 
 }
