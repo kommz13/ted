@@ -26,6 +26,10 @@
           <div class="our-link">
             <ul>
               <li><a href="#">My Account</a></li>
+              <li>
+                <router-link :to="{ path: '/register' }">Register</router-link>
+              </li>
+
               <li><a href="#">Our location</a></li>
               <li><a href="#">Contact Us</a></li>
             </ul>
