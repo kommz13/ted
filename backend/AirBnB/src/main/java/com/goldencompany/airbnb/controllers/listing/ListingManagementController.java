@@ -6,11 +6,16 @@
 package com.goldencompany.airbnb.controllers.listing;
 
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
+import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
+import com.goldencompany.airbnb.entity.Rule;
 import com.goldencompany.airbnb.entity.User;
+import com.goldencompany.airbnb.exceptions.UserValidationException;
+import com.goldencompany.airbnb.mappers.AmenityMapper;
 import com.goldencompany.airbnb.mappers.ListingMapper;
 import com.goldencompany.airbnb.mappers.RoleMapper;
 import com.goldencompany.airbnb.mappers.UserMapper;
+import com.goldencompany.airbnb.mappers.RuleMapper;
 import com.goldencompany.airbnb.repositories.ListingRepository;
 import com.goldencompany.airbnb.repositories.UserRepository;
 import java.util.ArrayList;
@@ -31,6 +36,13 @@ public class ListingManagementController {
 //    ListingQueryHolder listingQueries;
     @Inject
     ListingMapper listingMapper;
+    
+    @Inject
+    AmenityMapper amenityMapper;
+    
+    @Inject
+    RuleMapper ruleMapper;
+    
 
 //    @Inject
 //    RoleMapper roleMapper;
@@ -193,9 +205,67 @@ public class ListingManagementController {
         return dtos;
     }
 
-    public List updateListing(Integer id, ListingUpdateDTO input) {
+    public List updateListing(Integer id, ListingUpdateDTO input)  throws UserValidationException {
         List <ListingUpdateDTO> listing = Arrays.asList(input);
-        return listing;
+        
+        List errors = new ArrayList();
+        
+        List<Listing> listings = listingRepository.findByListingId(id);
+        if(listings.isEmpty()){
+            errors.add("There's no such listing");
+            throw new UserValidationException(errors);
+        }
+        
+        Listing thisListing = listings.get(0);
+        
+
+       thisListing.setBedroomNumber(input.getBedroom_num());
+       thisListing.setMaxPeople(input.getMaxPeople());
+       thisListing.setBedNumber(input.getBedNum());
+       thisListing.setDescription(input.getDescription());
+       thisListing.setMinimumDays(input.getMinDays());
+       thisListing.setActive(input.getActive());
+       thisListing.setExtraCostPerPerson(input.getExtraCostPerPerson());
+       
+       List <Amenity> amenities= amenityMapper.toEntities(input);
+       
+       thisListing.setAmenityList(amenities);
+       
+       List <Rule> rules = ruleMapper.toEntities(input);
+       
+       thisListing.setRuleList(rules);
+       
+        listings = listingRepository.update(thisListing);
+
+        List dtos = listingMapper.toDTO(listings);
+
+       
+       //edw 8a prepei na dw pws 8a ftia3w tis listes me ta amenities kai ta rules
+       
+//
+//        if (messages.isEmpty()) {
+//            errors.add("message does not exist");
+//            throw new UserValidationException(errors);
+//        }
+//        Message thisMessage = messages.get(0);
+//
+//        if (thisMessage.getActive() == 0) {
+//            thisMessage.setActive(1);
+//
+//            thisMessage = messageRepository.update(thisMessage);
+//
+//            List dtos = messageMapper.toDTO(messages);
+//            MessageDTO returnMessage = (MessageDTO) dtos.get(0);
+//
+////            MessageDTO dtos = messageMapper.toDTO(thisMessage);
+//            return returnMessage;
+//        } else {
+//            errors.add("this message is not deleted so it cannot be undeleted");
+//            throw new UserValidationException(errors);
+//        }
+//    }
+
+        return dtos;
     }
 
 }

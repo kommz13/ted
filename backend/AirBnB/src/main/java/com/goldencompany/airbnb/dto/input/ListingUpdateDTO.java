@@ -28,13 +28,22 @@ public class ListingUpdateDTO {
     private int minDays;
     private int active;
     private int extraCostPerPerson;
-    private TypeDTO type;
+//    private TypeDTO type;
 
     //Amenity integer variables where 0 means set to no , 1 means set to yes , maybe null means no change.
 //    private List<AmenityDTO> amenities = new ArrayList<>();
     private boolean hasWifi;
     //wifi
     //kitchen
+    private boolean hasKitchen;
+
+    public boolean isHasKitchen() {
+        return hasKitchen;
+    }
+
+    public void setHasKitchen(boolean hasKitchen) {
+        this.hasKitchen = hasKitchen;
+    }
     private boolean hasTv;
     //tv
     //parking
@@ -201,12 +210,12 @@ public class ListingUpdateDTO {
         this.extraCostPerPerson = extraCostPerPerson;
     }
 
-    public TypeDTO getType() {
-        return type;
-    }
-
-    public void setType(TypeDTO type) {
-        this.type = type;
-    }
+//    public TypeDTO getType() {
+//        return type;
+//    }
+//
+//    public void setType(TypeDTO type) {
+//        this.type = type;
+//    }
 
 }

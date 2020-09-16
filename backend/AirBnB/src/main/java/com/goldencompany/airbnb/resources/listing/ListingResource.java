@@ -93,13 +93,16 @@ public class ListingResource {
     @POST
     @Path("update/{id}")
     public Response update(@PathParam("id") Integer id ,  ListingUpdateDTO input) {
-       
+       try {
              List listings = controller.updateListing(id ,   input);
 //            List users = controller.approveUser(id);
 
             return Response
                     .ok(listings)
                     .build();
+       }catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
        
     }
 

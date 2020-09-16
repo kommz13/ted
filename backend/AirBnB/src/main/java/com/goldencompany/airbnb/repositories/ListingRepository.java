@@ -139,5 +139,23 @@ public class ListingRepository {
         List<Listing> listing = q.getResultList();
         return listing;
     }
+    
+     public List<Listing> findByListingId(Integer id) {
+        Query q = em.createNamedQuery("Listing.findById");
+        q.setParameter("id", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+     
+     
+        public List<Listing> update(Listing thisListing) {
+        em.merge(thisListing);
+        
+        List listings = new ArrayList();
+        
+        listings.add(thisListing);
+        
+        return listings;        
+    }
 
 }
