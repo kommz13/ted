@@ -48,6 +48,11 @@ public class ListingDTO {
     private List<AmenityDTO> amenities = new ArrayList<>();
     private List<RuleDTO> rules = new ArrayList<>();
     
+    private List<PhotoDTO> photos = new ArrayList<>();
+    private List<BookingDTO> bookings = new ArrayList<>();
+    private List<CriticDTO> critics = new ArrayList<>();
+
+    
 
     public Integer getId() {
         return id;
@@ -218,6 +223,31 @@ public class ListingDTO {
 
     public void setFriendlyName(String friendlyName) {
         this.friendlyName = friendlyName;
+    }
+    
+    
+    public List<PhotoDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoDTO> photos) {
+        this.photos = photos;
+    }
+
+    public List<BookingDTO> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<BookingDTO> bookings) {
+        this.bookings = bookings;
+    }
+
+    public List<CriticDTO> getCritics() {
+        return critics;
+    }
+
+    public void setCritics(List<CriticDTO> critics) {
+        this.critics = critics;
     }
     
     
