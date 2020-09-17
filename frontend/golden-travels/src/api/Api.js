@@ -11,6 +11,8 @@ let EXPORT_JSON = BASE_URL + "/admin/export/json";
 let EXPORT_XML = BASE_URL + "/admin/export/xml";
 let REGISTRATION = BASE_URL + "/account/register";
 let GET_USER_BY_ID = BASE_URL + "/admin/users/";
+let GET_ACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/active/";
+let GET_INACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/inactive/";
 
 export default {
   GET_APPROVED_USERS,
@@ -23,5 +25,7 @@ export default {
   EXPORT_JSON,
   EXPORT_XML,
   REGISTRATION,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  GET_ACTIVE_LISTINGS_BY_USER_ID,
+  GET_INACTIVE_LISTINGS_BY_USER_ID
 };

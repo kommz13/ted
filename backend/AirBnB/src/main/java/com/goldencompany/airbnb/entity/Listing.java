@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author george
+ * @author alex
  */
 @Entity
 @Table(name = "listing")
@@ -55,7 +56,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Listing.findByMinimumDays", query = "SELECT l FROM Listing l WHERE l.minimumDays = :minimumDays"),
     @NamedQuery(name = "Listing.findByActive", query = "SELECT l FROM Listing l WHERE l.active = :active"),
     @NamedQuery(name = "Listing.findBySubmittedDate", query = "SELECT l FROM Listing l WHERE l.submittedDate = :submittedDate"),
-    @NamedQuery(name = "Listing.findByExtraCostPerPerson", query = "SELECT l FROM Listing l WHERE l.extraCostPerPerson = :extraCostPerPerson")})
+    @NamedQuery(name = "Listing.findByExtraCostPerPerson", query = "SELECT l FROM Listing l WHERE l.extraCostPerPerson = :extraCostPerPerson"),
+    @NamedQuery(name = "Listing.findByFriendlyName", query = "SELECT l FROM Listing l WHERE l.friendlyName = :friendlyName")})
 public class Listing implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -132,26 +134,31 @@ public class Listing implements Serializable {
     @NotNull
     @Column(name = "extra_cost_per_person")
     private int extraCostPerPerson;
-    @ManyToMany(mappedBy = "listingList")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "friendly_name")
+    private String friendlyName;
+    @ManyToMany(mappedBy = "listingList", fetch = FetchType.LAZY)
     private List<Amenity> amenityList;
     @JoinTable(name = "listing_has_rule", joinColumns = {
         @JoinColumn(name = "listing_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "rule_id", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Rule> ruleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
     private List<Critic> criticList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
     private List<Photo> photoList;
     @JoinColumn(name = "type_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Type typeId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing", fetch = FetchType.LAZY)
     private List<UserViewsListing> userViewsListingList;
 
     public Listing() {
@@ -161,7 +168,7 @@ public class Listing implements Serializable {
         this.id = id;
     }
 
-    public Listing(Integer id, double geolocationLatitude, double geolocationLongitude, String country, int bedroomNumber, String city, String district, int sqrMeters, int floor, int maxPeople, int bedNumber, String description, int minimumDays, int active, Date submittedDate, int extraCostPerPerson) {
+    public Listing(Integer id, double geolocationLatitude, double geolocationLongitude, String country, int bedroomNumber, String city, String district, int sqrMeters, int floor, int maxPeople, int bedNumber, String description, int minimumDays, int active, Date submittedDate, int extraCostPerPerson, String friendlyName) {
         this.id = id;
         this.geolocationLatitude = geolocationLatitude;
         this.geolocationLongitude = geolocationLongitude;
@@ -178,6 +185,7 @@ public class Listing implements Serializable {
         this.active = active;
         this.submittedDate = submittedDate;
         this.extraCostPerPerson = extraCostPerPerson;
+        this.friendlyName = friendlyName;
     }
 
     public Integer getId() {
@@ -314,6 +322,14 @@ public class Listing implements Serializable {
 
     public void setExtraCostPerPerson(int extraCostPerPerson) {
         this.extraCostPerPerson = extraCostPerPerson;
+    }
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
     }
 
     @XmlTransient

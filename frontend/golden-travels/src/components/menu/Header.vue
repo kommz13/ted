@@ -99,6 +99,91 @@
                 href="#"
                 class="nav-link dropdown-toggle arrow"
                 data-toggle="dropdown"
+                >Customer</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <router-link :to="{ path: '/host/listing/create' }"
+                    >Create listing</router-link
+                  >
+                </li>
+                <!-- <li>
+                            <router-link :to="{ path: '/admin/users/approved' }"
+                              >Approved</router-link
+                            >
+                          </li> -->
+                <li><a href="wishlist.html">Find listings</a></li>
+                <li><a href="shop-detail.html">View all my listings</a></li>
+                <li><a href="checkout.html">View my active listings</a></li>
+                <li><a href="my-account.html">View my inactive listings</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle arrow"
+                data-toggle="dropdown"
+                >Messages</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <router-link :to="{ path: '/host/listing/create' }"
+                    >Create listing</router-link
+                  >
+                </li>
+                <!-- <li>
+                            <router-link :to="{ path: '/admin/users/approved' }"
+                              >Approved</router-link
+                            >
+                          </li> -->
+                <li><a href="wishlist.html">inbox</a></li>
+                <li><a href="shop-detail.html">outbox</a></li>
+                <!-- <li><a href="checkout.html">View my active listings</a></li>
+                <li><a href="my-account.html">View my inactive listings</a></li> -->
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle arrow"
+                data-toggle="dropdown"
+                >Host</a
+              >
+              <ul class="dropdown-menu">
+                <li>
+                  <router-link :to="{ path: '/host/listing/create' }"
+                    >Create listing</router-link
+                  >
+                </li>
+                <!-- <li>
+                            <router-link :to="{ path: '/admin/users/approved' }"
+                              >Approved</router-link
+                            >
+                          </li> -->
+
+                <li>
+                  <router-link :to="{ path: '/host/listing/view/:id' }"
+                    >View listing by id</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/host/listing/list/' }"
+                    >View all my listings</router-link
+                  >
+                </li>
+                <li><a href="wishlist.html">Update listing</a></li>
+
+                <li><a href="checkout.html">View my active listings</a></li>
+                <li><a href="my-account.html">View my inactive listings</a></li>
+              </ul>
+            </li>
+
+            <!-- <li class="dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle arrow"
+                data-toggle="dropdown"
                 >SHOP</a
               >
               <ul class="dropdown-menu">
@@ -108,13 +193,14 @@
                 <li><a href="wishlist.html">Wishlist</a></li>
                 <li><a href="shop-detail.html">Shop Detail</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
+            </li> -->
+
+            <!-- <li class="nav-item">
               <a class="nav-link" href="service.html">Our Service</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact-us.html">Contact Us</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

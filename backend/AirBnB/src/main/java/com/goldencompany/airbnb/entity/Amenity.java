@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author george
+ * @author alex
  */
 @Entity
 @Table(name = "amenity")
@@ -56,7 +57,7 @@ public class Amenity implements Serializable {
     @JoinTable(name = "listing_has_amenity", joinColumns = {
         @JoinColumn(name = "amenity_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "listing_id", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Listing> listingList;
 
     public Amenity() {

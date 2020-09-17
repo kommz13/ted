@@ -51,6 +51,7 @@ public class ListingMapper {
         dto.setActive(entity.getActive());
         dto.setSubmittedDate(entity.getSubmittedDate());
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
+        dto.setFriendlyName(entity.getFriendlyName());
 
 //        User from = entity.getUserIdFrom();
 //        User to = entity.getUserIdTo();

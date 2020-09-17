@@ -36,7 +36,7 @@
                       {{ u.id }}
                     </td>
                     <td class="name-pr">
-                      <a href="#"> {{ u.firstname }} {{ u.lastname }} </a>
+                      <router-link :to="{ name: 'Profile', params: {id: u.id } }">{{ u.firstname }} {{ u.lastname }}</router-link>
                     </td>
                     <td class="name-pr">
                       {{ u.username }}

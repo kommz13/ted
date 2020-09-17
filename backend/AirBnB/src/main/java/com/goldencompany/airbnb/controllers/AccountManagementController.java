@@ -13,8 +13,13 @@ import com.goldencompany.airbnb.exceptions.UserValidationException;
 import com.goldencompany.airbnb.mappers.RoleMapper;
 import com.goldencompany.airbnb.mappers.UserMapper;
 import com.goldencompany.airbnb.repositories.UserRepository;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
@@ -31,6 +36,26 @@ public class AccountManagementController {
 
     @Inject
     RoleMapper roleMapper;
+
+    private static String hash(String originalString) {
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException ex) {
+            return originalString;
+        }
+        byte[] encodedhash = digest.digest(originalString.getBytes(StandardCharsets.UTF_8));
+
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < encodedhash.length; i++) {
+            String hex = Integer.toHexString(0xff & encodedhash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 
     public List createUser(RegisterDTO dto) throws UserValidationException {
 
@@ -51,6 +76,9 @@ public class AccountManagementController {
         if (!errors.isEmpty()) {
             throw new UserValidationException(errors);
         } else {
+            
+            entity.setPassword(hash(entity.getPassword()));
+
             userRepository.create(entity, roles);
 
             List l = new ArrayList();

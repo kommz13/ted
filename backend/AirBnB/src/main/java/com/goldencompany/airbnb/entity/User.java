@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author george
+ * @author alex
  */
 @Entity
 @Table(name = "user")
@@ -109,19 +110,19 @@ public class User implements Serializable {
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
-    @ManyToMany(mappedBy = "userList")
+    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
     private List<Role> roleList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Critic> criticList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom", fetch = FetchType.LAZY)
     private List<Message> messageList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo", fetch = FetchType.LAZY)
     private List<Message> messageList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Listing> listingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserViewsListing> userViewsListingList;
 
     public User() {

@@ -6,7 +6,7 @@
           <div class="contact-info-left">
             <h2>REGISTER INFO</h2>
             <p>
-              Register for awesome stuff
+             Here you can register your listing.
             </p>
             <ul>
               <li>
@@ -221,7 +221,7 @@
                       type="submit"
                       @click.prevent="register"
                     >
-                      Complete registration
+                      Complete listing registration
                     </button>
                     <div id="msgSubmit" class="h3 text-center hidden"></div>
                     <div class="clearfix"></div>
@@ -255,7 +255,7 @@ export default {
         birthdate: "2010-10-10T22:00:00Z[UTC]",
         is_host: false,
         is_customer: true,
-        photoUrl: "https://icons-for-free.com/iconfiles/png/512/avatar+person+profile+user+icon-1320166578424287581.png",
+        photoUrl: undefined,
       },
     };
   },

@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is a view listing detail vue </h1>
+    <h1>This a listing creatiom page</h1>
   </div>
 </template>

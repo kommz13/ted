@@ -12,7 +12,7 @@
               <div class="carousel-item active">
                 <img
                   class="d-block w-100"
-                  src="images/big-img-01.jpg"
+                  :src="user.photoUrl"
                   alt="First slide"
                 />
               </div>
@@ -22,17 +22,20 @@
         <div class="col-xl-7 col-lg-7 col-md-6">
           <div class="single-product-details">
             <h2>{{ user.firstname }} {{ user.lastname }}</h2>
-            <h5>
+            <h2>
               <span v-for="r in user.roles" v-bind:key="r.id"
                 >{{ r.name }}
               </span>
-            </h5>
-            <h1 class="available-stock">
-              email : {{ user.email }}/ <a href="#">8 sold </a>
-            </h1>
-            <p></p>
-            <h4>Username : {{ user.username }}</h4>
-            <h2>id : {{ user.id }}</h2>
+            </h2>
+            <h2 class="available-stock">
+              Email : {{ user.email }} 
+            </h2>
+            <h2>Username : {{ user.username }}</h2>
+            <h2>Id : {{ user.id }}</h2>
+            <h2>Phone : {{ user.phone }}</h2>
+            <h2>Registration status : {{ user.registrationStatus }}</h2>
+            <h2>Birthdate : {{ user.birthdate }}</h2>
+            <h2>Registration date : {{ user.registrationDate }}</h2>
             <!-- <ul>
               <li>
                 <div class="form-group size-st">
@@ -508,27 +511,18 @@ export default {
   data() {
     return {
       user: {
-        active: 1,
-        birthdate: "1985-02-22T22:00:00Z[UTC]",
-        email: "alam@gmail.com",
-        firstname: "alfred",
-        id: 1,
-        lastname: "lamda",
-        phone: "6985452365",
-        photoUrl: "www.google.com",
-        registrationDate: "1990-11-23T00:00:00Z[UTC]",
-        registrationStatus: "rejected",
-        roles: [
-          {
-            id: 1,
-            name: "host",
-          },
-          {
-            id: 2,
-            name: "customer",
-          },
-        ],
-        username: "gg",
+        active: "-",
+        birthdate: "-",
+        email: "-",
+        firstname: "-",
+        id: "-",
+        lastname: "-",
+        phone: "-",
+        photoUrl: "-",
+        registrationDate: "-",
+        registrationStatus: "-",
+        roles: [],
+        username: "-",
       },
     };
   },
@@ -538,6 +532,10 @@ export default {
       const id = to.params.id;
       this.retrieveData(id);
     },
+  },
+  mounted() {
+    const id = this.$route.params.id;
+    this.retrieveData(id);
   },
   methods: {
     retrieveData(id) {
@@ -549,6 +547,3 @@ export default {
 };
 </script>
 
-www.faceboo.com/messages#id=1
-
-www.faceboo.com/messages#id=2

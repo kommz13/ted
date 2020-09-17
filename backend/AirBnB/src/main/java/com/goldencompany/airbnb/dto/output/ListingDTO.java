@@ -28,7 +28,7 @@ public class ListingDTO {
     private String district;
     private int floor;
     private int maxPeople;
-    
+    private String  friendlyName;
     
     
    
@@ -208,7 +208,17 @@ public class ListingDTO {
         this.type = type;
     }
 
+
+    
 //    
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
     
     
   
