@@ -26,9 +26,6 @@ public class BookingMapper {
     @Inject
     UserMapper userMapper;
 
-    @Inject
-    ListingMapper listingMapper;
-
     public BookingDTO toDTO(Booking entity) {
         BookingDTO dto = new BookingDTO();
 
@@ -44,13 +41,13 @@ public class BookingMapper {
         
         User user =entity.getUserId();
         
-        Listing listing = entity.getListingId();
+//        Listing listing = entity.getListingId();
         
         UserDTO userDTO= userMapper.toDTO(user);
 //        ListingDTO listingDTO=listingMapper.toDTO(listing);
         
         
-        dto.setUserId(userDTO);
+        dto.setUser(userDTO);
 //        dto.setListingId(listingDTO);
 
 

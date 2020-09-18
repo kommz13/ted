@@ -43,6 +43,8 @@ public class UserMapper {
         dto.setBirthdate(entity.getBirthdate());
         dto.setRegistrationStatus(registrationStatusMap[entity.getRegistrationStatus()]);
         dto.setActive(entity.getActive());
+        
+        
                         
         return dto;
     }

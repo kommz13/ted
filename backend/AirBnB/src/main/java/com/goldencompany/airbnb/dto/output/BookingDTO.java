@@ -28,7 +28,7 @@ public class BookingDTO {
 //prosoxh , isws xreiazetai    
 
 //    private List <User> userId;
-    private UserDTO userId;
+    private UserDTO user;
 //    private List <Message> messageId;
 //    this.id = id;
 //        this.checkin = checkin;
@@ -68,55 +68,18 @@ public class BookingDTO {
         this.howManyPeople = howManyPeople;
     }
 
-//    public ListingDTO getListingId() {
-//        return listingId;
-//    }
-//
-//    public void setListingId(ListingDTO listingId) {
-//        this.listingId = listingId;
-//    }
 
-    public UserDTO getUserId() {
-        return userId;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserId(UserDTO userId) {
-        this.userId = userId;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
-    
-//    public Listing getListingId() {
-//        return listingId;
-//    }
-//
-//    public void setListingId(Listing listingId) {
-//        this.listingId = listingId;
-//    }
-
-//    public List<User> getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(List<User> userId) {
-//        this.userId = userId;
-//    }
-
-//    public User getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(User userId) {
-//        this.userId = userId;
-//    }
+  
     
 
-//    public List<Message> getMessageId() {
-//        return messageId;
-//    }
-//
-//    public void setMessageId(List<Message> messageId) {
-//        this.messageId = messageId;
-//    }
 
     public BookingDTO() {
     }

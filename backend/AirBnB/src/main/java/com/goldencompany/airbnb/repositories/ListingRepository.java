@@ -5,9 +5,14 @@
  */
 package com.goldencompany.airbnb.repositories;
 
+import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
+import com.goldencompany.airbnb.entity.Photo;
 import com.goldencompany.airbnb.entity.Role;
+import com.goldencompany.airbnb.entity.Rule;
+import com.goldencompany.airbnb.entity.Type;
 import com.goldencompany.airbnb.entity.User;
+import com.goldencompany.airbnb.exceptions.BaseValidationException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -139,23 +144,49 @@ public class ListingRepository {
         List<Listing> listing = q.getResultList();
         return listing;
     }
-    
-     public List<Listing> findByListingId(Integer id) {
+
+    public List<Listing> findByListingId(Integer id) {
         Query q = em.createNamedQuery("Listing.findById");
         q.setParameter("id", id);
         List<Listing> listing = q.getResultList();
         return listing;
     }
-     
-     
-        public List<Listing> update(Listing thisListing) {
+
+    public List<Listing> update(Listing thisListing) {
         em.merge(thisListing);
+
+        List listings = new ArrayList();
+
+        listings.add(thisListing);
+
+        return listings;
+    }
+
+    public List<Listing> create(Listing listing, int userId, int typeId, List<Amenity> amenities, List<Photo> photos, List<Rule> rules) throws BaseValidationException {
+        Type type = em.find(Type.class,typeId);
         
+        if (type == null) {
+            throw new BaseValidationException("Type id is  invalid");
+        }
+        
+        User user = em.find(User.class, userId);
+        
+        if (user == null) {
+            throw new BaseValidationException("User id is  invalid");
+        }
+        
+        listing.setTypeId(type);
+        
+        listing.setUserId(user);
+        
+        em.persist(listing);
+
+        // TODO:
         List listings = new ArrayList();
         
-        listings.add(thisListing);
+        listings.add(listing);
         
-        return listings;        
+        return listings;
     }
 
 }

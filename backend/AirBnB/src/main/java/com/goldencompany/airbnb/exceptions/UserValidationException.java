@@ -11,22 +11,15 @@ import java.util.List;
  *
  * @author george
  */
-public class UserValidationException extends Exception {
-    private List errors;
+public class UserValidationException extends BaseValidationException {
 
     public UserValidationException(List errors) {
-        this.errors = errors;
+        super(errors);
     }
 
-    public List getErrors() {
-        return errors;
+    public UserValidationException(String error) {
+        super(error);
     }
-
-    public void setErrors(List errors) {
-        this.errors = errors;
-    }
-    
-    
     
     
     

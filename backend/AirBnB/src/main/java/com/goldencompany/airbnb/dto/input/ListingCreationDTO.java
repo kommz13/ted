@@ -17,8 +17,7 @@ import java.util.List;
  * @author george
  */
 public class ListingCreationDTO {
-   
-    private Integer id;
+
     private double geolocation_lat;
     private double geolocation_long;
     private String country;
@@ -27,29 +26,60 @@ public class ListingCreationDTO {
     private String district;
     private int floor;
     private int maxPeople;
-    
-    
-    
-   
+
     private int bedNum;
     private int bathroomNum;
     private String description;
-    
+    private int sqrMeters;
+
     private int minDays;
     private int active;
     private int extraCostPerPerson;
-    private TypeDTO type;
-    
-    private UserDTO user ;
-    private List<AmenityDTO> amenities = new ArrayList<>();
-    private List<RuleDTO> rules = new ArrayList<>();
+    private int typeId;
+    private String friendlyName;
 
-    public Integer getId() {
-        return id;
+    private int userId;
+    private boolean hasWifi;
+    //wifi
+    //kitchen
+    private boolean hasKitchen;
+    private boolean hasTv;
+    //tv
+    //parking
+    private boolean hasParking;
+    //elevator
+    private boolean hasElevator;
+    private boolean hasHeating;
+    //livingroom
+    private boolean hasLivingRoom;
+    
+    private boolean hasAirCondition;
+
+    //rules boolean Variables                
+//    private List<RuleDTO> rules = new ArrayList<>();
+    //pet
+    private boolean hasPet;
+    //event
+    private boolean hasEvent;
+    //smoking
+    private boolean hasSmoking;
+
+    public boolean isHasAirCondition() {
+        return hasAirCondition;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setHasAirCondition(boolean hasAirCondition) {
+        this.hasAirCondition = hasAirCondition;
+    }
+    
+    
+
+    public int getSqrMeters() {
+        return sqrMeters;
+    }
+
+    public void setSqrMeters(int sqrMeters) {
+        this.sqrMeters = sqrMeters;
     }
 
     public double getGeolocation_lat() {
@@ -163,31 +193,110 @@ public class ListingCreationDTO {
     public void setExtraCostPerPerson(int extraCostPerPerson) {
         this.extraCostPerPerson = extraCostPerPerson;
     }
-
-    public TypeDTO getType() {
-        return type;
+   
+    public int getUserId() {
+        return userId;
     }
 
-    public void setType(TypeDTO type) {
-        this.type = type;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public List<AmenityDTO> getAmenities() {
-        return amenities;
+    public boolean isHasWifi() {
+        return hasWifi;
     }
 
-    public void setAmenities(List<AmenityDTO> amenities) {
-        this.amenities = amenities;
+    public void setHasWifi(boolean hasWifi) {
+        this.hasWifi = hasWifi;
     }
 
-    public List<RuleDTO> getRules() {
-        return rules;
+    public boolean isHasKitchen() {
+        return hasKitchen;
     }
 
-    public void setRules(List<RuleDTO> rules) {
-        this.rules = rules;
+    public void setHasKitchen(boolean hasKitchen) {
+        this.hasKitchen = hasKitchen;
     }
 
+    public boolean isHasTv() {
+        return hasTv;
+    }
+
+    public void setHasTv(boolean hasTv) {
+        this.hasTv = hasTv;
+    }
+
+    public boolean isHasParking() {
+        return hasParking;
+    }
+
+    public void setHasParking(boolean hasParking) {
+        this.hasParking = hasParking;
+    }
+
+    public boolean isHasElevator() {
+        return hasElevator;
+    }
+
+    public void setHasElevator(boolean hasElevator) {
+        this.hasElevator = hasElevator;
+    }
+
+    public boolean isHasHeating() {
+        return hasHeating;
+    }
+
+    public void setHasHeating(boolean hasHeating) {
+        this.hasHeating = hasHeating;
+    }
+
+    public boolean isHasLivingRoom() {
+        return hasLivingRoom;
+    }
+
+    public void setHasLivingRoom(boolean hasLivingRoom) {
+        this.hasLivingRoom = hasLivingRoom;
+    }
+
+    public boolean isHasPet() {
+        return hasPet;
+    }
+
+    public void setHasPet(boolean hasPet) {
+        this.hasPet = hasPet;
+    }
+
+    public boolean isHasEvent() {
+        return hasEvent;
+    }
+
+    public void setHasEvent(boolean hasEvent) {
+        this.hasEvent = hasEvent;
+    }
+
+    public boolean isHasSmoking() {
+        return hasSmoking;
+    }
+
+    public void setHasSmoking(boolean hasSmoking) {
+        this.hasSmoking = hasSmoking;
+    }
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
     
     
     

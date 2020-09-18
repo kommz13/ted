@@ -28,9 +28,9 @@ public class CriticMapper {
     @Inject
     UserMapper userMapper;
 
-    @Inject
-    ListingMapper listingMapper;
-    
+//    @Inject
+//    ListingMapper listingMapper;
+//    
     
     
 
@@ -49,7 +49,7 @@ public class CriticMapper {
         
         User user =entity.getUserId();
         
-        Listing listing = entity.getListingId();
+//        Listing listing = entity.getListingId();
         
         UserDTO userDTO= userMapper.toDTO(user);
 //        ListingDTO listingDTO=listingMapper.toDTO(listing);

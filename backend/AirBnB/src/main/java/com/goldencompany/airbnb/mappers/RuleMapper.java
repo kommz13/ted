@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
 import com.goldencompany.airbnb.dto.output.RuleDTO;
 import com.goldencompany.airbnb.entity.Rule;
@@ -48,6 +49,10 @@ public class RuleMapper {
 
         return ruleList;
 
+    }
+
+    public List<Rule> toEntities(ListingCreationDTO input) {
+        return new ArrayList();
     }
     
 }

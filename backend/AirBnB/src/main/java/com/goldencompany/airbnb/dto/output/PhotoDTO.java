@@ -20,6 +20,10 @@ public class PhotoDTO {
     private Date uploadDate;
     private short default1;
 //    private ListingDTO listingId;
+    
+    public PhotoDTO() {
+    }
+    
 
     public Integer getActive() {
         return active;
@@ -29,8 +33,7 @@ public class PhotoDTO {
         this.active = active;
     }
 
-    public PhotoDTO() {
-    }
+   
 
     public Integer getId() {
         return id;

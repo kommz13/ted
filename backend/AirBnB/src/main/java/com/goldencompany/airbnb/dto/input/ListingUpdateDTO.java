@@ -36,6 +36,26 @@ public class ListingUpdateDTO {
     //wifi
     //kitchen
     private boolean hasKitchen;
+    private boolean hasAirCondition;
+    //heating
+    private boolean hasHeating;
+    //livingroom
+    private boolean hasLivingRoom;
+
+    //rules boolean Variables                
+//    private List<RuleDTO> rules = new ArrayList<>();
+    //pet
+    private boolean hasPet;
+    //event
+    private boolean hasEvent;
+    //smoking
+    private boolean hasSmoking;
+    private boolean hasTv;
+    //tv
+    //parking
+    private boolean hasParking;
+    //elevator
+    private boolean hasElevator;
 
     public boolean isHasKitchen() {
         return hasKitchen;
@@ -44,12 +64,6 @@ public class ListingUpdateDTO {
     public void setHasKitchen(boolean hasKitchen) {
         this.hasKitchen = hasKitchen;
     }
-    private boolean hasTv;
-    //tv
-    //parking
-    private boolean hasParking;
-    //elevator
-    private boolean hasElevator;
 
     public boolean isHasWifi() {
         return hasWifi;
@@ -131,20 +145,6 @@ public class ListingUpdateDTO {
         this.hasSmoking = hasSmoking;
     }
 //aircondition
-    private boolean hasAirCondition;
-    //heating
-    private boolean hasHeating;
-    //livingroom
-    private boolean hasLivingRoom;
-
-    //rules boolean Variables                
-//    private List<RuleDTO> rules = new ArrayList<>();
-    //pet
-    private boolean hasPet;
-    //event
-    private boolean hasEvent;
-    //smoking
-    private boolean hasSmoking;
 
     public int getBedroom_num() {
         return bedroom_num;
@@ -217,5 +217,4 @@ public class ListingUpdateDTO {
 //    public void setType(TypeDTO type) {
 //        this.type = type;
 //    }
-
 }

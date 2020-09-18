@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.output.PhotoDTO;
 import com.goldencompany.airbnb.entity.Photo;
 import java.util.ArrayList;
@@ -17,11 +18,7 @@ import javax.inject.Inject;
  */
 public class PhotoMapper {
 
-//    @Inject
-//    UserMapper userMapper;
-//    
-    @Inject 
-    ListingMapper listingMapper;
+
 
     public PhotoDTO toDTO(Photo entity) {
         PhotoDTO dto = new PhotoDTO();
@@ -31,24 +28,6 @@ public class PhotoMapper {
         dto.setActive(entity.getActive());
         dto.setDate(entity.getUploadDate());
         dto.setActive(entity.getActive());
-//        dto.setListingId(entity.getListingId());
-        
-        
-//        User from = entity.getUserIdFrom();
-//        User to = entity.getUserIdTo();
-        
-//        List<User> entities = new ArrayList<>();
-//        
-//        entities.add(from);
-//        entities.add(to);
-        
-//        List dtos = userMapper.toDTO(entities);
-        
-//        UserDTO fromdto = (UserDTO) dtos.get(0);
-//        UserDTO todto = (UserDTO) dtos.get(1);
-        
-//        dto.setSender(fromdto);
-//        dto.setReceiver(todto);
 
         return dto;
     }
@@ -62,5 +41,9 @@ public class PhotoMapper {
         }
 
         return list;
+    }
+
+    public List<Photo> toEntities(ListingCreationDTO input) {
+        return new ArrayList<>();
     }
 }

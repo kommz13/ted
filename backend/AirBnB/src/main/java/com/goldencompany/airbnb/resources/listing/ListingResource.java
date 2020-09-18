@@ -1,8 +1,10 @@
 package com.goldencompany.airbnb.resources.listing;
 
 import com.goldencompany.airbnb.controllers.listing.ListingManagementController;
+import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
 import com.goldencompany.airbnb.entity.constants.UserConstants;
+import com.goldencompany.airbnb.exceptions.BaseValidationException;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
 import java.util.List;
 import javax.inject.Inject;
@@ -88,23 +90,37 @@ public class ListingResource {
                 .ok(listings)
                 .build();
     }
-    
-    
+
     @POST
     @Path("update/{id}")
-    public Response update(@PathParam("id") Integer id ,  ListingUpdateDTO input) {
-       try {
-             List listings = controller.updateListing(id ,   input);
+    public Response update(@PathParam("id") Integer id, ListingUpdateDTO input) {
+        try {
+            List listings = controller.updateListing(id, input);
 //            List users = controller.approveUser(id);
 
             return Response
                     .ok(listings)
                     .build();
-       }catch (UserValidationException ex) {
+        } catch (UserValidationException ex) {
             return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
         }
-       
+
     }
 
+    @POST
+    @Path("create")
+    public Response create(ListingCreationDTO input) {
+        try {
+            List listing = controller.createListing(input);
+
+            return Response
+                    .ok(listing)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+
+//        return Response.ok().build();
+    }
 
 }

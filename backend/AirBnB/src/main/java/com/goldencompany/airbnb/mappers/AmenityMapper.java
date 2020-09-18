@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.dto.output.AmenityDTO;
@@ -47,6 +48,58 @@ public class AmenityMapper {
 //        
 //    }
     public List<Amenity> toEntities(ListingUpdateDTO dto) {
+        List<Amenity> amenityList = new ArrayList();
+
+        if (dto.isHasWifi()) {
+            Amenity r = new Amenity();
+            r.setId(1);
+            amenityList.add(r);
+        }
+        if (dto.isHasKitchen()) {
+            Amenity r = new Amenity();
+            r.setId(2);
+            amenityList.add(r);
+        }
+
+        if (dto.isHasTv()) {
+            Amenity r = new Amenity();
+            r.setId(3);
+            amenityList.add(r);
+        }
+
+        if (dto.isHasParking()) {
+            Amenity r = new Amenity();
+            r.setId(4);
+            amenityList.add(r);
+        }
+        if (dto.isHasElevator()) {
+            Amenity r = new Amenity();
+            r.setId(5);
+            amenityList.add(r);
+        }
+
+        if (dto.isHasAirCondition()) {
+            Amenity r = new Amenity();
+            r.setId(6);
+            amenityList.add(r);
+        }
+
+        if (dto.isHasHeating()) {
+            Amenity r = new Amenity();
+            r.setId(7);
+            amenityList.add(r);
+        }
+        if (dto.isHasLivingRoom()) {
+            Amenity r = new Amenity();
+            r.setId(8);
+            amenityList.add(r);
+        }
+
+        return amenityList;
+
+    }
+    
+     public List<Amenity> toEntities(ListingCreationDTO dto) {
         List<Amenity> amenityList = new ArrayList();
 
         if (dto.isHasWifi()) {
