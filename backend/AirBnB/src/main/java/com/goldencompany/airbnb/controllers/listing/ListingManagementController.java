@@ -152,10 +152,11 @@ public class ListingManagementController {
 
         List<Rule> rules = ruleMapper.toEntities(input);
         
-        List<Photo> photos = photoMapper.toEntities(input);
-                
+        
+        Photo photo = photoMapper.toEntity(input.getPhoto_url());
 
-        List<Listing> listings = listingRepository.create(listing, input.getUserId(), input.getTypeId(), amenities, photos, rules);
+        List<Listing> listings = listingRepository.create(listing, input.getUserId(), input.getTypeId(), amenities, photo, rules);
+        //8a xreiaste na ftia3oume kai create gia photo amenity kai rules??
 
         List dtos = listingMapper.toDTO(listings);
 

@@ -128,7 +128,7 @@ public class ListingMapper {
         entity.setCountry(dto.getCountry());
         entity.setBedroomNumber(dto.getBedroom_num());
         entity.setCity(dto.getCity());
-        entity.setDistrict(dto.getCity());
+        entity.setDistrict(dto.getDistrict());
         entity.setSqrMeters(dto.getSqrMeters());
         entity.setFloor(dto.getFloor());
         entity.setMaxPeople(dto.getMaxPeople());

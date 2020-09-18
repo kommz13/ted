@@ -18,22 +18,11 @@ public class PhotoDTO {
     private String photoUrl;
     private int active;
     private Date uploadDate;
-    private short default1;
-//    private ListingDTO listingId;
+    private boolean is_default;
+    private int listingId;
     
-    public PhotoDTO() {
+      public PhotoDTO() {
     }
-    
-
-    public Integer getActive() {
-        return active;
-    }
-
-    public void setActive(Integer active) {
-        this.active = active;
-    }
-
-   
 
     public Integer getId() {
         return id;
@@ -43,45 +32,49 @@ public class PhotoDTO {
         this.id = id;
     }
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
-    
-    public String getPhotoUrl(){
-        return this.photoUrl;
+
+    public int getActive() {
+        return active;
     }
-    
-    
-//    Date uploadDate
-            
-    public Date getDate(){
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public Date getUploadDate() {
         return uploadDate;
     }
-    
-    public void setDate(Date uploadDate){
-        this.uploadDate=uploadDate;
-    }
-    
-    public short getDefault(){
-        return default1;
-    }
-    public void setDefault(short default1){
-        this.default1=default1;
-    }
-    
-//    public Listing getListingId(){
-//        return listingId;
-//    }
-//    
-//    public void setListingId(Listing listingId){
-//        this.listingId=listingId;
-//    }
 
-//    public ListingDTO getListingId() {
-//        return listingId;
-//    }
-//
-//    public void setListingId(ListingDTO listingId) {
-//        this.listingId = listingId;
-//    }
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
+    }
+
+    public boolean isIs_default() {
+        return is_default;
+    }
+
+    public void setIs_default(boolean is_default) {
+        this.is_default = is_default;
+    }
+
+    public int getListingId() {
+        return listingId;
+    }
+
+    public void setListingId(int listingId) {
+        this.listingId = listingId;
+    }
+    
+    
+  
+    
+
+    
 }

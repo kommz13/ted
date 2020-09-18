@@ -17,17 +17,17 @@ import java.util.List;
  * @author george
  */
 public class RuleMapper {
-    
-       public RuleDTO toDTO(Rule entity){
-         RuleDTO dto = new RuleDTO();
-         
-         dto.setId(entity.getId());
-         dto.setRule(entity.getRule());
-         
-         return dto;
-     }
-       
-       public List<Rule> toEntities(ListingUpdateDTO dto) {
+
+    public RuleDTO toDTO(Rule entity) {
+        RuleDTO dto = new RuleDTO();
+
+        dto.setId(entity.getId());
+        dto.setRule(entity.getRule());
+
+        return dto;
+    }
+
+    public List<Rule> toEntities(ListingUpdateDTO dto) {
         List<Rule> ruleList = new ArrayList();
 
         if (dto.isHasPet()) {
@@ -40,8 +40,8 @@ public class RuleMapper {
             r.setId(2);
             ruleList.add(r);
         }
-        
-          if (dto.isHasSmoking()) {
+
+        if (dto.isHasSmoking()) {
             Rule r = new Rule();
             r.setId(3);
             ruleList.add(r);
@@ -52,7 +52,28 @@ public class RuleMapper {
     }
 
     public List<Rule> toEntities(ListingCreationDTO input) {
-        return new ArrayList();
+//        return new ArrayList();
+        List<Rule> ruleList = new ArrayList();
+
+        if (input.isHasPet()) {
+            Rule r = new Rule();
+            r.setId(1);
+            ruleList.add(r);
+        }
+        if (input.isHasEvent()) {
+            Rule r = new Rule();
+            r.setId(2);
+            ruleList.add(r);
+        }
+
+        if (input.isHasSmoking()) {
+            Rule r = new Rule();
+            r.setId(3);
+            ruleList.add(r);
+        }
+
+        return ruleList;
+
     }
-    
+
 }

@@ -162,7 +162,7 @@ public class ListingRepository {
         return listings;
     }
 
-    public List<Listing> create(Listing listing, int userId, int typeId, List<Amenity> amenities, List<Photo> photos, List<Rule> rules) throws BaseValidationException {
+    public List<Listing> create(Listing listing, int userId, int typeId, List<Amenity> amenities, Photo photo, List<Rule> rules) throws BaseValidationException {
         Type type = em.find(Type.class,typeId);
         
         if (type == null) {
@@ -178,6 +178,17 @@ public class ListingRepository {
         listing.setTypeId(type);
         
         listing.setUserId(user);
+        
+        listing.setAmenityList(amenities);
+        
+        listing.setRuleList(rules);
+        
+//        List<Photo> newPhotos = new ArrayList();
+//        newPhotos.add(photo);
+//        
+//        listing.setPhotoList(newPhotos);
+                
+        
         
         em.persist(listing);
 
