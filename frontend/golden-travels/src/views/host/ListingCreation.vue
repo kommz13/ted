@@ -1,5 +1,15 @@
 <template>
-  <div class="about">
-    <h1>This a listing creatiom page</h1>
+  <div class="cart-box-main">
+    <ListingForm></ListingForm>
   </div>
 </template>
+
+<script>
+import ListingForm from "@/components/forms/ListingForm.vue";
+
+export default {
+  components: {
+    ListingForm,
+  },
+};
+</script>

@@ -19,8 +19,6 @@ import javax.inject.Inject;
  */
 public class PhotoMapper {
 
-
-
     public PhotoDTO toDTO(Photo entity) {
         PhotoDTO dto = new PhotoDTO();
 
@@ -43,37 +41,37 @@ public class PhotoMapper {
 
         return list;
     }
-    
-    public Photo toEntity(String photo_url , int listingId){
+
+    public Photo toEntity(String photo_url, int listingId) {
         Photo thisPhoto = new Photo();
         thisPhoto.setActive(1);
         thisPhoto.setPhotoUrl(photo_url);
-        thisPhoto.setDefaultUrl((short)1);
+        thisPhoto.setDefaultUrl((short) 1);
         thisPhoto.setUploadDate(new Date());
 
 //        this.active = active;
 //        this.uploadDate = uploadDate;
 //        this.defaultUrl = defaultUrl;
 //          return new Photo();
-            return thisPhoto;
+        return thisPhoto;
     }
-    
-        public Photo toEntity(String photo_url){
+
+    public Photo toEntity(String photo_url) {
         Photo thisPhoto = new Photo();
         thisPhoto.setActive(1);
         thisPhoto.setPhotoUrl(photo_url);
-        thisPhoto.setDefaultUrl((short)1);
+        thisPhoto.setDefaultUrl((short) 1);
         thisPhoto.setUploadDate(new Date());
 
 //        this.active = active;
 //        this.uploadDate = uploadDate;
 //        this.defaultUrl = defaultUrl;
 //          return new Photo();
-            return thisPhoto;
+        return thisPhoto;
     }
 
     public List<Photo> toEntities(ListingCreationDTO input) {
-            return new ArrayList<>();
+        return new ArrayList<>();
 //        List<Photo> photos= new ArrayList();
 //        
 //          for () {
@@ -82,11 +80,11 @@ public class PhotoMapper {
 //        }
 //
 //        return list;
-        
+
     }
-    
-        public List<Photo> toEntities(List<String> input) {
-            return new ArrayList<>();
+
+    public List<Photo> toEntities(List<String> input) {
+        return new ArrayList<>();
 //        List<Photo> photos= new ArrayList();
 ////        
 //          for (String photo : input) {
@@ -96,6 +94,6 @@ public class PhotoMapper {
 //        }
 ////
 //        return list;
-        
+
     }
 }

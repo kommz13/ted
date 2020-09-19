@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,28 +38,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Booking.findAll", query = "SELECT b FROM Booking b"),
     @NamedQuery(name = "Booking.findById", query = "SELECT b FROM Booking b WHERE b.id = :id"),
-    @NamedQuery(name = "Booking.findByCheckin", query = "SELECT b FROM Booking b WHERE b.checkin = :checkin"),
     @NamedQuery(name = "Booking.findByCheckout", query = "SELECT b FROM Booking b WHERE b.checkout = :checkout"),
+    @NamedQuery(name = "Booking.findByCheckin", query = "SELECT b FROM Booking b WHERE b.checkin = :checkin"),
     @NamedQuery(name = "Booking.findByBookingStatus", query = "SELECT b FROM Booking b WHERE b.bookingStatus = :bookingStatus"),
     @NamedQuery(name = "Booking.findByHowManyPeople", query = "SELECT b FROM Booking b WHERE b.howManyPeople = :howManyPeople")})
 public class Booking implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "checkin")
-    @Temporal(TemporalType.DATE)
-    private Date checkin;
+    @Column(name = "checkout")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date checkout;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "checkout")
-    @Temporal(TemporalType.DATE)
-    private Date checkout;
+    @Column(name = "checkin")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date checkin;
     @Basic(optional = false)
     @NotNull
     @Column(name = "booking_status")
@@ -82,10 +84,10 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
-    public Booking(Integer id, Date checkin, Date checkout, int bookingStatus, int howManyPeople) {
+    public Booking(Integer id, Date checkout, Date checkin, int bookingStatus, int howManyPeople) {
         this.id = id;
-        this.checkin = checkin;
         this.checkout = checkout;
+        this.checkin = checkin;
         this.bookingStatus = bookingStatus;
         this.howManyPeople = howManyPeople;
     }
@@ -98,20 +100,20 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
-    public Date getCheckin() {
-        return checkin;
-    }
-
-    public void setCheckin(Date checkin) {
-        this.checkin = checkin;
-    }
-
     public Date getCheckout() {
         return checkout;
     }
 
     public void setCheckout(Date checkout) {
         this.checkout = checkout;
+    }
+
+    public Date getCheckin() {
+        return checkin;
+    }
+
+    public void setCheckin(Date checkin) {
+        this.checkin = checkin;
     }
 
     public int getBookingStatus() {

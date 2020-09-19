@@ -65,7 +65,12 @@ public class BookingResource {
     @POST
     @Path("/create")
     public Response create_booking(BookingCreationDTO input) {
+//        return Response
+//                .ok()
+//                .build();
+        
         BookingCreationDTO booking = controller.createBooking(input);
+        
 
         return Response
                 .ok(booking)

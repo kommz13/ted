@@ -44,7 +44,7 @@
             <p v-show="submit_complete">
               Your application has been submited. You will  be notified at {{ form.email  }}.
             </p>
-            <form id="contactForm" v-show="!submit_complete">
+            <form id="contactForm" v-show="!submit_complete" @submit.prevent="register">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -219,7 +219,6 @@
                       class="btn hvr-hover"
                       id="submit"
                       type="submit"
-                      @click.prevent="register"
                     >
                       Complete registration
                     </button>

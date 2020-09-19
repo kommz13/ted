@@ -12,6 +12,7 @@ import com.goldencompany.airbnb.entity.Message;
 import com.goldencompany.airbnb.entity.User;
 import java.util.Date;
 import java.util.List;
+import javax.json.bind.annotation.JsonbDateFormat;
 
 /**
  *

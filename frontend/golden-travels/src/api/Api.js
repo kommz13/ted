@@ -19,6 +19,7 @@ let GET_INACTIVE_LISTINGS = BASE_URL + "/listing/active/";
 let GET_RECEIVED_MESSAGES = BASE_URL + "/messages/received/";
 let GET_SENT_MESSAGES =  BASE_URL + "/messages/sent/";
 let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
+let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
 
 export default {
   GET_APPROVED_USERS,
@@ -40,6 +41,7 @@ export default {
   GET_RECEIVED_MESSAGES,
   GET_SENT_MESSAGES,
   GET_MESSAGE_DETAILS,
+  POST_LISTING_CREATE,
 
 
 

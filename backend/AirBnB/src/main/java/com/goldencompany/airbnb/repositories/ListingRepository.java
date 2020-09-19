@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -162,6 +163,7 @@ public class ListingRepository {
         return listings;
     }
 
+    
     public List<Listing> create(Listing listing, int userId, int typeId, List<Amenity> amenities, Photo photo, List<Rule> rules) throws BaseValidationException {
         Type type = em.find(Type.class,typeId);
         
@@ -183,20 +185,18 @@ public class ListingRepository {
         
         listing.setRuleList(rules);
         
-//        List<Photo> newPhotos = new ArrayList();
-//        newPhotos.add(photo);
-//        
-//        listing.setPhotoList(newPhotos);
-                
+        listing.setPhotoList(new ArrayList<>());
         
+        listing.getPhotoList().add(photo);
         
+        photo.setListingId(listing);
+                                                
         em.persist(listing);
-
-        // TODO:
+        
         List listings = new ArrayList();
-        
+
         listings.add(listing);
-        
+
         return listings;
     }
 

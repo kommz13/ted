@@ -67,6 +67,10 @@ public class ListingMapper {
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
         dto.setFriendlyName(entity.getFriendlyName());
 
+        for (Photo p : entity.getPhotoList()) {
+            dto.getPhotos().add(photoMapper.toDTO(p));
+        }
+
 //        User from = entity.getUserIdFrom();
 //        User to = entity.getUserIdTo();
 //        List<User> entities = new ArrayList<>();
@@ -102,10 +106,6 @@ public class ListingMapper {
 //                        .getRule().add(rule);
             }
 
-            for (Photo p : entity.getPhotoList()) {
-                listing.getPhotos().add(photoMapper.toDTO(p));
-            }
-
             for (Booking b : entity.getBookingList()) {
                 listing.getBookings().add(bookingMapper.toDTO(b));
             }
@@ -117,12 +117,10 @@ public class ListingMapper {
 
         return list;
     }
-    
-    
-    
-     public Listing toEntity (ListingCreationDTO dto) {
+
+    public Listing toEntity(ListingCreationDTO dto) {
         Listing entity = new Listing();
-        
+
         entity.setGeolocationLatitude(dto.getGeolocation_lat());
         entity.setGeolocationLongitude(dto.getGeolocation_long());
         entity.setCountry(dto.getCountry());
@@ -139,10 +137,7 @@ public class ListingMapper {
         entity.setExtraCostPerPerson(dto.getExtraCostPerPerson());
         entity.setFriendlyName(dto.getFriendlyName());
         entity.setBathroomNumber(dto.getBathroomNum());
-                
-       
-        
-        
+
 //        dto.setId(entity.getId());
 //        dto.setGeolocation_lat(entity.getGeolocationLatitude());
 //        dto.setGeolocation_long(entity.getGeolocationLongitude());
@@ -160,7 +155,6 @@ public class ListingMapper {
 //        dto.setSubmittedDate(entity.getSubmittedDate());
 //        dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
 //        dto.setFriendlyName(entity.getFriendlyName());
-
 //        User from = entity.getUserIdFrom();
 //        User to = entity.getUserIdTo();
 //        List<User> entities = new ArrayList<>();
