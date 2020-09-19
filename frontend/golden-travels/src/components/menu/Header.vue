@@ -103,8 +103,8 @@
               >
               <ul class="dropdown-menu">
                 <li>
-                  <router-link :to="{ path: '/host/listing/create' }"
-                    >Create listing</router-link
+                  <router-link :to="{ path: '/customer/listing/search' }"
+                    >Search</router-link
                   >
                 </li>
                 <!-- <li>
@@ -112,36 +112,24 @@
                               >Approved</router-link
                             >
                           </li> -->
-                <li><a href="wishlist.html">Find listings</a></li>
-                <li><a href="shop-detail.html">View all my listings</a></li>
-                <li><a href="checkout.html">View my active listings</a></li>
-                <li><a href="my-account.html">View my inactive listings</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle arrow"
-                data-toggle="dropdown"
-                >Messages</a
-              >
-              <ul class="dropdown-menu">
                 <li>
-                  <router-link :to="{ path: '/host/listing/create' }"
-                    >Create listing</router-link
+                  <router-link :to="{ path: '/customer/listing/all' }"
+                    >All my listings</router-link
                   >
                 </li>
-                <!-- <li>
-                            <router-link :to="{ path: '/admin/users/approved' }"
-                              >Approved</router-link
-                            >
-                          </li> -->
-                <li><a href="wishlist.html">inbox</a></li>
-                <li><a href="shop-detail.html">outbox</a></li>
-                <!-- <li><a href="checkout.html">View my active listings</a></li>
-                <li><a href="my-account.html">View my inactive listings</a></li> -->
+                <li>
+                  <router-link :to="{ path: '/customer/listing/active' }"
+                    >Active listings</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/customer/listing/inactive' }"
+                    >Inactive listings</router-link
+                  >
+                </li>
               </ul>
             </li>
+            
 
             <li class="dropdown">
               <a
@@ -172,10 +160,53 @@
                     >View all my listings</router-link
                   >
                 </li>
-                <li><a href="wishlist.html">Update listing</a></li>
-
-                <li><a href="checkout.html">View my active listings</a></li>
-                <li><a href="my-account.html">View my inactive listings</a></li>
+                <li>
+                  <router-link :to="{ path: '/host/listing/update/' }"
+                    >Update listing</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/host/listing/active/' }"
+                    >Active listings</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/host/listing/inactive/' }"
+                    >Inactive listings</router-link
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle arrow"
+                data-toggle="dropdown"
+                >Messages</a
+              >
+              <ul class="dropdown-menu">
+                                <!-- <li>
+                            <router-link :to="{ path: '/admin/users/approved' }"
+                              >Approved</router-link
+                            >
+                          </li> -->
+                <li>
+                  <router-link :to="{ path: '/messages/received/'}"
+                    >Inbox</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/messages/sent/' }"
+                    >Outbox</router-link
+                  >
+                </li>
+                <li>
+                  <router-link :to="{ path: '/messages/details/' }"
+                    >Message Details</router-link
+                  >
+                </li>
+                <!-- <li><a href="checkout.html">View my active listings</a></li>
+                <li><a href="my-account.html">View my inactive listings</a></li> -->
               </ul>
             </li>
 

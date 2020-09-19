@@ -8,8 +8,7 @@
             <div id="offer-box">
               <ul class="offer-box">
                 <li>
-                  <i class="fab fa-opencart"></i> Welcome to Golden Travels,
-                  have a good day!
+                  <i class="fas fa-plane-departure"></i>Welcome to Golden Travels
                 </li>
               </ul>
             </div>
