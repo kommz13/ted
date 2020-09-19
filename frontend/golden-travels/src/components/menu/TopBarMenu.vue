@@ -24,7 +24,9 @@
           </div>
           <div class="our-link">
             <ul>
-              <li><a href="#">My Account</a></li>
+              <li>
+                <router-link :to="{ path: '/account' }">My Account</router-link>
+              </li>
               <li>
                 <router-link :to="{ path: '/register' }">Register</router-link>
               </li>
