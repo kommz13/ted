@@ -21,7 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Booking.findByUserId", query = "SELECT b FROM Booking b WHERE b.userId.id = :x"),
-//    @NamedQuery(name = "Listing.findActiveByUserId", query = "SELECT l FROM Listing l WHERE l.userId.id = :x and l.active= 1"), //    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
+    @NamedQuery(name = "Booking.findByListingId", query = "SELECT b FROM Booking b WHERE b.listingId.id = :x"), 
+//    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
 //    @NamedQuery(name = "Message.findSentByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x"),
 //    @NamedQuery(name = "Message.findDetailsByID", query = "SELECT m FROM Message m WHERE m.id = :x"),
 //        findAllMessagesByUserID

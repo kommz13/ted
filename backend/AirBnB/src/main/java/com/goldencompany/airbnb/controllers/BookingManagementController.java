@@ -184,4 +184,12 @@ public class BookingManagementController {
 
     }
 
+    public List retrieveBookingsByListingId(Integer id) {
+        List<Booking> bookings = bookingRepository.retrieveAllBookingsByListingId(id);
+
+        List dtos = bookingMapper.toDTO(bookings);
+
+        return dtos;
+    }
+
 }

@@ -50,15 +50,15 @@ public class BookingResource {
 //
 //    //peirama 
     //get booking by listing id
-//    @GET
-//    @Path("incoming_bookings/{id}")
-//    public Response incoming_bookings(@PathParam("id") Integer id) {
-//        List bookings = controller.retrieveMessageDetailsByID(id);
-//
-//        return Response
-//                .ok(bookings)
-//                .build();
-//    }
+    @GET
+    @Path("incoming_bookings/{id}")
+    public Response incoming_bookings(@PathParam("id") Integer id) {
+        List bookings = controller.retrieveBookingsByListingId(id);
+
+        return Response
+                .ok(bookings)
+                .build();
+    }
     
     //create listing
 

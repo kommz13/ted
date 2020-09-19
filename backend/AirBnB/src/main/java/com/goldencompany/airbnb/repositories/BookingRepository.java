@@ -35,25 +35,27 @@ public class BookingRepository {
         return users;
     }
 
- 
-
-    
-
     //edw
-  
-    
-      public List retrieveAllBookings() {
+    public List retrieveAllBookings() {
         Query q = em.createNamedQuery("Booking.findAll");
-       
 
         List bookings = q.getResultList();
 
         return bookings;
     }
-      
-      
-        public List retrieveAllBookingsByUserId(int id) {
+
+    public List retrieveAllBookingsByUserId(int id) {
         Query q = em.createNamedQuery("Booking.findByUserId");
+        q.setParameter("x", id);
+
+        List bookings = q.getResultList();
+
+        return bookings;
+
+    }
+
+    public List<Booking> retrieveAllBookingsByListingId(Integer id) {
+        Query q = em.createNamedQuery("Booking.findByListingId");
         q.setParameter("x", id);
 
         List bookings = q.getResultList();
@@ -64,6 +66,5 @@ public class BookingRepository {
     public void create(Booking thisBooking) {
         em.persist(thisBooking);
     }
-        
 
 }
