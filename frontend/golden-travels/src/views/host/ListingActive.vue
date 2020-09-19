@@ -5,7 +5,7 @@
         <div class="col-12">
           <h2 class="noo-sh-title">Your Listings</h2>
         </div>
-        <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
+        <div v-for="l in listings" v-bind:key="l.id"  class="col-sm-6 col-lg-3">
           <div class="hover-team">
             <div class="our-team">
               <img src="images/img-1.jpg" alt="" />
