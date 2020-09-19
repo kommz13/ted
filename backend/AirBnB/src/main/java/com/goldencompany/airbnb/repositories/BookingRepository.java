@@ -50,5 +50,20 @@ public class BookingRepository {
 
         return bookings;
     }
+      
+      
+        public List retrieveAllBookingsByUserId(int id) {
+        Query q = em.createNamedQuery("Booking.findByUserId");
+        q.setParameter("x", id);
+
+        List bookings = q.getResultList();
+
+        return bookings;
+    }
+
+    public void create(Booking thisBooking) {
+        em.persist(thisBooking);
+    }
+        
 
 }

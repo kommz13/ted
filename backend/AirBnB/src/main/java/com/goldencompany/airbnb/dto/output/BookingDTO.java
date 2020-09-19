@@ -35,7 +35,19 @@ public class BookingDTO {
 //        this.checkout = checkout;
 //        this.bookingStatus = bookingStatus;
 //        this.howManyPeople = howManyPeople;
+    
+    
+    //pros8hkh listing
+    private ListingDTO listing;
 
+    public ListingDTO getListing() {
+        return listing;
+    }
+
+    public void setListing(ListingDTO listing) {
+        this.listing = listing;
+    }
+    //pros8hkh listing
     public Date getCheckIn() {
         return checkIn;
     }

@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.mappers;
 
+import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
 import com.goldencompany.airbnb.dto.output.BookingDTO;
 import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
@@ -25,6 +26,9 @@ public class BookingMapper {
 
     @Inject
     UserMapper userMapper;
+    
+//    @Inject
+//    ListingMapper listingMapper;
 
     public BookingDTO toDTO(Booking entity) {
         BookingDTO dto = new BookingDTO();
@@ -39,18 +43,14 @@ public class BookingMapper {
 //        Listing listing = entity.getListingId();
         
         
-        User user =entity.getUserId();
-        
-//        Listing listing = entity.getListingId();
-        
+        User user =entity.getUserId();               
         UserDTO userDTO= userMapper.toDTO(user);
-//        ListingDTO listingDTO=listingMapper.toDTO(listing);
-        
-        
         dto.setUser(userDTO);
-//        dto.setListingId(listingDTO);
-
-
+//den mporw na valw ta listings giati m kanei loop kai den mporw na skeftw pws na to kseperasw to loop , isws an ftia3w kapoia allh function alla kai pali 
+//mporei na mhn ftia3ei ... sunexizw me alla.
+//        Listing listing = entity.getListingId();
+//        ListingDTO listingDTO = listingMapper.toDTO(listing);
+//        dto.setListing(listingDTO);
         return dto;
     }
 
@@ -63,5 +63,22 @@ public class BookingMapper {
         }
 
         return list;
+    }
+    
+    
+//    public static final int PENDING = 0;
+//    public static final int APPROVED = 1;
+//    public static final int REJECTED = 2;
+
+    public Booking toEntity(BookingCreationDTO input, User user, Listing listing) {
+        Booking entity = new Booking();
+        entity.setBookingStatus(0);
+        entity.setCheckin(input.getCheckIn());
+        entity.setCheckout(input.getCheckOut());
+        entity.setHowManyPeople(input.getHowManyPeople());
+        entity.setListingId(listing);
+        entity.setUserId(user);
+//        entity.setMessageList(messageList);
+        return entity;
     }
 }
