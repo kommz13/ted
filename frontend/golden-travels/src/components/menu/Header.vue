@@ -157,7 +157,7 @@
                 </li>
                 <li>
                   <router-link :to="{ path: '/host/listing/list/' }"
-                    >View all my listings</router-link
+                    >View my listings</router-link
                   >
                 </li>
                 <li>
@@ -165,7 +165,7 @@
                     >Update listing</router-link
                   >
                 </li>
-                <li>
+                <!-- <li>
                   <router-link :to="{ path: '/host/listing/active/' }"
                     >Active listings</router-link
                   >
@@ -174,7 +174,7 @@
                   <router-link :to="{ path: '/host/listing/inactive/' }"
                     >Inactive listings</router-link
                   >
-                </li>
+                </li> -->
               </ul>
             </li>
             <li class="dropdown">

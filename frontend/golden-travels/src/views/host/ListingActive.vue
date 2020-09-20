@@ -1,19 +1,22 @@
 <template
   ><div class="about-box-main">
+    <div class="profile">
+      <HostTitleBox title="User profile"></HostTitleBox>
+    </div>
     <div class="container">
-      <button @click.prevent="f">Active</button>
-      <button @click.prevent="g">Invactive</button>
+      <!-- <button @click.prevent="f">Active</button>
+      <button @click.prevent="g">Inactive</button> -->
 
       <div class="row my-4">
         <div class="col-12">
           <h2 class="noo-sh-title">Your Listings</h2>
         </div>
-        <div v-for="l in listings" v-bind:key="l.id"  class="col-sm-6 col-lg-3">
+        <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
           <div class="hover-team">
             <div class="our-team">
               <img v-if="l.photos.length" :src="l.photos[0].photoUrl" alt="" />
               <img v-else src="" alt="" />
-              
+
               <div class="team-content">
                 <h3 class="title">{{ l.friendlyName }}</h3>
                 <span class="post">{{ l.city }}</span>
@@ -43,21 +46,25 @@
             </div>
             <hr class="my-0" />
           </div>
-        </div>        
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
+import HostTitleBox from "@/components/host/HostTitleBox.vue";
 
 export default {
+  components: {
+    HostTitleBox,
+  },
+
   data() {
     return {
-      listings: []
+      listings: [],
     };
   },
   mounted() {
@@ -68,21 +75,21 @@ export default {
     retrieveData(id) {
       axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
-        console.log(this.listings)
+        console.log(this.listings);
       });
     },
     f() {
       let id = 1;
       axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
-        console.log(this.listings)
-      });      
+        console.log(this.listings);
+      });
     },
     g() {
       let id = 1;
       axios.get(API.GET_INACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
-        console.log(this.listings)
+        console.log(this.listings);
       });
     },
   },
