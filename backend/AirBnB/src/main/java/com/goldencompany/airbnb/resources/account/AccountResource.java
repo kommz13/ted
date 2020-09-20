@@ -1,14 +1,21 @@
 package com.goldencompany.airbnb.resources.account;
 
+import com.goldencompany.airbnb.auth.AuthController;
 import com.goldencompany.airbnb.controllers.AccountManagementController;
+import com.goldencompany.airbnb.dto.input.LoginDTO;
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
+import com.goldencompany.airbnb.dto.output.SessionDataDTO;
+import com.goldencompany.airbnb.dto.output.UserDTO;
+import com.goldencompany.airbnb.entity.User;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
+import com.goldencompany.airbnb.mappers.UserMapper;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 /**
@@ -24,6 +31,9 @@ public class AccountResource {
 
     @Inject
     AccountManagementController controller;
+    
+    @Inject
+    UserMapper userMapper;
 
     @POST
     @Path("/register")
@@ -34,8 +44,28 @@ public class AccountResource {
         } catch (UserValidationException ex) {
             return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
         }
-
         
+    }
+    
+    @POST
+    @Path("/login")
+    public Response login(LoginDTO input) {
+        try {
+            User user = controller.loginUser(input);
+            
+            UserDTO dto = userMapper.toDTO(user);
+            
+            String token = AuthController.issueToken(user);
+            
+            SessionDataDTO data = new SessionDataDTO();
+            
+            data.setUser(dto);
+            data.setToken(token);
+            
+            return Response.ok(data).build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.UNAUTHORIZED).build();
+        }
         
     }
     

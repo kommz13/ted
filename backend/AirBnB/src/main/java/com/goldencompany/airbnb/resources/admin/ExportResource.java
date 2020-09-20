@@ -1,5 +1,6 @@
 package com.goldencompany.airbnb.resources.admin;
 
+import com.goldencompany.airbnb.auth.AuthController;
 import com.goldencompany.airbnb.controllers.admin.ExportController;
 import com.goldencompany.airbnb.controllers.admin.UserManagementController;
 import com.goldencompany.airbnb.dto.output.BookingDTO;
@@ -12,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import com.goldencompany.airbnb.annotations.SecuredModerator;
 
 /**
  *
@@ -26,6 +28,7 @@ public class ExportResource {
 
     @GET
     @Path("json")
+    @SecuredModerator
     @Produces({MediaType.APPLICATION_JSON})
     public Response json() {
         DatasetExportDTO dataset = controller.export();
@@ -37,6 +40,7 @@ public class ExportResource {
 
     @GET
     @Path("xml")
+    @SecuredModerator
     @Produces({MediaType.APPLICATION_XML})
     public Response xml() {
         DatasetExportDTO dataset = controller.export();
@@ -49,6 +53,7 @@ public class ExportResource {
     
     @GET
     @Path("jsonBooking")
+    @SecuredModerator
 //    @Produces({MediaType.APPLICATION_JSON})
     public Response jsonBooking() {
          List dataset = controller.bookingOnly();

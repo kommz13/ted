@@ -10,6 +10,7 @@ let REJECT_PENDING_USER = BASE_URL + "/admin/users/reject/";
 let EXPORT_JSON = BASE_URL + "/admin/export/json";
 let EXPORT_XML = BASE_URL + "/admin/export/xml";
 let REGISTRATION = BASE_URL + "/account/register";
+let LOGIN = BASE_URL + "/account/login";
 let GET_USER_BY_ID = BASE_URL + "/admin/users/";
 let GET_ACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/active/";
 let GET_INACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/inactive/";
@@ -42,7 +43,7 @@ export default {
   GET_SENT_MESSAGES,
   GET_MESSAGE_DETAILS,
   POST_LISTING_CREATE,
-
+  LOGIN
 
 
 };

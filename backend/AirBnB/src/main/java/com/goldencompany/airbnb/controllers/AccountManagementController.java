@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.controllers;
 
+import com.goldencompany.airbnb.dto.input.LoginDTO;
 import com.goldencompany.airbnb.dto.input.RegisterDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
 import com.goldencompany.airbnb.entity.Role;
@@ -161,5 +162,26 @@ public class AccountManagementController {
 
         return dtos;
 
+    }
+
+    public User loginUser(LoginDTO input) throws UserValidationException{
+        String username = input.getUsername();
+        String password =  input.getPassword();
+        
+        List<User> users = userRepository.findByUserName(username);
+        
+        if (users.isEmpty()) {
+            throw new UserValidationException("username not found");
+        }
+        
+        User user = users.get(0);
+
+        String passwordHash = hash(password);
+        
+        if (!passwordHash.equals(user.getPassword())) {
+            throw new UserValidationException("Passwords do not match");
+        } else {
+            return user;
+        }                
     }
 }

@@ -21,7 +21,7 @@ public class BaseValidationException extends Exception {
     
     public BaseValidationException(String error) {
         errors = new ArrayList();
-        errors.add(errors);
+        errors.add(error);
     }
 
     public List getErrors() {
