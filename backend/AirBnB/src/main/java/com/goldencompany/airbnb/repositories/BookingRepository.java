@@ -67,4 +67,9 @@ public class BookingRepository {
         em.persist(thisBooking);
     }
 
+    public void update(Booking thisBooking) {
+        em.merge(thisBooking);
+
+    }
+
 }

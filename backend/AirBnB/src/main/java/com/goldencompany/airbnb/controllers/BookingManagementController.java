@@ -7,6 +7,7 @@ package com.goldencompany.airbnb.controllers;
 
 import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
 import com.goldencompany.airbnb.dto.input.MessageCreationDTO;
+import com.goldencompany.airbnb.dto.output.BookingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.entity.Booking;
 import com.goldencompany.airbnb.entity.Listing;
@@ -190,6 +191,38 @@ public class BookingManagementController {
         List dtos = bookingMapper.toDTO(bookings);
 
         return dtos;
+    }
+
+    public BookingDTO acceptPendingBooking(Integer id) {
+        List<Booking> bookings = bookingRepository.findByBookingID(id);
+        Booking thisBooking = new Booking();
+        if (!bookings.isEmpty()) {
+            thisBooking = bookings.get(0);
+        } else {
+            //throw error message 
+            return new BookingDTO();
+        }
+
+        thisBooking.setBookingStatus(1);
+        bookingRepository.update(thisBooking);
+        BookingDTO returnBooking = bookingMapper.toDTO(thisBooking);
+        return returnBooking;
+    }
+
+    public BookingDTO rejectPendingBooking(Integer id) {
+        List<Booking> bookings = bookingRepository.findByBookingID(id);
+        Booking thisBooking = new Booking();
+        if (!bookings.isEmpty()) {
+            thisBooking = bookings.get(0);
+        } else {
+            //throw error message 
+            return new BookingDTO();
+        }
+
+        thisBooking.setBookingStatus(2);
+        bookingRepository.update(thisBooking);
+        BookingDTO returnBooking = bookingMapper.toDTO(thisBooking);
+        return returnBooking;
     }
 
 }

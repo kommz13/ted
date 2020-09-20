@@ -4,6 +4,7 @@ import com.goldencompany.airbnb.controllers.BookingManagementController;
 import com.goldencompany.airbnb.controllers.MessageManagementController;
 import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
 import com.goldencompany.airbnb.dto.input.MessageCreationDTO;
+import com.goldencompany.airbnb.dto.output.BookingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
 import java.util.List;
@@ -26,7 +27,6 @@ public class BookingResource {
     @Inject
     BookingManagementController controller;
 //    
-   
 
     @GET
     @Path("test_all")
@@ -50,6 +50,7 @@ public class BookingResource {
 //
 //    //peirama 
     //get booking by listing id
+
     @GET
     @Path("incoming_bookings/{id}")
     public Response incoming_bookings(@PathParam("id") Integer id) {
@@ -59,18 +60,45 @@ public class BookingResource {
                 .ok(bookings)
                 .build();
     }
-    
-    //create listing
 
+    //create listing
     @POST
     @Path("/create")
     public Response create_booking(BookingCreationDTO input) {
 //        return Response
 //                .ok()
 //                .build();
-        
+
         BookingCreationDTO booking = controller.createBooking(input);
-        
+
+        return Response
+                .ok(booking)
+                .build();
+    }
+
+    //na ftia3w kai to postman
+    @POST
+    @Path("/accept_pending_booking/{id}")
+    public Response accept_pending_booking(@PathParam("id") Integer id) {
+//        return Response
+//                .ok()
+//                .build();
+
+        BookingDTO booking = controller.acceptPendingBooking(id);
+
+        return Response
+                .ok(booking)
+                .build();
+    }
+
+    @POST
+    @Path("/reject_pending_booking/{id}")
+    public Response reject_pending_booking(@PathParam("id") Integer id) {
+//        return Response
+//                .ok()
+//                .build();
+
+        BookingDTO booking = controller.rejectPendingBooking(id);
 
         return Response
                 .ok(booking)
