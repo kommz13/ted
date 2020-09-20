@@ -20,7 +20,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <div class="custom-select-box"></div>
           <div class="right-phone-box">
-            <p>Call US :- <a href="#"> +11 900 800 100</a></p>
+            <p>Call Us :- <a href="#"> +30 2101234567</a></p>
           </div>
           <div class="our-link">
             <ul>
