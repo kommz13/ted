@@ -17,14 +17,15 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
+import com.goldencompany.airbnb.annotations.SecuredCustomer;
 import com.goldencompany.airbnb.annotations.SecuredModerator;
 
 
 
-@SecuredModerator
+@SecuredCustomer
 @Provider
 @Priority(Priorities.AUTHENTICATION)
-public class AuthFilterModerator implements ContainerRequestFilter {
+public class AuthFilterUser implements ContainerRequestFilter {
 	
 
     @Override
@@ -39,18 +40,18 @@ public class AuthFilterModerator implements ContainerRequestFilter {
         }
 
         // Extract the token from the HTTP Authorization header
-//        String token = authorizationHeader.substring("Bearer".length()).trim();
-//
-//        try {
-//
-//            // Validate the token
-//            AuthController.validateTokenForExpiration(token);
-//            
-//            AuthController.validateTokenForRoles(token, "moderator");
-//
-//        } catch (Exception e) {
-//            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-//        }
+        String token = authorizationHeader.substring("Bearer".length()).trim();
+
+        try {
+
+            // Validate the token
+            AuthController.validateTokenForExpiration(token);
+            
+            AuthController.validateTokenForRoles(token, "customer", "host");
+
+        } catch (Exception e) {
+            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+        }
     }
 
     

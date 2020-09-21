@@ -40,13 +40,14 @@ public class AuthController {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
-        long expMillis = nowMillis + 300000L;
+        long expMillis = nowMillis + 900000000L;
         Date exp = new Date(expMillis);
 
         String jws = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(now)
                 .claim("roles", s)
+                .claim("id", String.valueOf(user.getId()))
                 .signWith(SignatureAlgorithm.HS512, key)
                 .setExpiration(exp)
                 .compact();
@@ -68,19 +69,24 @@ public class AuthController {
             throw e;
         }
     }
-    
-    public static void validateTokenForRole(String token, String role) throws Exception {
-
-        Key key = KeyHolder.key;
+      
+    public static void validateTokenForRoles(String token, String ... contraintRoles) throws Exception {
+         Key key = KeyHolder.key;
         try {
 
             Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
             String s = claims.get("roles").toString();
-            String [] roles = s.split(",");
+            String [] userRoles = s.split(",");
             
-            for (String r : roles) {
-                if (r.equals(role)) {
+            for (String userRole : userRoles) {
+                if (userRole.equals("moderator")) {
                     return;
+                }
+                
+                for (String contraintRole : contraintRoles) {
+                    if (contraintRole.equals(userRole)) {
+                        return;
+                    }
                 }
             }
             

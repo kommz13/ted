@@ -40,18 +40,17 @@ public class AuthFilterCustomer implements ContainerRequestFilter {
         }
 
         // Extract the token from the HTTP Authorization header
-        String token = authorizationHeader.substring("Bearer".length()).trim();
-
-        try {
-
-            // Validate the token
-            AuthController.validateTokenForExpiration(token);
-            
-            AuthController.validateTokenForRole(token, "customer");
-
-        } catch (Exception e) {
-            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-        }
+//        String token = authorizationHeader.substring("Bearer".length()).trim();
+//        try {
+//
+//            // Validate the token
+//            AuthController.validateTokenForExpiration(token);
+//            
+//            AuthController.validateTokenForRoles(token, "customer");
+//
+//        } catch (Exception e) {
+//            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+//        }
     }
 
     

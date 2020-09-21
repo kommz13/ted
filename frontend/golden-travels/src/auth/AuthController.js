@@ -4,92 +4,112 @@ import API from "@/api/Api.js";
 
 const AUTH_TOKEN_KEY = "security_token";
 
-export function loginUser(form) {
-  return axios.post(API.LOGIN, form).then((res) => {
-    console.log("storing token to local storage #1");
-    setAuthToken(res.data.token);
-  });
-}
+class AuthController {
+  _token = localStorage.getItem(AUTH_TOKEN_KEY);
 
-export function logoutUser() {
-    clearAuthToken();
-}
+  constructor() {
+    console.log("AuthController constructed");
+    this._token = localStorage.getItem(AUTH_TOKEN_KEY);
+  }
 
-export function setAuthToken(token) {
-  console.log("storing token to local storage");
+  // getters/setters for reactive property
+  set token(token) {
+    console.log("storing token to local storage");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    this._token = token;
+  }
 
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  localStorage.setItem(AUTH_TOKEN_KEY, token);
-}
+  get token() {
+    console.log("getting token from local storage");
+    return this._token;
+  }
 
-export function getAuthToken() {
-  return localStorage.getItem(AUTH_TOKEN_KEY);
-}
+  // methods:
+  loginUser(form) {
+    return axios.post(API.LOGIN, form).then((res) => {
+      console.log("storing token to local storage #1");
+      this.token = res.data.token;
+    });
+  }
 
-export function clearAuthToken() {
-  axios.defaults.headers.common["Authorization"] = "";
-  localStorage.removeItem(AUTH_TOKEN_KEY);
-}
+  logoutUser() {
+    axios.defaults.headers.common["Authorization"] = "";
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    this.token = "";
+  }
 
+  isLoggedIn() {
+    let authToken = this.token;
+    return !!authToken && !this.isTokenExpired(authToken);
+  }
 
+  getUserInfo() {
+    let authToken = this.token;
+    if (this.isLoggedIn()) {
+      return decode(authToken);
+    } else {
+      return undefined;
+    }
+  }
 
-export function isLoggedIn() {
-  let authToken = getAuthToken();
-  return !!authToken && !isTokenExpired(authToken);
-}
+  getUserID() {
+    let authToken = this.token;
+    if (this.isLoggedIn()) {
+      let obj = decode(authToken);
+      let id = obj["id"];
+      return id;
+    } else {
+      return undefined;
+    }
+  }
 
-export function getUserInfo() {
-  if (isLoggedIn()) {
-    return decode(getAuthToken());
+  isAdmin() {
+    if (!this.isLoggedIn()) {
+      return false;
+    }
+    let obj = this.getUserInfo();
+    let rolesArray = obj["roles"];
+    let roles = rolesArray.split(",");
+    return roles.includes("moderator") || true;
+  }
+
+  isCustomer() {
+    if (!this.isLoggedIn()) {
+      return false;
+    }
+    let obj = this.getUserInfo();
+    let rolesArray = obj["roles"];
+    let roles = rolesArray.split(",");
+    return roles.includes("customer") || true;
+  }
+
+  isHost() {
+    if (!this.isLoggedIn()) {
+      return false;
+    }
+    let obj = this.getUserInfo();
+    let rolesArray = obj["roles"];
+    let roles = rolesArray.split(",") || true;
+    return roles.includes("host");
+  }
+
+  getTokenExpirationDate(encodedToken) {
+    let token = decode(encodedToken);
+    if (!token.exp) {
+      return null;
+    }
+    let date = new Date(0);
+    date.setUTCSeconds(token.exp);
+    return date;
+  }
+
+  isTokenExpired(token) {
+    let expirationDate = this.getTokenExpirationDate(token);
+    return expirationDate < new Date();
   }
 }
 
-export function isAdmin() {
-  if (!isLoggedIn) {
-    return false;
-  }
-  let obj = getUserInfo();
-  let rolesArray = obj["roles"];
-  let roles = rolesArray.split(",");
+const singleton = new AuthController();
 
-  return roles.includes("moderator");
-}
-
-export function isCustomer() {
-  if (!isLoggedIn) {
-    return false;
-  }
-  let obj = getUserInfo();
-  let rolesArray = obj["roles"];
-  let roles = rolesArray.split(",");
-
-  return roles.includes("customer");
-}
-
-export function isHost() {
-  if (!isLoggedIn) {
-    return false;
-  }
-  let obj = getUserInfo();
-  let rolesArray = obj["roles"];
-  let roles = rolesArray.split(",");
-
-  return roles.includes("host");
-}
-
-function getTokenExpirationDate(encodedToken) {
-  let token = decode(encodedToken);
-  if (!token.exp) {
-    return null;
-  }
-
-  let date = new Date(0);
-  date.setUTCSeconds(token.exp);
-
-  return date;
-}
-
-function isTokenExpired(token) {
-  let expirationDate = getTokenExpirationDate(token);
-  return expirationDate < new Date();
-}
+export default singleton;

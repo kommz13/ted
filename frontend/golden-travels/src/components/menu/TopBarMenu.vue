@@ -28,10 +28,10 @@
               <li v-if="showAccountOption()">
                 <router-link :to="{ path: '/account' }">My Account</router-link>
               </li>
-              <li>
+              <li v-if="showRegisterOption()">
                 <router-link :to="{ path: '/register' }">Register</router-link>
               </li>
-              <li>
+              <li v-if="showRegisterOption()">
                 <router-link :to="{ path: '/login' }">Login</router-link>
               </li>
 
@@ -51,26 +51,26 @@
 </template>
 
 <script>
-import { isLoggedIn, isAdmin, isCustomer, isHost, logoutUser } from "@/auth/AuthController";
+import authController from "@/auth/AuthController";
 
 export default {
-  mounted() {
-    console.log(isLoggedIn());
+  data() {
+    return {
+      authController:authController
+    }
   },
   methods: {
     showLogoutOption() {
-      return isLoggedIn() == true;
+      return authController.isLoggedIn() == true;
     },
     showAccountOption() {
-      return isLoggedIn() == true;
+      return authController.isLoggedIn() == true;
     },
-    f() {
-      isAdmin();
-      isCustomer();
-      isHost();
+    showRegisterOption() {
+      return authController.isLoggedIn() == false;
     },
     logout() {
-      logoutUser();
+      authController.logoutUser();
       this.$router.push({name: "Login"});
     }
   }

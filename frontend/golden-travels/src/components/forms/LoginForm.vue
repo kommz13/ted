@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { loginUser, isAdmin, isCustomer, isHost } from "@/auth/AuthController";
+import authController from "@/auth/AuthController";
 
 export default {
   data() {
@@ -72,20 +72,21 @@ export default {
         username: undefined,
         password: undefined,
       },
+      authController: authController
     };
   },
   mounted() {},
 
   methods: {
     login() {
-      loginUser(this.form)
+      authController.loginUser(this.form)
         .then(() => {
           // console.log(getUserInfo())
-          if (isAdmin()) {
+          if (authController.isAdmin()) {
             this.$router.push({ name: "ApprovedUsers" });
-          } else if (isCustomer()) {
+          } else if (authController.isCustomer()) {
             this.$router.push({ name: "ListingActiveForCustomers" });
-          } else if (isHost()) {
+          } else if (authController.isHost()) {
             this.$router.push({ name: "ListingActiveForHost" });
           }
         })

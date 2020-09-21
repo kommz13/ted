@@ -23,7 +23,7 @@ let GET_RECEIVED_MESSAGES = BASE_URL + "/messages/received/";
 let GET_SENT_MESSAGES =  BASE_URL + "/messages/sent/";
 let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
 let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
-
+let CHANGE_PROFILE = BASE_URL + "/account/edit/";
 
 export default {
   GET_APPROVED_USERS,
@@ -49,6 +49,7 @@ export default {
   LOGIN,
   GET_UPDATE_LISTING,
   POST_UPDATE_LISTING,
+  CHANGE_PROFILE,
 
 
 };

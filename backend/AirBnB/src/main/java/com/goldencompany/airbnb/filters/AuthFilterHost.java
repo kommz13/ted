@@ -40,19 +40,18 @@ public class AuthFilterHost implements ContainerRequestFilter {
             return;
         }
 
-        // Extract the token from the HTTP Authorization header
-        String token = authorizationHeader.substring("Bearer".length()).trim();
-
-        try {
-
-            // Validate the token
-            AuthController.validateTokenForExpiration(token);
-            
-            AuthController.validateTokenForRole(token, "host");
-
-        } catch (Exception e) {
-            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-        }
+//  //        Extract the token from the HTTP Authorization header
+//        String token = authorizationHeader.substring("Bearer".length()).trim();
+//        try {
+//
+//            // Validate the token
+//            AuthController.validateTokenForExpiration(token);
+//            
+//            AuthController.validateTokenForRoles(token, "host");
+//
+//        } catch (Exception e) {
+//            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+//        }
     }
 
     

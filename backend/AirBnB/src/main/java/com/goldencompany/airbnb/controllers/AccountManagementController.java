@@ -77,7 +77,7 @@ public class AccountManagementController {
         if (!errors.isEmpty()) {
             throw new UserValidationException(errors);
         } else {
-            
+
             entity.setPassword(hash(entity.getPassword()));
 
             userRepository.create(entity, roles);
@@ -112,46 +112,54 @@ public class AccountManagementController {
         User thisUser = users.get(0);
 
 ////       
-        if (!dto.getFirstname().isEmpty()) {
+        if (dto.getFirstname() != null && !dto.getFirstname().isEmpty()) {
             thisUser.setFirstname(dto.getFirstname());
         }
 
-        if (!dto.getLastname().isEmpty()) {
+        if (dto.getLastname() != null && !dto.getLastname().isEmpty()) {
             thisUser.setLastname(dto.getLastname());
         }
-        if (!dto.getPassword().isEmpty()) {
-            thisUser.setPassword(dto.getPassword());
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            thisUser.setPassword(hash(dto.getPassword()));
         }
-        List<User> userWithPhone = userRepository.findByPhone(dto.getPhone());
 
-        if (!dto.getPhone().isEmpty()) {
+        if (dto.getPhone() != null) {
+
+            List<User> userWithPhone = userRepository.findByPhone(dto.getPhone());
             if (!userWithPhone.isEmpty()) {
-                errors.add("phone already exists");
-                throw new UserValidationException(errors);
+                User userWithPhoneEnt = userWithPhone.get(0);
+
+                if (!dto.getPhone().isEmpty()) {
+                    if ((!userWithPhone.isEmpty()) && (!userWithPhoneEnt.getId().equals(thisUser.getId()))) {
+                        errors.add("phone already exists");
+                        throw new UserValidationException(errors);
+                    }
+                    thisUser.setPhone(dto.getPhone());
+                }
+            } else {
+                thisUser.setPhone(dto.getPhone());
             }
-            thisUser.setPhone(dto.getPhone());
         }
 
-        List<User> userWithEmail = userRepository.findByEmail(dto.getEmail());
+        if (dto.getEmail() != null) {
+            List<User> userWithEmail = userRepository.findByEmail(dto.getEmail());
 
-        if (!dto.getEmail().isEmpty()) {
             if (!userWithEmail.isEmpty()) {
-                errors.add("E-mail already exists");
-                throw new UserValidationException(errors);
+                User userWithEmailEnt = userWithEmail.get(0);
+
+                if ((!dto.getEmail().isEmpty()) && (!userWithEmailEnt.getId().equals(thisUser.getId()))) {
+                    if (!userWithEmail.isEmpty()) {
+                        errors.add("E-mail already exists");
+                        throw new UserValidationException(errors);
+                    }
+                    thisUser.setEmail(dto.getEmail());
+                }
+            } else {
+                thisUser.setEmail(dto.getEmail());
             }
-            thisUser.setEmail(dto.getEmail());
         }
 
-//        if (dto.getEmail() != "") {
-//            thisUser.setEmail(dto.getEmail());
-//        }
-////        if (!dto.getBirthdate().isEmpty) {
-////            thisUser.setBirthdate(dto.getBirthdate());
-////        }
-//        if (!dto.getPhone().isEmpty()) {
-//            thisUser.setPhone(dto.getPhone());
-//        }
-        if (!dto.getPhotoUrl().isEmpty()) {
+        if (dto.getPhotoUrl() != null && !dto.getPhotoUrl().isEmpty()) {
             thisUser.setPhotoUrl(dto.getPhotoUrl());
         }
 //        //is host/customer
@@ -164,24 +172,24 @@ public class AccountManagementController {
 
     }
 
-    public User loginUser(LoginDTO input) throws UserValidationException{
+    public User loginUser(LoginDTO input) throws UserValidationException {
         String username = input.getUsername();
-        String password =  input.getPassword();
-        
+        String password = input.getPassword();
+
         List<User> users = userRepository.findByUserName(username);
-        
+
         if (users.isEmpty()) {
             throw new UserValidationException("username not found");
         }
-        
+
         User user = users.get(0);
 
         String passwordHash = hash(password);
-        
+
         if (!passwordHash.equals(user.getPassword())) {
             throw new UserValidationException("Passwords do not match");
         } else {
             return user;
-        }                
+        }
     }
 }

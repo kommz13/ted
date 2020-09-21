@@ -37,7 +37,7 @@
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
             </li>
-            <li class="dropdown megamenu-fw">
+            <li class="dropdown megamenu-fw" v-if="showAdministratorOption()">
               <a
                 href="#"
                 class="nav-link dropdown-toggle arrow"
@@ -94,7 +94,7 @@
               </ul>
             </li>
 
-            <li class="dropdown">
+            <li class="dropdown" v-if="showCustomerOption()">
               <a
                 href="#"
                 class="nav-link dropdown-toggle arrow"
@@ -129,9 +129,8 @@
                 </li>
               </ul>
             </li>
-            
 
-            <li class="dropdown">
+            <li class="dropdown" v-if="showHostOption()">
               <a
                 href="#"
                 class="nav-link dropdown-toggle arrow"
@@ -240,3 +239,30 @@
   </header>
   <!-- End Main Top -->
 </template>
+
+
+<script>
+import authController from "@/auth/AuthController";
+
+export default {
+  data() {
+    return {
+      authController:authController
+    }
+  },
+  methods: {
+    showAdministratorOption() {
+      return authController.isAdmin() == true;
+    },
+    showHostOption() {
+      return authController.isHost() == true;
+    },
+    showGuestOption() {
+      return authController.isLoggedIn() == false;
+    },
+    showCustomerOption() {
+      return authController.isCustomer() == true;
+    }
+  }
+}
+</script>
