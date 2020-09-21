@@ -15,12 +15,15 @@ let GET_USER_BY_ID = BASE_URL + "/admin/users/";
 let GET_ACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/active/";
 let GET_INACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/inactive/";
 let GET_ALL_LISTINGS = BASE_URL + "/listing/all";
+let GET_UPDATE_LISTING = BASE_URL + "/listing/";
+let POST_UPDATE_LISTING = BASE_URL + "listing/";
 let GET_ACTIVE_LISTINGS = BASE_URL + "/listing/active/";
 let GET_INACTIVE_LISTINGS = BASE_URL + "/listing/inactive/";
 let GET_RECEIVED_MESSAGES = BASE_URL + "/messages/received/";
 let GET_SENT_MESSAGES =  BASE_URL + "/messages/sent/";
 let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
 let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
+
 
 export default {
   GET_APPROVED_USERS,
@@ -43,7 +46,9 @@ export default {
   GET_SENT_MESSAGES,
   GET_MESSAGE_DETAILS,
   POST_LISTING_CREATE,
-  LOGIN
+  LOGIN,
+  GET_UPDATE_LISTING,
+  POST_UPDATE_LISTING,
 
 
 };
