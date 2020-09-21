@@ -83,12 +83,15 @@ public class BookingResource {
 //        return Response
 //                .ok()
 //                .build();
+        try {
+            BookingDTO booking = controller.acceptPendingBooking(id);
 
-        BookingDTO booking = controller.acceptPendingBooking(id);
-
-        return Response
-                .ok(booking)
-                .build();
+            return Response
+                    .ok(booking)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
     }
 
     @POST
@@ -97,12 +100,32 @@ public class BookingResource {
 //        return Response
 //                .ok()
 //                .build();
+        try {
+            BookingDTO booking = controller.rejectPendingBooking(id);
 
-        BookingDTO booking = controller.rejectPendingBooking(id);
+            return Response
+                    .ok(booking)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
 
-        return Response
-                .ok(booking)
-                .build();
+    @POST
+    @Path("/debug_make_booking_pending/{id}")
+    public Response debug_make_booking_pending(@PathParam("id") Integer id) {
+//        return Response
+//                .ok()
+//                .build();
+        try {
+            BookingDTO booking = controller.makeBookingPending(id);
+
+            return Response
+                    .ok(booking)
+                    .build();
+        } catch (UserValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
     }
 //
 //    @POST

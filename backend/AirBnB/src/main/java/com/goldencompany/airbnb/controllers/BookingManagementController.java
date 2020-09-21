@@ -193,14 +193,23 @@ public class BookingManagementController {
         return dtos;
     }
 
-    public BookingDTO acceptPendingBooking(Integer id) {
+    public BookingDTO acceptPendingBooking(Integer id) throws UserValidationException {
         List<Booking> bookings = bookingRepository.findByBookingID(id);
         Booking thisBooking = new Booking();
+        List errors = new ArrayList();
+
         if (!bookings.isEmpty()) {
             thisBooking = bookings.get(0);
         } else {
             //throw error message 
-            return new BookingDTO();
+            errors.add("This Booking does not exist");
+//            return new BookingDTO();
+            throw new UserValidationException(errors);
+        }
+
+        if (thisBooking.getBookingStatus() != 0) {
+            errors.add("Booking exists but is already accepted or rejected");
+            throw new UserValidationException(errors);
         }
 
         thisBooking.setBookingStatus(1);
@@ -209,17 +218,51 @@ public class BookingManagementController {
         return returnBooking;
     }
 
-    public BookingDTO rejectPendingBooking(Integer id) {
+    public BookingDTO rejectPendingBooking(Integer id) throws UserValidationException {
         List<Booking> bookings = bookingRepository.findByBookingID(id);
+        List errors = new ArrayList();
+
         Booking thisBooking = new Booking();
         if (!bookings.isEmpty()) {
             thisBooking = bookings.get(0);
         } else {
             //throw error message 
-            return new BookingDTO();
+            errors.add("This Booking does not exist");
+//            return new BookingDTO();
+            throw new UserValidationException(errors);
+        }
+
+        if (thisBooking.getBookingStatus() != 0) {
+            errors.add("Booking exists but is already accepted or rejected");
+            throw new UserValidationException(errors);
         }
 
         thisBooking.setBookingStatus(2);
+        bookingRepository.update(thisBooking);
+        BookingDTO returnBooking = bookingMapper.toDTO(thisBooking);
+        return returnBooking;
+    }
+
+    public BookingDTO makeBookingPending(Integer id) throws UserValidationException {
+        List<Booking> bookings = bookingRepository.findByBookingID(id);
+        List errors = new ArrayList();
+
+        Booking thisBooking = new Booking();
+        if (!bookings.isEmpty()) {
+            thisBooking = bookings.get(0);
+        } else {
+            //throw error message 
+            errors.add("make Booking Pending :This Booking does not exist");
+//            return new BookingDTO();
+            throw new UserValidationException(errors);
+        }
+
+        if (thisBooking.getBookingStatus() == 0) {
+            errors.add("make Booking Pending : Booking exists but is already pending");
+            throw new UserValidationException(errors);
+        }
+
+        thisBooking.setBookingStatus(0);
         bookingRepository.update(thisBooking);
         BookingDTO returnBooking = bookingMapper.toDTO(thisBooking);
         return returnBooking;
