@@ -3,6 +3,7 @@ package com.goldencompany.airbnb.resources.listing;
 import com.goldencompany.airbnb.controllers.listing.ListingManagementController;
 import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
+import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.entity.constants.UserConstants;
 import com.goldencompany.airbnb.exceptions.BaseValidationException;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
@@ -115,6 +116,22 @@ public class ListingResource {
 
             return Response
                     .ok(listing)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+
+//        return Response.ok().build();
+    }
+
+    @POST
+    @Path("deactivate/{id}")
+    public Response deactivate(@PathParam("id") Integer id) {
+        try {
+            List listings= controller.deactivateListing(id);
+
+            return Response
+                    .ok(listings)
                     .build();
         } catch (BaseValidationException ex) {
             return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();

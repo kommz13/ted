@@ -49,10 +49,10 @@ public class ListingManagementController {
 
     @Inject
     RuleMapper ruleMapper;
-    
+
     @Inject
     TypeMapper typeMapper;
-    
+
     @Inject
     PhotoMapper photoMapper;
 
@@ -151,8 +151,7 @@ public class ListingManagementController {
         List<Amenity> amenities = amenityMapper.toEntities(input);
 
         List<Rule> rules = ruleMapper.toEntities(input);
-        
-        
+
         Photo photo = photoMapper.toEntity(input.getPhoto_url());
 
         List<Listing> listings = listingRepository.create(listing, input.getUserId(), input.getTypeId(), amenities, photo, rules);
@@ -161,6 +160,28 @@ public class ListingManagementController {
         List dtos = listingMapper.toDTO(listings);
 
         return dtos;
+    }
+
+    public List deactivateListing(Integer id) throws BaseValidationException {
+        List<Listing> listings = listingRepository.find(id);
+        List errors = new ArrayList();
+        Listing listing = new Listing();
+        if (!listings.isEmpty()) {
+            listing = listings.get(0);
+        } else {
+            errors.add("Listing does not exist");
+            throw new BaseValidationException(errors);
+        }
+
+        if (listing.getActive() == 0) {
+            errors.add("Listing is already deactivated");
+            throw new BaseValidationException(errors);
+        }
+        listing.setActive(0);
+        listingRepository.update(listing);
+        List dtos = listingMapper.toDTO(listings);
+        return dtos;
+
     }
 
 }
