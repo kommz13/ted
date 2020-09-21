@@ -15,7 +15,9 @@
             <div class="our-team">
               <img v-if="l.photos.length" :src="l.photos[0].photoUrl" alt="" />
               <img v-else src="" alt="" />
-
+              <router-link :to="{ name: 'ListingView', params: { id: u.id } }"
+                >{{ u.firstname }} {{ u.lastname }}</router-link
+              >
               <div class="team-content">
                 <h3 class="title">{{ l.friendlyName }}</h3>
                 <span class="post">{{ l.city }}</span>
