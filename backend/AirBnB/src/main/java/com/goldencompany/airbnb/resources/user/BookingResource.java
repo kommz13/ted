@@ -6,6 +6,7 @@ import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
 import com.goldencompany.airbnb.dto.input.MessageCreationDTO;
 import com.goldencompany.airbnb.dto.output.BookingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
+import com.goldencompany.airbnb.exceptions.BaseValidationException;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
 import java.util.List;
 import javax.inject.Inject;
@@ -125,6 +126,21 @@ public class BookingResource {
                     .build();
         } catch (UserValidationException ex) {
             return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+    }
+
+    @GET
+    @Path("my_pending_bookings/{id}")
+    public Response my_pending_bookings(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrievePendingBookingListingsByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
         }
     }
 //
