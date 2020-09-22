@@ -14,12 +14,21 @@
         <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
           <div class="hover-team">
             <div class="our-team">
-              <img v-if="l.photos.length" :src="l.photos[0].photoUrl" alt="" />
-              <img v-else src="" alt="" />
+              <router-link
+                :to="{ name: 'ListingViewByUserID', params: { id: l.id } }"
+              >
+                <img
+                  v-if="l.photos.length"
+                  :src="l.photos[0].photoUrl"
+                  alt=""
+                  class="img_thumbnail"
+                />
+                <img v-else src="" alt="" />
+              </router-link>
 
               <div class="team-content">
-                <h3 class="title">{{ l.friendlyName }}</h3>
-                <span class="post">{{ l.city }}</span>
+                <h3 class="title">{{ l.city }}</h3>
+                <span class="post">{{ l.district }}</span>
               </div>
               <ul class="social">
                 <li>
@@ -41,7 +50,11 @@
             </div>
             <div class="team-description">
               <p>
-                {{ l.description }}
+                {{ l.friendlyName }}
+              </p>
+              <p>{{ l.cost }} + {{ l.extraCostPerPerson }} per person</p>
+              <p>
+                {{ l.submittedDate }}
               </p>
             </div>
             <hr class="my-0" />
@@ -52,10 +65,22 @@
   </div>
 </template>
 
+<style scoped>
+.img_thumbnail {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  min-height: 300px;
+  width: auto;
+  height: auto;
+}
+</style>
+
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
 import HostTitleBox from "@/components/host/HostTitleBox.vue";
+import authController from "@/auth/AuthController";
 
 export default {
   components: {
@@ -64,11 +89,12 @@ export default {
 
   data() {
     return {
+      authController: authController,
       listings: [],
     };
   },
   mounted() {
-    const id = 1;
+    const id = authController.getUserID();
     this.retrieveData(id);
   },
   methods: {
@@ -77,21 +103,7 @@ export default {
         this.listings = response.data;
         console.log(this.listings);
       });
-    },
-    f() {
-      let id = 1;
-      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
-      });
-    },
-    g() {
-      let id = 1;
-      axios.get(API.GET_INACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
-      });
-    },
+    }
   },
 };
 </script>

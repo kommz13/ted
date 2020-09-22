@@ -150,11 +150,6 @@
                           </li> -->
 
                 <li>
-                  <router-link :to="{ path: '/host/listing/view/:id' }"
-                    >View listing by id</router-link
-                  >
-                </li>
-                <li>
                   <router-link :to="{ path: '/host/listing/list/' }"
                     >View my listings</router-link
                   >

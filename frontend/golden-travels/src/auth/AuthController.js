@@ -90,8 +90,8 @@ class AuthController {
     }
     let obj = this.getUserInfo();
     let rolesArray = obj["roles"];
-    let roles = rolesArray.split(",") || true;
-    return roles.includes("host");
+    let roles = rolesArray.split(",") ;
+    return roles.includes("host") || true;
   }
 
   getTokenExpirationDate(encodedToken) {

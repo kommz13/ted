@@ -31,7 +31,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ApprovedUsers.vue"),
+      import(/* webpackChunkName: "about" */ "../views/admin/ApprovedUsers.vue"),
   },
   {
     path: "/admin/users/rejected",
@@ -40,7 +40,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/RejectedUsers.vue"),
+      import(/* webpackChunkName: "about" */ "../views/admin/RejectedUsers.vue"),
   },
   {
     path: "/admin/users/pending",
@@ -49,7 +49,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PendingUsers.vue"),
+      import(/* webpackChunkName: "about" */ "../views/admin/PendingUsers.vue"),
   },
   {
     path: "/admin/export/xml",
@@ -57,7 +57,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/XML.vue"),
+    component: () => import(/* webpackChunkName: "about" */ "../views/admin/XML.vue"),
   },
   {
     path: "/admin/export/json",
@@ -66,7 +66,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/JSON.vue"),
+      import(/* webpackChunkName: "about" */ "../views/admin/JSON.vue"),
   },
   {
     path: "/register",
@@ -126,7 +126,7 @@ const routes = [
   },
   {
     path: "/host/listing/view/:id",
-    name: "ListingView",
+    name: "ListingViewByUserID",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -161,6 +161,15 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/host/ListingActive.vue"),
+  },
+  {
+    path: "/host/listing/pending",
+    name: "ListingPendingForHost",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/host/ListingPending.vue"),
   },
   {
     path: "/customer/listing/active",

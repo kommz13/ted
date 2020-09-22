@@ -16,6 +16,18 @@
                 >Inactive</router-link
               >
             </li>
+            <li class="breadcrumb-item active">
+              <router-link :to="{ path: '/host/listing/create' }"
+                >Create</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              <router-link :to="{ path: '/host/listing/create' }"
+                >Create</router-link
+              >
+            </li>
+            
+            
           </ul>
         </div>
       </div>

@@ -25,7 +25,6 @@
                 />
                 <img v-else src="" alt="" />
               </router-link>
-
               <div class="team-content">
                 <h3 class="title">{{ l.city }}</h3>
                 <span class="post">{{ l.district }}</span>
@@ -101,7 +100,7 @@ export default {
   },
   methods: {
     retrieveData(id) {
-      axios.get(API.GET_INACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
+      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
         console.log(this.listings);
       });
