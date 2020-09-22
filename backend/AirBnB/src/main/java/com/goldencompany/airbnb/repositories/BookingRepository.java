@@ -63,6 +63,22 @@ public class BookingRepository {
         return bookings;
     }
 
+    public List<Booking> findByUserIDAndActive(Integer id) {
+        Query q = em.createNamedQuery("Booking.findByUserIdAndActive");
+        q.setParameter("x", id);
+
+        List bookings = q.getResultList();
+        return bookings;
+    }
+
+    public List<Booking> findByUserIDAndPending(Integer id) {
+        Query q = em.createNamedQuery("Booking.findByUserIdAndPending");
+        q.setParameter("x", id);
+
+        List bookings = q.getResultList();
+        return bookings;
+    }
+
     public void create(Booking thisBooking) {
         em.persist(thisBooking);
     }
