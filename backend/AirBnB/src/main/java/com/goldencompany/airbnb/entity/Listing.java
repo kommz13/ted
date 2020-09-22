@@ -57,7 +57,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Listing.findByActive", query = "SELECT l FROM Listing l WHERE l.active = :active"),
     @NamedQuery(name = "Listing.findBySubmittedDate", query = "SELECT l FROM Listing l WHERE l.submittedDate = :submittedDate"),
     @NamedQuery(name = "Listing.findByExtraCostPerPerson", query = "SELECT l FROM Listing l WHERE l.extraCostPerPerson = :extraCostPerPerson"),
-    @NamedQuery(name = "Listing.findByFriendlyName", query = "SELECT l FROM Listing l WHERE l.friendlyName = :friendlyName")})
+    @NamedQuery(name = "Listing.findByFriendlyName", query = "SELECT l FROM Listing l WHERE l.friendlyName = :friendlyName"),
+    @NamedQuery(name = "Listing.findByCost", query = "SELECT l FROM Listing l WHERE l.cost = :cost")})
 public class Listing implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -139,6 +140,10 @@ public class Listing implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "friendly_name")
     private String friendlyName;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "cost")
+    private int cost;
     @ManyToMany(mappedBy = "listingList", fetch = FetchType.LAZY)
     private List<Amenity> amenityList;
     @JoinTable(name = "listing_has_rule", joinColumns = {
@@ -158,7 +163,7 @@ public class Listing implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listing", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "listingId", fetch = FetchType.LAZY)
     private List<UserViewsListing> userViewsListingList;
 
     public Listing() {
@@ -168,7 +173,7 @@ public class Listing implements Serializable {
         this.id = id;
     }
 
-    public Listing(Integer id, double geolocationLatitude, double geolocationLongitude, String country, int bedroomNumber, String city, String district, int sqrMeters, int floor, int maxPeople, int bedNumber, String description, int minimumDays, int active, Date submittedDate, int extraCostPerPerson, String friendlyName) {
+    public Listing(Integer id, double geolocationLatitude, double geolocationLongitude, String country, int bedroomNumber, String city, String district, int sqrMeters, int floor, int maxPeople, int bedNumber, String description, int minimumDays, int active, Date submittedDate, int extraCostPerPerson, String friendlyName, int cost) {
         this.id = id;
         this.geolocationLatitude = geolocationLatitude;
         this.geolocationLongitude = geolocationLongitude;
@@ -186,6 +191,7 @@ public class Listing implements Serializable {
         this.submittedDate = submittedDate;
         this.extraCostPerPerson = extraCostPerPerson;
         this.friendlyName = friendlyName;
+        this.cost = cost;
     }
 
     public Integer getId() {
@@ -330,6 +336,14 @@ public class Listing implements Serializable {
 
     public void setFriendlyName(String friendlyName) {
         this.friendlyName = friendlyName;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     @XmlTransient

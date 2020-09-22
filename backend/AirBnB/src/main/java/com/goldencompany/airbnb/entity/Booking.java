@@ -53,12 +53,12 @@ public class Booking implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "checkout")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date checkout;
     @Basic(optional = false)
     @NotNull
     @Column(name = "checkin")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date checkin;
     @Basic(optional = false)
     @NotNull

@@ -31,14 +31,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author alex
  */
 @Entity
-@Table(name = "critic")
+@Table(name = "user_rates_user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Critic.findAll", query = "SELECT c FROM Critic c"),
-    @NamedQuery(name = "Critic.findById", query = "SELECT c FROM Critic c WHERE c.id = :id"),
-    @NamedQuery(name = "Critic.findByRating", query = "SELECT c FROM Critic c WHERE c.rating = :rating"),
-    @NamedQuery(name = "Critic.findByDate", query = "SELECT c FROM Critic c WHERE c.date = :date")})
-public class Critic implements Serializable {
+    @NamedQuery(name = "UserRatesUser.findAll", query = "SELECT u FROM UserRatesUser u"),
+    @NamedQuery(name = "UserRatesUser.findById", query = "SELECT u FROM UserRatesUser u WHERE u.id = :id"),
+    @NamedQuery(name = "UserRatesUser.findByRating", query = "SELECT u FROM UserRatesUser u WHERE u.rating = :rating"),
+    @NamedQuery(name = "UserRatesUser.findByDate", query = "SELECT u FROM UserRatesUser u WHERE u.date = :date")})
+public class UserRatesUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,7 +49,7 @@ public class Critic implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(min = 1, max = 2147483647)
     @Column(name = "text")
     private String text;
     @Basic(optional = false)
@@ -61,21 +61,21 @@ public class Critic implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @JoinColumn(name = "listing_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id_1", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Listing listingId;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User userId1;
+    @JoinColumn(name = "user_id_2", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User userId;
+    private User userId2;
 
-    public Critic() {
+    public UserRatesUser() {
     }
 
-    public Critic(Integer id) {
+    public UserRatesUser(Integer id) {
         this.id = id;
     }
 
-    public Critic(Integer id, String text, int rating, Date date) {
+    public UserRatesUser(Integer id, String text, int rating, Date date) {
         this.id = id;
         this.text = text;
         this.rating = rating;
@@ -114,20 +114,20 @@ public class Critic implements Serializable {
         this.date = date;
     }
 
-    public Listing getListingId() {
-        return listingId;
+    public User getUserId1() {
+        return userId1;
     }
 
-    public void setListingId(Listing listingId) {
-        this.listingId = listingId;
+    public void setUserId1(User userId1) {
+        this.userId1 = userId1;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUserId2() {
+        return userId2;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserId2(User userId2) {
+        this.userId2 = userId2;
     }
 
     @Override
@@ -140,10 +140,10 @@ public class Critic implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Critic)) {
+        if (!(object instanceof UserRatesUser)) {
             return false;
         }
-        Critic other = (Critic) object;
+        UserRatesUser other = (UserRatesUser) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -152,7 +152,7 @@ public class Critic implements Serializable {
 
     @Override
     public String toString() {
-        return "com.goldencompany.airbnb.entity.Critic[ id=" + id + " ]";
+        return "com.goldencompany.airbnb.entity.UserRatesUser[ id=" + id + " ]";
     }
     
 }

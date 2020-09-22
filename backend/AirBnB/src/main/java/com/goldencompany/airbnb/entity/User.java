@@ -116,13 +116,17 @@ public class User implements Serializable {
     private List<Booking> bookingList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Critic> criticList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId1", fetch = FetchType.LAZY)
+    private List<UserRatesUser> userRatesUserList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId2", fetch = FetchType.LAZY)
+    private List<UserRatesUser> userRatesUserList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdFrom", fetch = FetchType.LAZY)
     private List<Message> messageList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdTo", fetch = FetchType.LAZY)
     private List<Message> messageList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<Listing> listingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<UserViewsListing> userViewsListingList;
 
     public User() {
@@ -267,6 +271,24 @@ public class User implements Serializable {
 
     public void setCriticList(List<Critic> criticList) {
         this.criticList = criticList;
+    }
+
+    @XmlTransient
+    public List<UserRatesUser> getUserRatesUserList() {
+        return userRatesUserList;
+    }
+
+    public void setUserRatesUserList(List<UserRatesUser> userRatesUserList) {
+        this.userRatesUserList = userRatesUserList;
+    }
+
+    @XmlTransient
+    public List<UserRatesUser> getUserRatesUserList1() {
+        return userRatesUserList1;
+    }
+
+    public void setUserRatesUserList1(List<UserRatesUser> userRatesUserList1) {
+        this.userRatesUserList1 = userRatesUserList1;
     }
 
     @XmlTransient

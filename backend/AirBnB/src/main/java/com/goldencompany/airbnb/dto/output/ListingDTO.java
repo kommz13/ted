@@ -43,6 +43,17 @@ public class ListingDTO {
     private Date submittedDate;
     private int extraCostPerPerson;
     private TypeDTO type;
+    
+    private int cost;
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+    
 
    
     private List<AmenityDTO> amenities = new ArrayList<>();

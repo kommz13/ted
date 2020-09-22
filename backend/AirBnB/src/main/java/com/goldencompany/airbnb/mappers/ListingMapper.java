@@ -66,6 +66,7 @@ public class ListingMapper {
         dto.setSubmittedDate(entity.getSubmittedDate());
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
         dto.setFriendlyName(entity.getFriendlyName());
+        dto.setCost(entity.getCost());
 
         for (Photo p : entity.getPhotoList()) {
             dto.getPhotos().add(photoMapper.toDTO(p));
@@ -137,6 +138,7 @@ public class ListingMapper {
         entity.setExtraCostPerPerson(dto.getExtraCostPerPerson());
         entity.setFriendlyName(dto.getFriendlyName());
         entity.setBathroomNumber(dto.getBathroomNum());
+        entity.setCost(dto.getCost());
 
 //        dto.setId(entity.getId());
 //        dto.setGeolocation_lat(entity.getGeolocationLatitude());

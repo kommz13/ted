@@ -8,9 +8,11 @@ package com.goldencompany.airbnb.entity;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -28,47 +30,37 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserViewsListing.findAll", query = "SELECT u FROM UserViewsListing u"),
-    @NamedQuery(name = "UserViewsListing.findByUserId", query = "SELECT u FROM UserViewsListing u WHERE u.userViewsListingPK.userId = :userId"),
-    @NamedQuery(name = "UserViewsListing.findByListingId", query = "SELECT u FROM UserViewsListing u WHERE u.userViewsListingPK.listingId = :listingId"),
-    @NamedQuery(name = "UserViewsListing.findByCounter", query = "SELECT u FROM UserViewsListing u WHERE u.counter = :counter")})
+    @NamedQuery(name = "UserViewsListing.findByCounter", query = "SELECT u FROM UserViewsListing u WHERE u.counter = :counter"),
+    @NamedQuery(name = "UserViewsListing.findById", query = "SELECT u FROM UserViewsListing u WHERE u.id = :id")})
 public class UserViewsListing implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UserViewsListingPK userViewsListingPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "counter")
     private int counter;
-    @JoinColumn(name = "listing_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "listing_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Listing listing;
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Listing listingId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User user;
+    private User userId;
 
     public UserViewsListing() {
     }
 
-    public UserViewsListing(UserViewsListingPK userViewsListingPK) {
-        this.userViewsListingPK = userViewsListingPK;
+    public UserViewsListing(Integer id) {
+        this.id = id;
     }
 
-    public UserViewsListing(UserViewsListingPK userViewsListingPK, int counter) {
-        this.userViewsListingPK = userViewsListingPK;
+    public UserViewsListing(Integer id, int counter) {
+        this.id = id;
         this.counter = counter;
-    }
-
-    public UserViewsListing(int userId, int listingId) {
-        this.userViewsListingPK = new UserViewsListingPK(userId, listingId);
-    }
-
-    public UserViewsListingPK getUserViewsListingPK() {
-        return userViewsListingPK;
-    }
-
-    public void setUserViewsListingPK(UserViewsListingPK userViewsListingPK) {
-        this.userViewsListingPK = userViewsListingPK;
     }
 
     public int getCounter() {
@@ -79,26 +71,34 @@ public class UserViewsListing implements Serializable {
         this.counter = counter;
     }
 
-    public Listing getListing() {
-        return listing;
+    public Integer getId() {
+        return id;
     }
 
-    public void setListing(Listing listing) {
-        this.listing = listing;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Listing getListingId() {
+        return listingId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setListingId(Listing listingId) {
+        this.listingId = listingId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (userViewsListingPK != null ? userViewsListingPK.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -109,7 +109,7 @@ public class UserViewsListing implements Serializable {
             return false;
         }
         UserViewsListing other = (UserViewsListing) object;
-        if ((this.userViewsListingPK == null && other.userViewsListingPK != null) || (this.userViewsListingPK != null && !this.userViewsListingPK.equals(other.userViewsListingPK))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -117,7 +117,7 @@ public class UserViewsListing implements Serializable {
 
     @Override
     public String toString() {
-        return "com.goldencompany.airbnb.entity.UserViewsListing[ userViewsListingPK=" + userViewsListingPK + " ]";
+        return "com.goldencompany.airbnb.entity.UserViewsListing[ id=" + id + " ]";
     }
     
 }

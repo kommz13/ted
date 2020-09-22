@@ -65,6 +65,18 @@ public class ListingCreationDTO {
     private boolean hasSmoking;
     
     private String photo_url;
+    private int cost;
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+    
+    
+    
 
     public String getPhoto_url() {
         return photo_url;
