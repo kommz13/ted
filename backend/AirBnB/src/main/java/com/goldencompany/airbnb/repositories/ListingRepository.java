@@ -181,7 +181,8 @@ public class ListingRepository {
         
         listing.setUserId(user);
         
-        listing.setAmenityList(amenities);
+        listing.setAmenityList(new ArrayList<>());
+        
         
         listing.setRuleList(rules);
         
@@ -192,6 +193,15 @@ public class ListingRepository {
         photo.setListingId(listing);
                                                 
         em.persist(listing);
+        
+        for (Amenity a : amenities) {
+            Amenity ent = em.find(Amenity.class, a.getId());
+            listing.getAmenityList().add(ent);
+            
+            ent.getListingList().add(listing);
+        }
+        
+        
         
         List listings = new ArrayList();
 

@@ -208,6 +208,36 @@
               </div>
             </div>
             <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cost">Cost per day</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="cost"
+                  placeholder=""
+                  required
+                  v-model="listing.cost"
+                />
+                <div class="invalid-feedback">
+                  Enter cost per days
+                </div>
+              </div>
+               <div class="col-md-6 mb-3">
+                <label for="bathroomNum">No of bathrooms</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="bathroomNum"
+                  placeholder=""
+                  required
+                  v-model="listing.bathroomNum"
+                />
+                <div class="invalid-feedback">
+                  Please enter bathroom number.
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-12 mb-3">
                 <label for="photo_url">Photo URL</label>
                 <input
@@ -438,42 +468,45 @@
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
+import authController from "@/auth/AuthController";
 
 export default {
   data() {
     return {
+      authController: authController,
       submit_complete: false,
 
       listing: {
-        geolocation_lat: 1115,
-        geolocation_long: 2011,
-        country: "Turkey",
-        bedroom_num: 5,
-        city: "Istanbul",
-        district: "Hagia Sofia",
-        floor: 2,
-        maxPeople: 10,
-        bedNum: 5,
-        bathroomNum: 2,
-        description: "if you wanna pray , this is the place you wanna go",
-        sqrMeters: 32,
-        minDays: 5,
-        extraCostPerPerson: 5,
+        geolocation_lat: 0,
+        geolocation_long: 0,
+        country: "",
+        bedroom_num: 0,
+        city: "",
+        district: "",
+        floor: 0,
+        maxPeople: 0,
+        bedNum: 0,
+        bathroomNum: 0,
+        description: "",
+        sqrMeters: 0,
+        minDays: 0,
+        cost: 0,
+        extraCostPerPerson: 0,
         typeId: 1,
-        friendlyName: "Lovely home near Hagia sofia",
-        userId: 1,
-        photo_url: "google.com",
-        hasWifi: true,
+        friendlyName: "",
+        userId: authController.getUserID(),
+        photo_url: "",
+        hasWifi: false,
         hasKitchen: false,
-        hasTv: true,
-        hasParking: true,
+        hasTv: false,
+        hasParking: false,
         hasElevator: false,
         hasHeating: false,
         hasLivingRoom: false,
         hasAirCondition: false,
-        hasPet: true,
-        hasEvent: true,
-        hasSmoking: true,
+        hasPet: false,
+        hasEvent: false,
+        hasSmoking: false,
       },
     };
   },

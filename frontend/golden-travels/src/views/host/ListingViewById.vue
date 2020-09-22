@@ -1,25 +1,61 @@
 <template
-  ><div class="about-box-main">
+  ><!-- Start About Page  -->
+  <div class="about-box-main">
     <div class="container">
-      <!-- <button @click.prevent="f">Active</button>
-      <button @click.prevent="g">Inactive</button> -->
-      <div class="profile">
-        <HostTitleBox title="User profile"></HostTitleBox>
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="noo-sh-title">{{ listing.friendlyName }}</h2>
+          <p>
+            <i>Submitted at: {{ listing.submittedDate }} </i>
+          </p>
+          <p>
+          <ol>
+            <li>Bedrooms: {{ listing.bedroom_num }}</li>
+            <li>Beds: {{ listing.bedNum }}</li>
+            <li>Bathrooms: {{ listing.bathroomNum }}</li>
+          </ol>
+          </p>
+          <p>
+            {{ listing.description }}
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <div class="banner-frame">
+            <img class="img-thumbnail img-fluid" :src="getDefaultURL" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="row my-5">
+        <div
+          v-for="r in listing.rules"
+          v-bind:key="r.id"
+          class="col-sm-6 col-lg-4"
+        >
+          <div class="service-block-inner">
+            <h3>We allow:</h3>
+            <p>
+              {{ r.rule }}
+            </p>
+          </div>
+        </div>
       </div>
       <div class="row my-4">
         <div class="col-12">
-          <h2 class="noo-sh-title">Your Listings</h2>
+          <h2 class="noo-sh-title">People said for this listing:</h2>
         </div>
-        <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
+        <div
+          v-for="c in listing.critics"
+          v-bind:key="c.id"
+          class="col-sm-6 col-lg-3"
+        >
           <div class="hover-team">
             <div class="our-team">
-              <img v-if="l.photos.length" :src="l.photos[0].photoUrl" alt="" />
-              <img v-else src="" alt="" />
-              <router-link :to="{ name: 'ListingView', params: {id: u.id } }"></router-link>
-
+              <img :src="c.userId.photoUrl" alt="" />
               <div class="team-content">
-                <h3 class="title">{{ l.friendlyName }}</h3>
-                <span class="post">{{ l.city }}</span>
+                <h3 class="title">
+                  {{ c.userId.firstname }} {{ c.userId.lastname }}
+                </h3>
+                <span class="post">{{ c.userId.email }} </span>
               </div>
               <ul class="social">
                 <li>
@@ -40,8 +76,15 @@
               </div>
             </div>
             <div class="team-description">
+              <h3>
+                Rated:
+
+                <span v-for="i in c.rating" v-bind:key="i">
+                  &#9733;
+                </span>
+              </h3>
               <p>
-                {{ l.description }}
+                {{ c.text }}
               </p>
             </div>
             <hr class="my-0" />
@@ -59,32 +102,41 @@ import API from "@/api/Api.js";
 export default {
   data() {
     return {
-      listings: [],
+      listing: {
+        photos: [],
+      },
     };
   },
+  computed: {
+    getDefaultURL: function() {
+      console.log("computed called");
+
+      for (let i = 0; i < this.listing.photos.length; i++) {
+        let p = this.listing.photos[i];
+        if (p.is_default) {
+          console.log(p.photoUrl);
+          return p.photoUrl;
+        }
+      }
+      return "";
+    },
+  },
   mounted() {
-    const id = 1;
+    const id = this.$route.params.id;
     this.retrieveData(id);
+  },
+  watch: {
+    $route(to, from) {
+      console.log("to: " + from);
+      const id = to.params.id;
+      this.retrieveData(id);
+    },
   },
   methods: {
     retrieveData(id) {
-      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
-      });
-    },
-    f() {
-      let id = 1;
-      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
-      });
-    },
-    g() {
-      let id = 1;
-      axios.get(API.GET_INACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
+      axios.get(API.GET_LISTING_BY_ID + id).then((response) => {
+        this.listing = response.data[0];
+        console.log(this.listing);
       });
     },
   },

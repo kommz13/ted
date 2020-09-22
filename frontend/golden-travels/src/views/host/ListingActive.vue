@@ -103,7 +103,7 @@ export default {
         this.listings = response.data;
         console.log(this.listings);
       });
-    }
+    },
   },
 };
 </script>

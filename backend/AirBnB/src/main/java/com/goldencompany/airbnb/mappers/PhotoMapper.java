@@ -27,6 +27,7 @@ public class PhotoMapper {
         dto.setActive(entity.getActive());
         dto.setUploadDate(entity.getUploadDate());
         dto.setActive(entity.getActive());
+        dto.setIs_default(entity.getDefaultUrl() == 1);
 
         return dto;
     }
