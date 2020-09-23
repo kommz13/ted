@@ -8,6 +8,7 @@ package com.goldencompany.airbnb.controllers;
 import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
 import com.goldencompany.airbnb.dto.input.MessageCreationDTO;
 import com.goldencompany.airbnb.dto.output.BookingDTO;
+import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.dto.output.MessageDTO;
 import com.goldencompany.airbnb.entity.Booking;
 import com.goldencompany.airbnb.entity.Listing;
@@ -272,7 +273,7 @@ public class BookingManagementController {
     public List retrievePendingBookingListingsByUserId(Integer id) throws BaseValidationException {
         List errors = new ArrayList();
         List<Booking> bookings = new ArrayList();
-        List bookingz= new ArrayList();
+        List bookingz = new ArrayList();
 //        errors.add("Not supported yet.");
         List<User> UserList = userRepository.find(id);
 //        User thisUser= UserList.get(0);
@@ -282,13 +283,23 @@ public class BookingManagementController {
 
         } else {
 
+            List<Listing> listings = new ArrayList();
+
 //            bookings = bookingRepository.findByUserIDAndActive(id);
             bookings = bookingRepository.findByUserIDAndPending(id);
+            if(bookings.isEmpty()){
+                return new ArrayList();
+            }else{
+            for (Booking b : bookings) {
+                listings.add(b.getListingId());
+            }
+               List<ListingDTO> listingsDTO= listingMapper.toDTO(listings);
 
             bookingz = bookingMapper.toDTO(bookings);
+            return listingsDTO;
+//            return bookingz;
+            }
         }
-        
-        return bookingz;
 
     }
 
