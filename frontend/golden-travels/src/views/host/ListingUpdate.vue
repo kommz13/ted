@@ -1,5 +1,7 @@
 <template>
+  
   <div class="container">
+    
     <form class="needs-validation" @submit.prevent="submitForm">
       <div class="row">
         <div class="col-sm-6 col-lg-6 mb-3">
@@ -477,13 +479,13 @@ export default {
   //     },
   //   };
   mounted() {
-    const id = 1;
+    const id = this.$route.params.id;
     this.retrieveData(id);
   },
 
-    methods: {
-    retrieveData(id){
-            axios.get(API.GET_UPDATE_LISTING + id).then((response) => {
+  methods: {
+    retrieveData(id) {
+      axios.get(API.GET_UPDATE_LISTING + id).then((response) => {
         this.listings = response.data;
         console.log(this.listings);
       });
@@ -500,7 +502,7 @@ export default {
           alert(response.data);
         });
       return false;
-    }
-    }
+    },
+  },
 };
 </script>

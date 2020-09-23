@@ -56,6 +56,7 @@
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
+import HostTitleBox from "@/components/host/HostTitleBox.vue";
 
 export default {
   data() {

@@ -31,7 +31,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/admin/ApprovedUsers.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/admin/ApprovedUsers.vue"
+      ),
   },
   {
     path: "/admin/users/rejected",
@@ -40,7 +42,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/admin/RejectedUsers.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/admin/RejectedUsers.vue"
+      ),
   },
   {
     path: "/admin/users/pending",
@@ -57,7 +61,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ "../views/admin/XML.vue"),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/admin/XML.vue"),
   },
   {
     path: "/admin/export/json",
@@ -169,17 +174,8 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/host/ListingPending.vue"),
-  },
-  {
-    path: "/customer/listing/active",
-    name: "ListingActiveForCustomers",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
       import(
-        /* webpackChunkName: "about" */ "../views/customer/ListingActive.vue"
+        /* webpackChunkName: "about" */ "../views/host/ListingPending.vue"
       ),
   },
   {
@@ -194,7 +190,7 @@ const routes = [
       ),
   },
   {
-    path: "/customer/listing/all",
+    path: "/customer/booking/all",
     name: "ListingAll",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -205,7 +201,7 @@ const routes = [
       ),
   },
   {
-    path: "/customer/listing/search",
+    path: "/customer/booking/search",
     name: "ListingSearch",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -216,14 +212,25 @@ const routes = [
       ),
   },
   {
-    path: "/customer/listing/inactive",
-    name: "ListingInactiveForCustomer",
+    path: "/customer/booking/mybookings/active",
+    name: "BookingActiveForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(
-        /* webpackChunkName: "about" */ "../views/customer/ListingInactive.vue"
+        /* webpackChunkName: "about" */ "../views/customer/BookingActive.vue"
+      ),
+  },
+  {
+    path: "/customer/booking/mybookings/previous",
+    name: "BookingPreviousForCustomers",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/customer/BookingPrevious.vue"
       ),
   },
   {
