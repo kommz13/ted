@@ -1013,7 +1013,8 @@
 				"53ad6a98-3cc9-44bb-87d9-8c3e5a015171",
 				"9d55b9f2-96bf-4174-86ac-23770b55ed33",
 				"db7cde73-82b3-4222-9920-4c71601199d4",
-				"1afac4af-8e71-4fc8-bd2c-a0efc614b425"
+				"1afac4af-8e71-4fc8-bd2c-a0efc614b425",
+				"dc0939f5-05a8-47e7-98e2-98da5a6b687f"
 			],
 			"folders_order": [],
 			"protocolProfileBehavior": {},
@@ -1168,6 +1169,27 @@
 					"helperAttributes": null,
 					"collectionId": "db9e9141-6c44-45c4-a1fc-21dadee142e3",
 					"rawModeData": "{\n    \"checkIn\":\"2020-11-15T22:00:00Z[UTC]\",\n    \"checkOut\":\"2020-11-20T22:00:00Z[UTC]\",\n    \"howManyPeople\":2,\n    \"userId\":2,\n    \"listingId\":5\n}\n",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "dc0939f5-05a8-47e7-98e2-98da5a6b687f",
+					"name": "List Listings by pending Bookings by user id",
+					"url": "http://localhost:8080/AirBnB/api/bookings/my_pending_bookings/1",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "db9e9141-6c44-45c4-a1fc-21dadee142e3",
 					"headers": "",
 					"pathVariables": {}
 				}
@@ -1360,7 +1382,7 @@
 	],
 	"environments": [
 		{
-			"id": "a91698f0-041f-4775-92f7-a769b5e3f2e9",
+			"id": "deb2700b-ed0f-4a12-8c29-43a024ebff02",
 			"name": "My Workspace - globals",
 			"values": []
 		}
