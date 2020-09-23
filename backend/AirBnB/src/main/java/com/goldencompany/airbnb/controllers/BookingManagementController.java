@@ -270,7 +270,7 @@ public class BookingManagementController {
         return returnBooking;
     }
 
-    public List retrievePendingBookingListingsByUserId(Integer id) throws BaseValidationException {
+    public List retrieveListingsWithPendingBookingByUserId(Integer id) throws BaseValidationException {
         List errors = new ArrayList();
         List<Booking> bookings = new ArrayList();
         List bookingz = new ArrayList();

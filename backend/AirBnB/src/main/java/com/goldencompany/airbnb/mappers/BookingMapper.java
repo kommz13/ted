@@ -27,8 +27,8 @@ public class BookingMapper {
     @Inject
     UserMapper userMapper;
     
-    @Inject
-    ListingMapper listingMapper;
+//    @Inject
+//    ListingMapper listingMapper;
 
     public BookingDTO toDTO(Booking entity) {
         BookingDTO dto = new BookingDTO();
@@ -49,8 +49,9 @@ public class BookingMapper {
 //den mporw na valw ta listings giati m kanei loop kai den mporw na skeftw pws na to kseperasw to loop , isws an ftia3w kapoia allh function alla kai pali 
 //mporei na mhn ftia3ei ... sunexizw me alla.
         Listing listing = entity.getListingId();
-        ListingDTO listingDTO = listingMapper.toDTO(listing);
-        dto.setListing(listingDTO);
+                
+//        ListingDTO listingDTO = listingMapper.toDTO(listing);
+//        dto.setListing(listingDTO);
         return dto;
     }
 

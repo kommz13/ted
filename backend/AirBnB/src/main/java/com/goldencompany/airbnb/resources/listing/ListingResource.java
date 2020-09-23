@@ -140,4 +140,63 @@ public class ListingResource {
 //        return Response.ok().build();
     }
 
+    @GET
+    @Path("pending_bookings/customer/{id}")
+    public Response with_pending_bookings(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithPendingBookingByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+    
+    @GET
+    @Path("accepted_bookings/customer/{id}")
+    public Response with_accepted_bookings(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithAcceptedBookingByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+    
+    @GET
+    @Path("rejected_bookings/customer/{id}")
+    public Response with_rejected_bookings(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithRejectedBookingByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+    
+    @GET
+    @Path("previous_bookings/customer/{id}")
+    public Response with_previous_bookings(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithPreviousBookingByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
 }

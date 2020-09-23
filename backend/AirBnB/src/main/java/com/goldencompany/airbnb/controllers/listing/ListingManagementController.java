@@ -184,4 +184,36 @@ public class ListingManagementController {
 
     }
 
+    public List retrieveWithPendingBookingByUserId(Integer id) throws BaseValidationException {
+        List<Listing> listing = listingRepository.findWithPendingBookingsByCustomerID(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
+    public List retrieveWithAcceptedBookingByUserId(Integer id) throws BaseValidationException {
+        List<Listing> listing = listingRepository.findWithAcceptedBookingsByCustomerID(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
+    public List retrieveWithRejectedBookingByUserId(Integer id) throws BaseValidationException {
+        List<Listing> listing = listingRepository.findWithRejectedBookingsByCustomerID(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
+    public List retrieveWithPreviousBookingByUserId(Integer id) throws BaseValidationException {
+        List<Listing> listing = listingRepository.findWithPreviousBookingsByCustomerID(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
 }

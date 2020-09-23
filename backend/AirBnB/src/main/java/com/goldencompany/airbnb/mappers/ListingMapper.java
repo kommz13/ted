@@ -40,8 +40,8 @@ public class ListingMapper {
     @Inject
     PhotoMapper photoMapper;
 
-//    @Inject
-//    BookingMapper bookingMapper;
+    @Inject
+    BookingMapper bookingMapper;
 
     @Inject
     CriticMapper criticMapper;
@@ -110,7 +110,6 @@ public class ListingMapper {
 //            for (Booking b : entity.getBookingList()) {
 //                listing.getBookings().add(bookingMapper.toDTO(b));
 //            }
-
             for (Critic c : entity.getCriticList()) {
                 listing.getCritics().add(criticMapper.toDTO(c));
             }

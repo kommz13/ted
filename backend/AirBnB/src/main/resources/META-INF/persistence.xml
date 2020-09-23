@@ -19,8 +19,12 @@
     <class>com.goldencompany.airbnb.entity.Rule</class>
     <class>com.goldencompany.airbnb.entity.Type</class>
     <class>com.goldencompany.airbnb.entity.User</class>
+    <class>com.goldencompany.airbnb.entity.UserRatesUser</class>
     <class>com.goldencompany.airbnb.entity.UserViewsListing</class>
     <class>com.goldencompany.airbnb.entity.queries.MessageQueryHolder</class>
+    <class>com.goldencompany.airbnb.entity.queries.BookingQueryHolder</class>
+    <class>com.goldencompany.airbnb.entity.queries.CriticQueryHolder</class>
+    <class>com.goldencompany.airbnb.entity.queries.ListingQueryHolder</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/airbnbdb?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

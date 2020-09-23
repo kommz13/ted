@@ -129,20 +129,20 @@ public class BookingResource {
         }
     }
 
-    @GET
-    @Path("my_pending_bookings/{id}")
-    public Response my_pending_bookings(@PathParam("id") Integer id) {
-        try {
-            List bookings = controller.retrievePendingBookingListingsByUserId(id);
-
-            return Response
-                    .ok(bookings)
-                    .build();
-        } catch (BaseValidationException ex) {
-            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
-
-        }
-    }
+//    @GET
+//    @Path("my_pending_bookings/{id}")
+//    public Response my_pending_bookings(@PathParam("id") Integer id) {
+//        try {
+//            List bookings = controller.retrieveListingsWithPendingBookingByUserId(id);
+//
+//            return Response
+//                    .ok(bookings)
+//                    .build();
+//        } catch (BaseValidationException ex) {
+//            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+//
+//        }
+//    }
 //
 //    @POST
 //    @Path("/send_message")

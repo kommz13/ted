@@ -163,51 +163,73 @@ public class ListingRepository {
         return listings;
     }
 
-    
     public List<Listing> create(Listing listing, int userId, int typeId, List<Amenity> amenities, Photo photo, List<Rule> rules) throws BaseValidationException {
-        Type type = em.find(Type.class,typeId);
-        
+        Type type = em.find(Type.class, typeId);
+
         if (type == null) {
             throw new BaseValidationException("Type id is  invalid");
         }
-        
+
         User user = em.find(User.class, userId);
-        
+
         if (user == null) {
             throw new BaseValidationException("User id is  invalid");
         }
-        
+
         listing.setTypeId(type);
-        
+
         listing.setUserId(user);
-        
+
         listing.setAmenityList(new ArrayList<>());
-        
-        
+
         listing.setRuleList(rules);
-        
+
         listing.setPhotoList(new ArrayList<>());
-        
+
         listing.getPhotoList().add(photo);
-        
+
         photo.setListingId(listing);
-                                                
+
         em.persist(listing);
-        
+
         for (Amenity a : amenities) {
             Amenity ent = em.find(Amenity.class, a.getId());
             listing.getAmenityList().add(ent);
-            
+
             ent.getListingList().add(listing);
         }
-        
-        
-        
+
         List listings = new ArrayList();
 
         listings.add(listing);
 
         return listings;
     }
+
+    public List<Listing> findWithPendingBookingsByCustomerID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithPendingBookingsByCustomerID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithAcceptedBookingsByCustomerID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithAcceptedBookingsByCustomerID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithRejectedBookingsByCustomerID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithRejectedBookingsByCustomerID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;    }
+
+    public List<Listing> findWithPreviousBookingsByCustomerID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithPreviousBookingsByCustomerID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;    }
 
 }
