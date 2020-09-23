@@ -1,7 +1,40 @@
 <template
   ><!-- Start About Page  -->
   <div class="about-box-main">
+    
     <div class="container">
+      <div class="profile">
+        <HostTitleBox title="User profile"></HostTitleBox>
+      </div>
+      <!-- <div class="row">
+        <div class="col-lg-12">
+          <h2>Listings {{ content }}</h2>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <router-link :to="{ path: '/host/listing/active' }"
+                >Active</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              <router-link :to="{ path: '/host/listing/inactive' }"
+                >Inactive</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              <router-link :to="{ path: '/host/listing/update' }"
+                >Update</router-link
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              <router-link :to="{ path: '/host/listing/create' }"
+                >Create</router-link
+              >
+            </li>
+            
+            
+          </ul>
+        </div>
+      </div> -->
       <div class="row">
         <div class="col-lg-6">
           <h2 class="noo-sh-title">{{ listing.friendlyName }}</h2>
@@ -13,6 +46,14 @@
             <li>Bedrooms: {{ listing.bedroom_num }}</li>
             <li>Beds: {{ listing.bedNum }}</li>
             <li>Bathrooms: {{ listing.bathroomNum }}</li>
+            <li>Cost per day: {{ listing.cost }}</li>
+            <li>Extra cost per day: {{ listing.extraCostPerPerson }}</li>
+            <li>Maximum persons: {{ listing.maxPeople }}</li>
+            <li>Minimum stay duration: {{ listing.minDays }}</li>
+            <li>District: {{ listing.district }}</li>
+            <li>City: {{ listing.city }}</li>
+            <li>Country: {{ listing.country }}</li>
+            
           </ol>
           </p>
           <p>
@@ -98,8 +139,12 @@
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
+import HostTitleBox from "@/components/host/HostTitleBox.vue";
 
 export default {
+  components: {
+    HostTitleBox,
+  },
   data() {
     return {
       listing: {

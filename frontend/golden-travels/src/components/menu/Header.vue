@@ -113,18 +113,8 @@
                             >
                           </li> -->
                 <li>
-                  <router-link :to="{ path: '/customer/listing/all' }"
-                    >All my listings</router-link
-                  >
-                </li>
-                <li>
-                  <router-link :to="{ path: '/customer/listing/active' }"
-                    >Active listings</router-link
-                  >
-                </li>
-                <li>
-                  <router-link :to="{ path: '/customer/listing/inactive' }"
-                    >Inactive listings</router-link
+                  <router-link :to="{ path: '/customer/booking/all' }"
+                    >My bookings</router-link
                   >
                 </li>
               </ul>
@@ -179,13 +169,13 @@
                 >Messages</a
               >
               <ul class="dropdown-menu">
-                                <!-- <li>
+                <!-- <li>
                             <router-link :to="{ path: '/admin/users/approved' }"
                               >Approved</router-link
                             >
                           </li> -->
                 <li>
-                  <router-link :to="{ path: '/messages/received/'}"
+                  <router-link :to="{ path: '/messages/received/' }"
                     >Inbox</router-link
                   >
                 </li>
@@ -235,15 +225,14 @@
   <!-- End Main Top -->
 </template>
 
-
 <script>
 import authController from "@/auth/AuthController";
 
 export default {
   data() {
     return {
-      authController:authController
-    }
+      authController: authController,
+    };
   },
   methods: {
     showAdministratorOption() {
@@ -257,7 +246,7 @@ export default {
     },
     showCustomerOption() {
       return authController.isCustomer() == true;
-    }
-  }
-}
+    },
+  },
+};
 </script>

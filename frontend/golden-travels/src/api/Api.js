@@ -25,6 +25,8 @@ let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
 let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
 let CHANGE_PROFILE = BASE_URL + "/account/edit/";
 let GET_LISTING_BY_ID = BASE_URL + "/listing/";
+let GET_ACTIVE_BOOKINGS_BY_USER_ID = BASE_URL + "bookings/my_bookings/";
+let GET_PREVIOUS_BOOKINGS_BY_USER_ID = BASE_URL + "bookings/my_bookings/";
 
 export default {
   GET_APPROVED_USERS,
@@ -51,6 +53,8 @@ export default {
   GET_UPDATE_LISTING,
   POST_UPDATE_LISTING,
   CHANGE_PROFILE,
-  GET_LISTING_BY_ID
+  GET_LISTING_BY_ID,
+  GET_ACTIVE_BOOKINGS_BY_USER_ID,
+  GET_PREVIOUS_BOOKINGS_BY_USER_ID,
 
 };
