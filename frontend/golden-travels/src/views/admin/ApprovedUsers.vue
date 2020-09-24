@@ -13,14 +13,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Photo</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>E-mail</th>
-                    <!-- <th>Birthday</th> -->
-                    <th>Phone</th>
-                    <!-- <th>Registered at</th> -->
+                    <th>From</th>
+                    <th>Date</th>
                     <th>Roles</th>
                     <th>&nbsp;</th>
                   </tr>

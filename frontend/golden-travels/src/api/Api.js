@@ -27,6 +27,7 @@ let CHANGE_PROFILE = BASE_URL + "/account/edit/";
 let GET_LISTING_BY_ID = BASE_URL + "/listing/";
 let GET_ACTIVE_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_bookings/";
 let GET_PREVIOUS_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_bookings/";
+let GET_PENDING_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_pending_bookings/";
 let POST_ACCEPT_BOOKING = BASE_URL + "/bookings/accept_pending_booking/";
 let POST_REJECT_BOOKING = BASE_URL + "/bookings/reject_pending_booking/";
 
@@ -58,6 +59,7 @@ export default {
   GET_LISTING_BY_ID,
   GET_ACTIVE_BOOKINGS_BY_USER_ID,
   GET_PREVIOUS_BOOKINGS_BY_USER_ID,
+  GET_PENDING_BOOKINGS_BY_USER_ID,
   POST_ACCEPT_BOOKING,
   POST_REJECT_BOOKING,
 
