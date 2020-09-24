@@ -30,6 +30,8 @@ public class ListingDTO {
     private int maxPeople;
     private String  friendlyName;
     
+    private int sqrMeters;
+    
     
    
     private int bedNum;
@@ -45,15 +47,6 @@ public class ListingDTO {
     private TypeDTO type;
     
     private int cost;
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-    
 
    
     private List<AmenityDTO> amenities = new ArrayList<>();
@@ -86,6 +79,14 @@ public class ListingDTO {
 //    public void setPhotos(List<PhotoDTO> photos) {
 //        this.photos = photos;
 //    }
+
+    public int getSqrMeters() {
+        return sqrMeters;
+    }
+
+    public void setSqrMeters(int sqrMeters) {
+        this.sqrMeters = sqrMeters;
+    }
 
     
 
@@ -217,8 +218,6 @@ public class ListingDTO {
         this.extraCostPerPerson = extraCostPerPerson;
     }
     
-//    private List<RoleDTO> roles = new ArrayList<>();
-
     public ListingDTO() {
         
     }
@@ -248,10 +247,6 @@ public class ListingDTO {
         this.type = type;
     }
 
-
-    
-//    
-
     public String getFriendlyName() {
         return friendlyName;
     }
@@ -268,23 +263,15 @@ public class ListingDTO {
     public void setPhotos(List<PhotoDTO> photos) {
         this.photos = photos;
     }
-//
-//    public List<BookingDTO> getBookings() {
-//        return bookings;
-//    }
-//
-//    public void setBookings(List<BookingDTO> bookings) {
-//        this.bookings = bookings;
-//    }
-//
-//    public List<CriticDTO> getCritics() {
-//        return critics;
-//    }
-//
-//    public void setCritics(List<CriticDTO> critics) {
-//        this.critics = critics;
-//    }
     
+    
+     public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
     
   
 }

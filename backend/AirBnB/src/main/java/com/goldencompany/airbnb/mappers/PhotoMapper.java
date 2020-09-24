@@ -70,6 +70,20 @@ public class PhotoMapper {
 //          return new Photo();
         return thisPhoto;
     }
+    
+    public Photo toEntity(PhotoDTO dto) {
+        Photo thisPhoto = new Photo();
+        thisPhoto.setActive(1);
+        thisPhoto.setPhotoUrl(dto.getPhotoUrl());
+        thisPhoto.setDefaultUrl(dto.isIs_default() ? (short) 1 : 0);
+        thisPhoto.setUploadDate(new Date());
+        thisPhoto.setId(dto.getId());
+        thisPhoto.setActive(dto.getActive());
+        thisPhoto.setUploadDate(dto.getUploadDate());
+        
+        return thisPhoto;
+    }
+    
 
     public List<Photo> toEntities(ListingCreationDTO input) {
         return new ArrayList<>();
@@ -84,17 +98,11 @@ public class PhotoMapper {
 
     }
 
-    public List<Photo> toEntities(List<String> input) {
-        return new ArrayList<>();
-//        List<Photo> photos= new ArrayList();
-////        
-//          for (String photo : input) {
-//              Photo photoEnt= toEntity(photo);
-////            PhotoDTO photo = toDTO(entity);
-////            list.add(photo);
-//        }
-////
-//        return list;
-
+    public List<Photo> toEntities(List<PhotoDTO> photos) {
+        List<Photo> l = new ArrayList<>();
+        for (PhotoDTO dto : photos) {
+            l.add(toEntity(dto));
+        }
+        return l;
     }
 }

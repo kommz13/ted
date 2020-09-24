@@ -26,7 +26,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="u in users" :key="u.id">
+                  <tr v-for="u in filtered_users" :key="u.id">
                     <td class="thumbnail-img">
                       <a href="#">
                         <img class="img-fluid" :src="u.photoUrl" alt="" />
@@ -36,7 +36,10 @@
                       {{ u.id }}
                     </td>
                     <td class="name-pr">
-                        <router-link :to="{ name: 'Profile', params: {id: u.id } }">{{ u.firstname }} {{ u.lastname }}</router-link>
+                      <router-link
+                        :to="{ name: 'Profile', params: { id: u.id } }"
+                        >{{ u.firstname }} {{ u.lastname }}</router-link
+                      >
                     </td>
                     <td class="name-pr">
                       {{ u.username }}
@@ -72,6 +75,27 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="add-to-btn">
+              <div class="add-comp">
+                Page {{ page }} of {{ maxpages }} - {{ users.length }}
+                records
+              </div>
+              <div class="share-bar">
+                <a class="btn hvr-hover" href="#" @click.prevent="first">
+                  |<i class="fas fa-caret-left"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="previous">
+                  <i class="fas fa-caret-left"> </i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="next">
+                  <i class="fas fa-caret-right"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="last">
+                  <i class="fas fa-caret-right"></i>|
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -84,11 +108,13 @@
 import axios from "axios";
 import UserTitleBox from "@/components/admin/UserTitleBox";
 import API from "@/api/Api.js";
+import PaginationMixin from "@/mixins/PaginationMixin";
 
 export default {
   components: {
     UserTitleBox,
   },
+  mixins: [PaginationMixin],
   data() {
     return {
       users: [],
@@ -100,10 +126,16 @@ export default {
 
     this.retrieveData();
   },
+  computed: {
+    filtered_users() {
+      return this.getPage(this.users);
+    },
+  },
   methods: {
     retrieveData() {
       axios.get(API.GET_REJECTED_USERS).then((response) => {
         this.users = response.data;
+        this.paginate(this.users);
       });
     },
     approveUser(id) {

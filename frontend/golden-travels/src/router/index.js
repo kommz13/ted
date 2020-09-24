@@ -141,7 +141,7 @@ const routes = [
       ),
   },
   {
-    path: "/host/listing/update",
+    path: "/host/listing/update/:id",
     name: "ListingUpdate",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

@@ -127,6 +127,33 @@ public class ListingManagementController {
         thisListing.setMinimumDays(input.getMinDays());
         thisListing.setActive(input.getActive());
         thisListing.setExtraCostPerPerson(input.getExtraCostPerPerson());
+//        
+//            private double geolocationLatitude;
+//    private double geolocationLongitude;
+//    private String city;
+//    private String country;
+//    private String district;
+//    private String friendlyName;
+//    private int floor;
+//    private int sqrMeters;
+        thisListing.setGeolocationLatitude(input.getGeolocationLatitude());
+        thisListing.setGeolocationLongitude(input.getGeolocationLongitude());
+        thisListing.setCity(input.getCity());
+        thisListing.setDistrict(input.getDistrict());
+        thisListing.setCountry(input.getCountry());
+        thisListing.setFriendlyName(input.getFriendlyName());
+        thisListing.setFloor(input.getFloor());
+        thisListing.setSqrMeters(input.getSqrMeters());
+        thisListing.setCost(input.getCost());
+        
+        List <Photo> photos = photoMapper.toEntities(input.getPhotos());
+        
+        for (Photo p : photos) {
+            p.setListingId(thisListing);
+        }
+        
+        thisListing.setPhotoList(photos);
+        
 
         List<Amenity> amenities = amenityMapper.toEntities(input);
 

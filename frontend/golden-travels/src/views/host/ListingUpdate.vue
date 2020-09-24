@@ -1,7 +1,5 @@
 <template>
-  
   <div class="container">
-    
     <form class="needs-validation" @submit.prevent="submitForm">
       <div class="row">
         <div class="col-sm-6 col-lg-6 mb-3">
@@ -208,23 +206,6 @@
                   Please enter extra cost per person.
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 mb-3">
-                <label for="photo_url">Photo URL</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="photo_url"
-                  placeholder=""
-                  required
-                  v-model="listing.photo_url"
-                />
-                <div class="invalid-feedback">
-                  Please enter photo URL.
-                </div>
-              </div>
-
               <div class="col-md-12 mb-3">
                 <label for="description">Description</label>
                 <input
@@ -238,6 +219,50 @@
                 <div class="invalid-feedback">
                   Please enter a description.
                 </div>
+              </div>
+            </div>
+
+            <div class="title-left">
+              <h2>
+                Photos
+                <button
+                  @click="
+                    listing.photos.push({
+                      id: undefined,
+                      default: false,
+                      photoUrl: '',
+                    })
+                  "
+                >
+                  +
+                </button>
+              </h2>
+            </div>
+
+            <div class="row">
+              <div
+                v-for="(p, i) in listing.photos"
+                v-bind:key="p.id"
+                class="col-md-12 mb-3"
+              >
+                <label for="photo_url">Photo URL #{{ i + 1 }}</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="photo_url"
+                  placeholder=""
+                  required
+                  v-model="p.photoUrl"
+                />
+                <div class="invalid-feedback">
+                  Please enter photo URL.
+                </div>
+                <input type="checkbox" v-model="p.is_default" />
+                Default
+
+                <button @click="listing.photos.splice(i, 1)">
+                  remove
+                </button>
               </div>
             </div>
           </div>
@@ -442,42 +467,43 @@ import axios from "axios";
 import API from "@/api/Api.js";
 
 export default {
-  // data() {
-  //   return {
-  //     submit_complete: false,
+  data() {
+    return {
+      submit_complete: false,
 
-  //     listing: {
-  //       geolocation_lat: 1115,
-  //       geolocation_long: 2011,
-  //       country: "Turkey",
-  //       bedroom_num: 5,
-  //       city: "Istanbul",
-  //       district: "Hagia Sofia",
-  //       floor: 2,
-  //       maxPeople: 10,
-  //       bedNum: 5,
-  //       bathroomNum: 2,
-  //       description: "if you wanna pray , this is the place you wanna go",
-  //       sqrMeters: 32,
-  //       minDays: 5,
-  //       extraCostPerPerson: 5,
-  //       typeId: 1,
-  //       friendlyName: "Lovely home near Hagia sofia",
-  //       userId: 1,
-  //       photo_url: "google.com",
-  //       hasWifi: true,
-  //       hasKitchen: false,
-  //       hasTv: true,
-  //       hasParking: true,
-  //       hasElevator: false,
-  //       hasHeating: false,
-  //       hasLivingRoom: false,
-  //       hasAirCondition: false,
-  //       hasPet: true,
-  //       hasEvent: true,
-  //       hasSmoking: true,
-  //     },
-  //   };
+      listing: {
+        geolocation_lat: 0,
+        geolocation_long: 0,
+        country: "-",
+        bedroom_num: 5,
+        city: "-",
+        district: "",
+        floor: 0,
+        maxPeople: 0,
+        bedNum: 0,
+        bathroomNum: 0,
+        description: "",
+        sqrMeters: 0,
+        minDays: 0,
+        extraCostPerPerson: 0,
+        typeId: 0,
+        friendlyName: "",
+        userId: 0,
+        hasWifi: false,
+        hasKitchen: false,
+        hasTv: false,
+        hasParking: false,
+        hasElevator: false,
+        hasHeating: false,
+        hasLivingRoom: false,
+        hasAirCondition: false,
+        hasPet: false,
+        hasEvent: false,
+        hasSmoking: false,
+        photos: [],
+      },
+    };
+  },
   mounted() {
     const id = this.$route.params.id;
     this.retrieveData(id);
@@ -486,13 +512,14 @@ export default {
   methods: {
     retrieveData(id) {
       axios.get(API.GET_UPDATE_LISTING + id).then((response) => {
-        this.listings = response.data;
+        this.listing = response.data[0];
         console.log(this.listings);
       });
     },
     submitForm() {
+      const id = this.$route.params.id;
       axios
-        .post(API.POST_UPDATE_LISTING, this.listing)
+        .post(API.POST_UPDATE_LISTING + id, this.listing)
         .then(() => {
           this.submit_complete = true;
           alert("submit successful!");

@@ -67,6 +67,7 @@ public class ListingMapper {
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
         dto.setFriendlyName(entity.getFriendlyName());
         dto.setCost(entity.getCost());
+        dto.setSqrMeters(entity.getSqrMeters());
 
         for (Photo p : entity.getPhotoList()) {
             dto.getPhotos().add(photoMapper.toDTO(p));
@@ -107,9 +108,9 @@ public class ListingMapper {
 //                        .getRule().add(rule);
             }
 
-//            for (Booking b : entity.getBookingList()) {
-//                listing.getBookings().add(bookingMapper.toDTO(b));
-//            }
+            for (Booking b : entity.getBookingList()) {
+                listing.getBookings().add(bookingMapper.toDTO(b));
+            }
             for (Critic c : entity.getCriticList()) {
                 listing.getCritics().add(criticMapper.toDTO(c));
             }
