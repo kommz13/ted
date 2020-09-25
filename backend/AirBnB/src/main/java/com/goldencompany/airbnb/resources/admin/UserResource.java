@@ -1,5 +1,6 @@
 package com.goldencompany.airbnb.resources.admin;
 
+import com.goldencompany.airbnb.annotations.SecuredModerator;
 import com.goldencompany.airbnb.controllers.admin.UserManagementController;
 import com.goldencompany.airbnb.entity.constants.UserConstants;
 import com.goldencompany.airbnb.exceptions.UserValidationException;
@@ -35,6 +36,7 @@ public class UserResource {
 
     @GET
     @Path("{id}")
+//    @SecuredModerator
     public Response id(@PathParam("id") Integer id) {
         List user = controller.retrieveUserByID(id);
 
@@ -45,6 +47,7 @@ public class UserResource {
 
     @GET
     @Path("active")
+    @SecuredModerator
     public Response active() {
         List users = controller.retrieveActiveUsers();
 
@@ -55,6 +58,7 @@ public class UserResource {
 
     @GET
     @Path("inactive")
+    @SecuredModerator
     public Response inactive() {
         List users = controller.retrieveInactiveUsers();
 
@@ -65,6 +69,7 @@ public class UserResource {
 
     @GET
     @Path("approved")
+    @SecuredModerator
     public Response approved() {
         List users = controller.retrieveUsersByStatus(UserConstants.APPROVED);
 
@@ -75,6 +80,7 @@ public class UserResource {
 
     @GET
     @Path("pending")
+    @SecuredModerator
     public Response pending() {
         List users = controller.retrieveUsersByStatus(UserConstants.PENDING);
 
@@ -85,6 +91,7 @@ public class UserResource {
 
     @GET
     @Path("rejected")
+    @SecuredModerator
     public Response rejected() {
         List users = controller.retrieveUsersByStatus(UserConstants.REJECTED);
 
@@ -95,6 +102,7 @@ public class UserResource {
 
     @POST
     @Path("approve/{id}")
+    @SecuredModerator
     public Response approve(@PathParam("id") Integer id) {
         try {
             List users = controller.approveUser(id);
@@ -109,6 +117,7 @@ public class UserResource {
 
     @POST
     @Path("reject/{id}")
+    @SecuredModerator
     public Response reject(@PathParam("id") Integer id) {
         try {
             List users = controller.rejectUser(id);
@@ -124,6 +133,7 @@ public class UserResource {
 
     @POST
     @Path("reject_approved/{id}")
+    @SecuredModerator
     public Response reject_approved(@PathParam("id") Integer id) {
         try {
             List users = controller.rejectApprovedUser(id);
@@ -139,6 +149,7 @@ public class UserResource {
 
     @POST
     @Path("approve_rejected/{id}")
+    @SecuredModerator
     public Response approve_rejected(@PathParam("id") Integer id) {
         try {
             List users = controller.approveRejectedUser(id);

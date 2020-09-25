@@ -1,5 +1,7 @@
 package com.goldencompany.airbnb.resources.listing;
 
+import com.goldencompany.airbnb.annotations.SecuredCustomer;
+import com.goldencompany.airbnb.annotations.SecuredHost;
 import com.goldencompany.airbnb.controllers.listing.ListingManagementController;
 import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
@@ -94,6 +96,7 @@ public class ListingResource {
     }
 
     @POST
+    @SecuredHost
     @Path("update/{id}")
     public Response update(@PathParam("id") Integer id, ListingUpdateDTO input) {
         try {
@@ -110,6 +113,7 @@ public class ListingResource {
     }
 
     @POST
+    @SecuredHost
     @Path("create")
     public Response create(ListingCreationDTO input) {
         try {
@@ -126,6 +130,7 @@ public class ListingResource {
     }
 
     @POST
+    @SecuredHost
     @Path("deactivate/{id}")
     public Response deactivate(@PathParam("id") Integer id) {
         try {
@@ -140,12 +145,13 @@ public class ListingResource {
 
 //        return Response.ok().build();
     }
-    
-     @POST
+
+    @POST
+    @SecuredHost
     @Path("activate/{id}")
     public Response activate(@PathParam("id") Integer id) {
         try {
-            List listings= controller.activateListing(id);
+            List listings = controller.activateListing(id);
 
             return Response
                     .ok(listings)
@@ -158,6 +164,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredCustomer
     @Path("pending_bookings/customer/{id}")
     public Response with_pending_bookings(@PathParam("id") Integer id) {
         try {
@@ -173,6 +180,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredCustomer
     @Path("accepted_bookings/customer/{id}")
     public Response with_accepted_bookings(@PathParam("id") Integer id) {
         try {
@@ -188,6 +196,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredCustomer
     @Path("rejected_bookings/customer/{id}")
     public Response with_rejected_bookings(@PathParam("id") Integer id) {
         try {
@@ -203,6 +212,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredCustomer
     @Path("previous_bookings/customer/{id}")
     public Response with_previous_bookings(@PathParam("id") Integer id) {
         try {
@@ -219,6 +229,7 @@ public class ListingResource {
 
     /////////////////////for host=============================================
     @GET
+    @SecuredHost
     @Path("pending_bookings/host/{id}")
     public Response with_pending_bookings_host(@PathParam("id") Integer id) {
         try {
@@ -234,6 +245,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredHost
     @Path("accepted_bookings/host/{id}")
     public Response with_accepted_bookings_host(@PathParam("id") Integer id) {
         try {
@@ -249,6 +261,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredHost
     @Path("rejected_bookings/host/{id}")
     public Response with_rejected_bookings_host(@PathParam("id") Integer id) {
         try {
@@ -264,6 +277,7 @@ public class ListingResource {
     }
 
     @GET
+    @SecuredHost
     @Path("previous_bookings/host/{id}")
     public Response with_previous_bookings_host(@PathParam("id") Integer id) {
         try {
@@ -277,7 +291,7 @@ public class ListingResource {
 
         }
     }
-    
+
     @POST
     @Path("search")
     public Response search(SearchDTO params) {

@@ -1,5 +1,6 @@
 package com.goldencompany.airbnb.resources.user;
 
+import com.goldencompany.airbnb.annotations.SecuredHost;
 import com.goldencompany.airbnb.controllers.BookingManagementController;
 import com.goldencompany.airbnb.controllers.MessageManagementController;
 import com.goldencompany.airbnb.dto.input.BookingCreationDTO;
@@ -79,6 +80,7 @@ public class BookingResource {
 
     //na ftia3w kai to postman
     @POST
+    @SecuredHost
     @Path("/accept_pending_booking/{id}")
     public Response accept_pending_booking(@PathParam("id") Integer id) {
 //        return Response
@@ -96,6 +98,7 @@ public class BookingResource {
     }
 
     @POST
+    @SecuredHost
     @Path("/reject_pending_booking/{id}")
     public Response reject_pending_booking(@PathParam("id") Integer id) {
 //        return Response

@@ -71,7 +71,7 @@ class AuthController {
     let obj = this.getUserInfo();
     let rolesArray = obj["roles"];
     let roles = rolesArray.split(",");
-    return roles.includes("moderator") || true;
+    return roles.includes("moderator") ;//|| true;
   }
 
   isCustomer() {
@@ -81,7 +81,7 @@ class AuthController {
     let obj = this.getUserInfo();
     let rolesArray = obj["roles"];
     let roles = rolesArray.split(",");
-    return roles.includes("customer") || true;
+    return roles.includes("customer") ;//|| true;
   }
 
   isHost() {
@@ -91,7 +91,7 @@ class AuthController {
     let obj = this.getUserInfo();
     let rolesArray = obj["roles"];
     let roles = rolesArray.split(",") ;
-    return roles.includes("host") || true;
+    return roles.includes("host"); //|| true;
   }
 
   getTokenExpirationDate(encodedToken) {
