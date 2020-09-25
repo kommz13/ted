@@ -1,15 +1,12 @@
-<template
-  ><div class="about-box-main">
-    <div class="profile">
-      <HostTitleBox title="User profile"></HostTitleBox>
-    </div>
+<template>
+  <div>
+    <CustomerTitleBox></CustomerTitleBox>
+
     <div class="container">
-      <!-- <button @click.prevent="f">Active</button>
-      <button @click.prevent="g">Inactive</button> -->
 
       <div class="row my-4">
         <div class="col-12">
-          <h2 class="noo-sh-title">Your Listings</h2>
+          <h2 class="noo-sh-title">Previous bookings</h2>
         </div>
       </div>
 
@@ -47,7 +44,7 @@
           <div class="hover-team">
             <div class="our-team">
               <router-link
-                :to="{ name: 'ListingViewByUserID', params: { id: l.id } }"
+                :to="{ name: 'BookingViewById', params: { id: l.id } }"
               >
                 <img
                   v-if="l.photos.length"
@@ -61,14 +58,6 @@
               <div class="team-content">
                 <h3 class="title">{{ l.city }}</h3>
                 <span class="post">{{ l.district }}</span>
-              </div>
-
-              <div class="icon">
-                <router-link
-                  :to="{ name: 'ListingUpdate', params: { id: l.id } }"
-                >
-                  <i class="fa fa-edit" aria-hidden="true"></i>
-                </router-link>
               </div>
             </div>
             <div class="team-description">
@@ -102,13 +91,13 @@
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
-import HostTitleBox from "@/components/host/HostTitleBox.vue";
+import CustomerTitleBox from "@/components/customer/CustomerTitleBox.vue";
 import authController from "@/auth/AuthController";
 import PaginationMixin from "@/mixins/PaginationMixin";
 
 export default {
   components: {
-    HostTitleBox,
+    CustomerTitleBox,
   },
   mixins: [PaginationMixin],
   data() {
@@ -128,7 +117,7 @@ export default {
   },
   methods: {
     retrieveData(id) {
-      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
+      axios.get(API.GET_PREVIOUS_BOOKINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
         console.log(this.listings);
       });

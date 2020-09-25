@@ -139,6 +139,22 @@ public class ListingResource {
 
 //        return Response.ok().build();
     }
+    
+     @POST
+    @Path("activate/{id}")
+    public Response activate(@PathParam("id") Integer id) {
+        try {
+            List listings= controller.activateListing(id);
+
+            return Response
+                    .ok(listings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+        }
+
+//        return Response.ok().build();
+    }
 
     @GET
     @Path("pending_bookings/customer/{id}")

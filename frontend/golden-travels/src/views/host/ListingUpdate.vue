@@ -451,15 +451,34 @@
             </div>
             <div class="col-12 d-flex shopping-box">
               <button id="submit" type="submit" class="ml-auto btn primary  ">
-                Update Room
+                Apply changes
               </button>
             </div>
 
-              <div class="col-12 d-flex shopping-box">
-                <button id="deleteRoom" class="ml-auto btn hvr-hover">
-                   Delete Room
-                </button>
-              </div>
+            <div class="col-md-12 col-lg-12">
+              <br />
+              <br />
+            </div>
+            
+            <div class="col-12 d-flex shopping-box">
+              <button
+                v-if="deactivatable"
+                id="deleteRoom"
+                @click.prevent="deactivateListing(listing.id)"
+                class="ml-auto btn hvr-hover"
+              >
+                Deactive Room
+              </button>
+
+              <button
+                v-if="activatable"
+                id="deleteRoom"
+                @click.prevent="activateListing(listing.id)"
+                class="ml-auto btn btn-success"
+              >
+                Activate Room
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -514,7 +533,18 @@ export default {
     const id = this.$route.params.id;
     this.retrieveData(id);
   },
-
+  computed: {
+    activatable() {
+      return !this.listing.active;
+    },
+    deactivatable() {
+      return (
+        this.listing.active &&
+        (!this.listing.bookings ||
+          (this.listing.bookings && this.listing.bookings.length == 0))
+      );
+    },
+  },
   methods: {
     retrieveData(id) {
       axios.get(API.GET_UPDATE_LISTING + id).then((response) => {
@@ -529,6 +559,39 @@ export default {
         .then(() => {
           this.submit_complete = true;
           alert("submit successful!");
+
+          return false;
+        })
+        .catch((response) => {
+          alert(response.data);
+        });
+      return false;
+    },
+    activateListing(id) {
+      console.log(id);
+      axios
+        .post(API.POST_ACTIVATE_LISTING + id, this.listing)
+        .then(() => {
+          this.submit_complete = true;
+
+          this.retrieveData(id);
+
+          return false;
+        })
+        .catch((response) => {
+          alert(response.data);
+        });
+      return false;
+    },
+    deactivateListing(id) {
+      console.log(id);
+      axios
+        .post(API.POST_DEACTIVATE_LISTING + id, this.listing)
+        .then(() => {
+          this.submit_complete = true;
+
+          this.retrieveData(id);
+
           return false;
         })
         .catch((response) => {

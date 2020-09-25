@@ -190,17 +190,6 @@ const routes = [
       ),
   },
   {
-    path: "/customer/booking/all",
-    name: "ListingAll",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(
-        /* webpackChunkName: "about" */ "../views/customer/ListingAll.vue"
-      ),
-  },
-  {
     path: "/customer/booking/search",
     name: "ListingSearch",
     // route level code-splitting
@@ -212,7 +201,7 @@ const routes = [
       ),
   },
   {
-    path: "/mybookings/active/:id",
+    path: "/mybookings/active",
     name: "BookingActiveForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -223,7 +212,18 @@ const routes = [
       ),
   },
   {
-    path: "/mybookings/pending/:id",
+    path: "/mybookings/listing/view/:id",
+    name: "BookingViewById",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/customer/BookingViewById.vue"
+      ),
+  },
+  {
+    path: "/mybookings/pending",
     name: "BookingPendingForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -234,7 +234,7 @@ const routes = [
       ),
   },
   {
-    path: "/mybookings/previous/:id",
+    path: "/mybookings/previous",
     name: "BookingPreviousForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -244,6 +244,18 @@ const routes = [
         /* webpackChunkName: "about" */ "../views/customer/BookingPrevious.vue"
       ),
   },
+  {
+    path: "/mybookings/rejected",
+    name: "BookingPreviousForCustomers",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/customer/BookingRejected.vue"
+      ),
+  },
+  
   
   {
     path: "/messages/received/",

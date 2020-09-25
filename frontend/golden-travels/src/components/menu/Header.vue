@@ -115,7 +115,7 @@
                             >
                           </li> -->
                 <li>
-                  <router-link :to="{ path: '/customer/booking/all' }"
+                  <router-link :to="{ path: '/mybookings/active' }"
                     >My bookings</router-link
                   >
                 </li>

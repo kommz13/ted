@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HostTitleBox title="User profile"></HostTitleBox>
+    <HostTitleBox></HostTitleBox>
 
     <div class="container">
       <!-- <button @click.prevent="f">Active</button>
@@ -8,7 +8,7 @@
 
       <div class="row my-4">
         <div class="col-12">
-          <h2 class="noo-sh-title">Your Listings</h2>
+          <h2 class="noo-sh-title">Published listings</h2>
         </div>
       </div>
 

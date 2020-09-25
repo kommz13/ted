@@ -8,7 +8,7 @@
 
       <div class="row my-4">
         <div class="col-12">
-          <h2 class="noo-sh-title">Your Listings</h2>
+          <h2 class="noo-sh-title">Unpublished listings</h2>
         </div>
       </div>
       <div class="row">
@@ -59,22 +59,13 @@
                 <h3 class="title">{{ l.city }}</h3>
                 <span class="post">{{ l.district }}</span>
               </div>
-              <ul class="social">
-                <li>
-                  <a href="#" class="fab fa-facebook"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-twitter"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-google-plus"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-youtube"></a>
-                </li>
-              </ul>
-              <div class="icon">
-                <i class="fa fa-plus" aria-hidden="true"></i>
+             
+            <div class="icon">
+                <router-link
+                  :to="{ name: 'ListingUpdate', params: { id: l.id } }"
+                >
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                </router-link>
               </div>
             </div>
             <div class="team-description">

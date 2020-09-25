@@ -145,15 +145,14 @@ public class ListingManagementController {
         thisListing.setFloor(input.getFloor());
         thisListing.setSqrMeters(input.getSqrMeters());
         thisListing.setCost(input.getCost());
-        
-        List <Photo> photos = photoMapper.toEntities(input.getPhotos());
-        
+
+        List<Photo> photos = photoMapper.toEntities(input.getPhotos());
+
         for (Photo p : photos) {
             p.setListingId(thisListing);
         }
-        
+
         thisListing.setPhotoList(photos);
-        
 
         List<Amenity> amenities = amenityMapper.toEntities(input);
 
@@ -240,6 +239,27 @@ public class ListingManagementController {
 
         List dtos = listingMapper.toDTO(listing);
 
+        return dtos;
+    }
+
+    public List activateListing(Integer id) throws BaseValidationException {
+        List<Listing> listings = listingRepository.find(id);
+        List errors = new ArrayList();
+        Listing listing = new Listing();
+        if (!listings.isEmpty()) {
+            listing = listings.get(0);
+        } else {
+            errors.add("Listing does not exist");
+            throw new BaseValidationException(errors);
+        }
+
+        if (listing.getActive() == 1) {
+            errors.add("Listing is already activated");
+            throw new BaseValidationException(errors);
+        }
+        listing.setActive(1);
+        listingRepository.update(listing);
+        List dtos = listingMapper.toDTO(listings);
         return dtos;
     }
 

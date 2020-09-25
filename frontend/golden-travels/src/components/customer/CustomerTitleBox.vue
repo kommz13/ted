@@ -7,7 +7,7 @@
           <h2>Bookings {{ content }}</h2>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link :to="{ path: '/mybookings/active/:id' }"
+              <router-link :to="{ path: '/mybookings/active/' }"
                 >Active</router-link
               >
             </li>
@@ -19,6 +19,11 @@
              <li class="breadcrumb-item active">
               <router-link :to="{ path: '/mybookings/previous/' }"
                 >Previous</router-link
+              >
+            </li>
+             <li class="breadcrumb-item active">
+             <router-link :to="{ path: '/mybookings/rejected/' }"
+                >Rejected</router-link
               >
             </li>
           </ul>
