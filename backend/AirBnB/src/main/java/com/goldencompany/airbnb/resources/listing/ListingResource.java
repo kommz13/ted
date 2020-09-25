@@ -3,6 +3,7 @@ package com.goldencompany.airbnb.resources.listing;
 import com.goldencompany.airbnb.controllers.listing.ListingManagementController;
 import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
+import com.goldencompany.airbnb.dto.input.SearchDTO;
 import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.entity.constants.UserConstants;
 import com.goldencompany.airbnb.exceptions.BaseValidationException;
@@ -267,6 +268,21 @@ public class ListingResource {
     public Response with_previous_bookings_host(@PathParam("id") Integer id) {
         try {
             List bookings = controller.retrieveWithPreviousBookingByHostId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+    
+    @POST
+    @Path("search")
+    public Response search(SearchDTO params) {
+        try {
+            List bookings = controller.search(params);
 
             return Response
                     .ok(bookings)

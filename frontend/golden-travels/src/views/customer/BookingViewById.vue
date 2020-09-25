@@ -216,6 +216,64 @@
                 </tbody>
               </table>
             </div>
+
+            <form class="needs-validation" @submit.prevent="submitBooking">
+      <div class="row">
+        <div class="col-sm-12 col-lg-12 mb-3">
+          <div class="checkout-address">
+            <div class="title-left">
+              <h2>Booking Creation</h2>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="country">Check-in</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value=""
+                  required
+                  v-model="booking.checkIn"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="city">Check-out</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value=""
+                  required
+                  v-model="booking.checkOut"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="country">People</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  placeholder=""
+                  value=""
+                  required
+                  v-model="booking.howManyPeople"
+                />
+              </div>
+              </div>
+
+              <div class="col-12 d-flex shopping-box">
+              <button id="submit" type="submit" class="ml-auto btn btn-success">
+                Apply for a booking
+              </button>
+            </div>
+
+            </div>
+            </div>
+            </div>
+            </form>
+            
+
               
               </div>
             </div>
@@ -246,6 +304,13 @@ export default {
         geolocation_long: 0,
         photos: [],
       },
+      booking: {
+        checkIn: "",
+        checkOut: "",
+        howManyPeople: 2,
+        userId:  authController.getUserID(),
+        listingId: 0
+      }
     };
   },
   computed: {
@@ -282,14 +347,29 @@ export default {
     },
   },
   methods: {
+    showCustomerOption() {
+      return authController.isCustomer() == true;
+    },
     retrieveData(id) {
       axios.get(API.GET_LISTING_BY_ID + id).then((response) => {
         this.listing = response.data[0];
+        this.booking.listingId = id;
         console.log(this.listing);
       });
     },
     rejectBooking(id) {
       axios.post(API.POST_REJECT_BOOKING + id).then((response) => {
+        if (response.status == 200) {
+          id = this.$route.params.id;
+          this.retrieveData(id);
+        }
+      });
+    },
+    submitBooking(id) {
+      this.booking.checkIn = this.booking.checkIn + "T22:00:00Z[UTC]";
+      this.booking.checkOut = this.booking.checkOut + "T22:00:00Z[UTC]";
+
+      axios.post(API.POST_BOOKING, this.booking).then((response) => {
         if (response.status == 200) {
           id = this.$route.params.id;
           this.retrieveData(id);

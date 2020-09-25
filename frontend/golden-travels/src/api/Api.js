@@ -36,6 +36,8 @@ let GET_PREVIOUS_BOOKINGS_BY_USER_ID = BASE_URL + "/listing/previous_bookings/cu
 
 let POST_ACCEPT_BOOKING = BASE_URL + "/bookings/accept_pending_booking/";
 let POST_REJECT_BOOKING = BASE_URL + "/bookings/reject_pending_booking/";
+let POST_LISTING_SEARCH = BASE_URL + "/listing/search/";
+let POST_BOOKING = BASE_URL + "/bookings/create";
 
 export default {
   GET_APPROVED_USERS,
@@ -71,5 +73,7 @@ export default {
   POST_DELETE_MESSAGE,
   POST_ACTIVATE_LISTING,
   POST_DEACTIVATE_LISTING,
-  GET_REJECTED_BOOKINGS_BY_USER_ID
+  GET_REJECTED_BOOKINGS_BY_USER_ID,
+  POST_LISTING_SEARCH,
+  POST_BOOKING
 };

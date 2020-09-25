@@ -95,11 +95,18 @@ public class MessageManagementController {
         User sender = users2.get(0);
 
         //na valw booking sto to entity san orisma
-        List<Booking> bookings = bookingRepository.findByBookingID(dto.getBookingId());
-        Booking booking = bookings.get(0);
-        Message rofl = messageMapper.toEntity(dto, sender, receiver, booking);
+        if (dto.getBookingId() != null) {
+            List<Booking> bookings = bookingRepository.findByBookingID(dto.getBookingId());
+            Booking booking = bookings.get(0);
+            Message rofl = messageMapper.toEntity(dto, sender, receiver, booking);
+            messageRepository.create(rofl);
+        } else {
+            Message rofl = messageMapper.toEntity(dto, sender, receiver, null);
+            messageRepository.create(rofl);
+        }
+        
 
-        messageRepository.create(rofl);
+        
 
         return dto;
     }

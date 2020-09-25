@@ -5,6 +5,7 @@
  */
 package com.goldencompany.airbnb.repositories;
 
+import com.goldencompany.airbnb.dto.input.SearchDTO;
 import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
 import com.goldencompany.airbnb.entity.Photo;
@@ -21,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 /**
@@ -259,6 +261,80 @@ public class ListingRepository {
         Query q = em.createNamedQuery("Listing.findWithPreviousBookingsByHostID");
         q.setParameter("x", id);
         List<Listing> listing = q.getResultList();
-        return listing;    }
+        return listing;
+    }
 
+    private boolean isNullOrEmpty(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    public List<Listing> search(SearchDTO params) {
+//        Query q = em.createNamedQuery("Listing.findWithPreviousBookingsByHostID");
+
+        StringBuffer b = new StringBuffer();
+        b.append("SELECT distinct l FROM Listing l join l.amenityList a join l.bookingList b where 1=1 ");
+
+        if (!isNullOrEmpty(params.getCity())) {
+            b.append(" and l.city like '").append(params.getCity()).append("'");
+        }
+
+        if (!isNullOrEmpty(params.getMaxPeople())) {
+            Integer m = Integer.parseInt(params.getMaxPeople());
+            b.append(" and l.maxPeople >= '").append(params.getMaxPeople()).append("'");
+        }
+
+        if (!isNullOrEmpty(params.getCost())) {
+            Integer m = Integer.parseInt(params.getCost());
+            b.append(" and l.cost <= '").append(params.getCost()).append("'");
+        }
+
+        if (params.getTypeId() > 0) {
+            Integer m = params.getTypeId();
+
+            b.append(" and l.typeId.id = '").append(params.getTypeId()).append("'");
+        }
+
+        if (params.isHasWifi()) {
+            b.append(" and a.id = '1'");
+        }
+        if (params.isHasKitchen()) {
+            b.append(" and a.id = '2'");
+        }
+
+        if (params.isHasTv()) {
+            b.append(" and a.id = '3'");
+        }
+
+        if (params.isHasParking()) {
+            b.append(" and a.id = '4'");
+        }
+
+        if (params.isHasElevator()) {
+            b.append(" and a.id = '5'");
+        }
+
+        if (params.isHasHeating()) {
+            b.append(" and a.id = '7'");
+        }
+        if (params.isHasLivingRoom()) {
+            b.append(" and a.id = '8'");
+        }
+        if (params.isHasAirCondition()) {
+            b.append(" and a.id = '6'");
+        }
+
+        if (!isNullOrEmpty(params.getCheckin())) {
+            b.append("where not exists (select b from Booking b where b.listingId.id = l.id and '").append(params.getCheckin()).append(" ' between b.checkin and b.checkout )");
+        }
+
+        if (!isNullOrEmpty(params.getCheckout())) {
+            b.append("where not exists (select b from Booking b where b.listingId.id = l.id and '").append(params.getCheckout()).append(" ' between b.checkin and b.checkout )");
+        }
+
+        TypedQuery<Listing> query = em.createQuery(b.toString(), Listing.class);
+
+        List<Listing> listing = query.getResultList();
+
+        return listing;
+    }
 }

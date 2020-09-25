@@ -7,6 +7,7 @@ package com.goldencompany.airbnb.controllers.listing;
 
 import com.goldencompany.airbnb.dto.input.ListingCreationDTO;
 import com.goldencompany.airbnb.dto.input.ListingUpdateDTO;
+import com.goldencompany.airbnb.dto.input.SearchDTO;
 import com.goldencompany.airbnb.dto.output.ListingDTO;
 import com.goldencompany.airbnb.entity.Amenity;
 import com.goldencompany.airbnb.entity.Listing;
@@ -289,6 +290,14 @@ public class ListingManagementController {
 
     public List retrieveWithPreviousBookingByHostId(Integer id) throws BaseValidationException {
         List<Listing> listing = listingRepository.findWithPreviousBookingsByHostID(id);
+
+        List dtos = listingMapper.toDTO(listing);
+
+        return dtos;
+    }
+
+    public List search(SearchDTO params) throws BaseValidationException {
+         List<Listing> listing = listingRepository.search(params);
 
         List dtos = listingMapper.toDTO(listing);
 

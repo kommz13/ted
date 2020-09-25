@@ -32,12 +32,9 @@
             data-out="fadeOutUp"
           >
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{ path: '/about' }"
-                >About</router-link
-              >
+              <router-link class="nav-link" :to="{ path: '/' }">
+                Search
+              </router-link>
             </li>
             <li class="dropdown megamenu-fw" v-if="showAdministratorOption()">
               <a
@@ -104,11 +101,6 @@
                 >Customer</a
               >
               <ul class="dropdown-menu">
-                <li>
-                  <router-link :to="{ path: '/customer/listing/search' }"
-                    >Search</router-link
-                  >
-                </li>
                 <!-- <li>
                             <router-link :to="{ path: '/admin/users/approved' }"
                               >Approved</router-link
@@ -146,11 +138,6 @@
                     >View my listings</router-link
                   >
                 </li>
-                <li>
-                  <router-link :to="{ path: '/host/listing/update/' }"
-                    >Update listing</router-link
-                  >
-                </li>
                 <!-- <li>
                   <router-link :to="{ path: '/host/listing/active/' }"
                     >Active listings</router-link
@@ -163,7 +150,7 @@
                 </li> -->
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" v-if="showSessionOptions()">
               <a
                 href="#"
                 class="nav-link dropdown-toggle arrow"
@@ -186,14 +173,14 @@
                     >Outbox</router-link
                   >
                 </li>
-                <li>
-                  <router-link :to="{ path: '/messages/details/' }"
-                    >Message Details</router-link
-                  >
-                </li>
                 <!-- <li><a href="checkout.html">View my active listings</a></li>
                 <li><a href="my-account.html">View my inactive listings</a></li> -->
               </ul>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{ path: '/about' }"
+                >About</router-link
+              >
             </li>
 
             <!-- <li class="dropdown">
@@ -249,6 +236,9 @@ export default {
     showCustomerOption() {
       return authController.isCustomer() == true;
     },
+    showSessionOptions() {
+      return authController.isCustomer() == true || authController.isHost() == true || authController.isAdmin() == true;
+    }
   },
 };
 </script>

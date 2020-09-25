@@ -14,11 +14,19 @@ import java.util.Date;
  */
 public class MessageCreationDTO {
     private String text;
-//    private Date dateTime;
 
     private Integer sender;
     private Integer receiver;
     private Integer bookingId;
+    private Date date= new Date();
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Integer getBookingId() {
         return bookingId;
