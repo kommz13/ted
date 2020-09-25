@@ -6,6 +6,7 @@
 package com.goldencompany.airbnb.dto.input;
 
 import com.goldencompany.airbnb.dto.output.AmenityDTO;
+import com.goldencompany.airbnb.dto.output.PhotoDTO;
 import com.goldencompany.airbnb.dto.output.RuleDTO;
 import com.goldencompany.airbnb.dto.output.TypeDTO;
 import com.goldencompany.airbnb.dto.output.UserDTO;
@@ -33,7 +34,20 @@ public class ListingUpdateDTO {
     //Amenity integer variables where 0 means set to no , 1 means set to yes , maybe null means no change.
 //    private List<AmenityDTO> amenities = new ArrayList<>();
     private boolean hasWifi;
-    //wifi
+    //////
+    private double geolocationLatitude;
+    private double geolocationLongitude;
+    private String city;
+    private String country;
+    private String district;
+    private String friendlyName;
+    private int floor;
+    private int sqrMeters;
+    private List<PhotoDTO> photos;
+    //mhn ksexaseis to cost
+    
+    /////
+//wifi
     //kitchen
     private boolean hasKitchen;
     private boolean hasAirCondition;
@@ -57,6 +71,79 @@ public class ListingUpdateDTO {
     //elevator
     private boolean hasElevator;
     private int cost;
+
+    public List<PhotoDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoDTO> photos) {
+        this.photos = photos;
+    }
+ 
+    public double getGeolocationLatitude() {
+        return geolocationLatitude;
+    }
+
+    public void setGeolocationLatitude(double geolocationLatitude) {
+        this.geolocationLatitude = geolocationLatitude;
+    }
+
+    public double getGeolocationLongitude() {
+        return geolocationLongitude;
+    }
+
+    public void setGeolocationLongitude(double geolocationLongitude) {
+        this.geolocationLongitude = geolocationLongitude;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
+
+    public int getSqrMeters() {
+        return sqrMeters;
+    }
+
+    public void setSqrMeters(int sqrMeters) {
+        this.sqrMeters = sqrMeters;
+    }
+    
 
     public int getCost() {
         return cost;
@@ -218,12 +305,4 @@ public class ListingUpdateDTO {
     public void setExtraCostPerPerson(int extraCostPerPerson) {
         this.extraCostPerPerson = extraCostPerPerson;
     }
-
-//    public TypeDTO getType() {
-//        return type;
-//    }
-//
-//    public void setType(TypeDTO type) {
-//        this.type = type;
-//    }
 }

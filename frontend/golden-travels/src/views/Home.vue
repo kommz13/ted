@@ -1,6 +1,6 @@
 <template>
   <div>
-    Home page
+    NA TO KANOUME IDIO ME TO SEARCH PAGE GIA GUEST/CUSTOMER/HOST/(ADMIN?)
   </div>
 </template>
 

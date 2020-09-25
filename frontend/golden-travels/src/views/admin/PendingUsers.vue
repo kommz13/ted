@@ -26,7 +26,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="u in users" :key="u.id">
+                  <tr v-for="u in filtered_users" :key="u.id">
                     <td class="thumbnail-img">
                       <a href="#">
                         <img class="img-fluid" :src="u.photoUrl" alt="" />
@@ -36,7 +36,10 @@
                       {{ u.id }}
                     </td>
                     <td class="name-pr">
-                        <router-link :to="{ name: 'Profile', params: {id: u.id } }">{{ u.firstname }} {{ u.lastname }}</router-link>
+                      <router-link
+                        :to="{ name: 'Profile', params: { id: u.id } }"
+                        >{{ u.firstname }} {{ u.lastname }}</router-link
+                      >
                     </td>
                     <td class="name-pr">
                       {{ u.username }}
@@ -79,6 +82,26 @@
                 </tbody>
               </table>
             </div>
+            <div class="add-to-btn">
+              <div class="add-comp">
+                Page {{ page }} of {{ maxpages }} - {{ users.length }}
+                records
+              </div>
+              <div class="share-bar">
+                <a class="btn hvr-hover" href="#" @click.prevent="first">
+                  |<i class="fas fa-caret-left"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="previous">
+                  <i class="fas fa-caret-left"> </i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="next">
+                  <i class="fas fa-caret-right"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="last">
+                  <i class="fas fa-caret-right"></i>|
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -91,15 +114,22 @@
 import axios from "axios";
 import UserTitleBox from "@/components/admin/UserTitleBox";
 import API from "@/api/Api.js";
+import PaginationMixin from "@/mixins/PaginationMixin";
 
 export default {
   components: {
     UserTitleBox,
   },
+  mixins: [PaginationMixin],
   data() {
     return {
       users: [],
     };
+  },
+  computed: {
+    filtered_users() {
+      return this.getPage(this.users);
+    },
   },
   mounted() {
     console.clear();
@@ -109,14 +139,14 @@ export default {
   },
   methods: {
     retrieveData() {
-      axios.get(API.GET_PENDING_USERS).then(response => {
+      axios.get(API.GET_PENDING_USERS).then((response) => {
         this.users = response.data;
       });
     },
     approveUser(id) {
       console.log("id clicked: " + id);
 
-      axios.post(API.APPROVE_PENDING_USER + id).then(response => {
+      axios.post(API.APPROVE_PENDING_USER + id).then((response) => {
         if (response.status == 200) {
           this.retrieveData();
         }
@@ -125,7 +155,7 @@ export default {
     rejectUser(id) {
       console.log("id clicked: " + id);
 
-      axios.post(API.REJECT_PENDING_USER + id).then(response => {
+      axios.post(API.REJECT_PENDING_USER + id).then((response) => {
         if (response.status == 200) {
           this.retrieveData();
         }
@@ -134,4 +164,3 @@ export default {
   },
 };
 </script>
-

@@ -1,8 +1,7 @@
-<template
-  ><div class="about-box-main">
-    <div class="profile">
-      <HostTitleBox title="User profile"></HostTitleBox>
-    </div>
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
+
     <div class="container">
       <!-- <button @click.prevent="f">Active</button>
       <button @click.prevent="g">Inactive</button> -->
@@ -11,7 +10,39 @@
         <div class="col-12">
           <h2 class="noo-sh-title">Your Listings</h2>
         </div>
-        <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="add-to-btn">
+            <div class="add-comp">
+              Page {{ page }} of {{ maxpages }} - {{ listings.length }}
+              records
+            </div>
+            <div class="share-bar">
+              <a class="btn hvr-hover" href="#" @click.prevent="first">
+                |<i class="fas fa-caret-left"></i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="previous">
+                <i class="fas fa-caret-left"> </i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="next">
+                <i class="fas fa-caret-right"></i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="last">
+                <i class="fas fa-caret-right"></i>|
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-4">
+        <div
+          v-for="l in filtered_listings"
+          v-bind:key="l.id"
+          class="col-sm-6 col-lg-3"
+        >
           <div class="hover-team">
             <div class="our-team">
               <router-link
@@ -30,22 +61,13 @@
                 <h3 class="title">{{ l.city }}</h3>
                 <span class="post">{{ l.district }}</span>
               </div>
-              <ul class="social">
-                <li>
-                  <a href="#" class="fab fa-facebook"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-twitter"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-google-plus"></a>
-                </li>
-                <li>
-                  <a href="#" class="fab fa-youtube"></a>
-                </li>
-              </ul>
+
               <div class="icon">
-                <i class="fa fa-plus" aria-hidden="true"></i>
+                <router-link
+                  :to="{ name: 'ListingUpdate', params: { id: l.id } }"
+                >
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                </router-link>
               </div>
             </div>
             <div class="team-description">
@@ -81,12 +103,13 @@ import axios from "axios";
 import API from "@/api/Api.js";
 import HostTitleBox from "@/components/host/HostTitleBox.vue";
 import authController from "@/auth/AuthController";
+import PaginationMixin from "@/mixins/PaginationMixin";
 
 export default {
   components: {
     HostTitleBox,
   },
-
+  mixins: [PaginationMixin],
   data() {
     return {
       authController: authController,
@@ -96,6 +119,11 @@ export default {
   mounted() {
     const id = authController.getUserID();
     this.retrieveData(id);
+  },
+  computed: {
+    filtered_listings() {
+      return this.getPage(this.listings);
+    },
   },
   methods: {
     retrieveData(id) {

@@ -16,13 +16,11 @@
           </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-          <input type="text" class="form-control" placeholder="Search" />
+          <!--<input type="text" class="form-control" placeholder="Search" /> -->
         </div>
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <div class="custom-select-box"></div>
-          <div class="right-phone-box">
-            <p>Call Us :- <a href="#"> +30 2101234567</a></p>
-          </div>
+          
           <div class="our-link">
             <ul>
               <li v-if="showAccountOption()">

@@ -16,17 +16,21 @@ let GET_ACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/active/";
 let GET_INACTIVE_LISTINGS_BY_USER_ID = BASE_URL + "/listing/inactive/";
 let GET_ALL_LISTINGS = BASE_URL + "/listing/all";
 let GET_UPDATE_LISTING = BASE_URL + "/listing/";
-let POST_UPDATE_LISTING = BASE_URL + "listing/";
+let POST_UPDATE_LISTING = BASE_URL + "/listing/update/";
 let GET_ACTIVE_LISTINGS = BASE_URL + "/listing/active/";
 let GET_INACTIVE_LISTINGS = BASE_URL + "/listing/inactive/";
 let GET_RECEIVED_MESSAGES = BASE_URL + "/messages/received/";
 let GET_SENT_MESSAGES =  BASE_URL + "/messages/sent/";
 let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
+let POST_DELETE_MESSAGE = BASE_URL + "/messages/delete_message/";
 let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
 let CHANGE_PROFILE = BASE_URL + "/account/edit/";
 let GET_LISTING_BY_ID = BASE_URL + "/listing/";
-let GET_ACTIVE_BOOKINGS_BY_USER_ID = BASE_URL + "bookings/my_bookings/";
-let GET_PREVIOUS_BOOKINGS_BY_USER_ID = BASE_URL + "bookings/my_bookings/";
+let GET_ACTIVE_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_bookings/";
+let GET_PREVIOUS_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_bookings/";
+let GET_PENDING_BOOKINGS_BY_USER_ID = BASE_URL + "/bookings/my_pending_bookings/";
+let POST_ACCEPT_BOOKING = BASE_URL + "/bookings/accept_pending_booking/";
+let POST_REJECT_BOOKING = BASE_URL + "/bookings/reject_pending_booking/";
 
 export default {
   GET_APPROVED_USERS,
@@ -56,5 +60,8 @@ export default {
   GET_LISTING_BY_ID,
   GET_ACTIVE_BOOKINGS_BY_USER_ID,
   GET_PREVIOUS_BOOKINGS_BY_USER_ID,
-
+  GET_PENDING_BOOKINGS_BY_USER_ID,
+  POST_ACCEPT_BOOKING,
+  POST_REJECT_BOOKING,
+  POST_DELETE_MESSAGE
 };

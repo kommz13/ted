@@ -56,7 +56,7 @@
 <script>
 import axios from "axios";
 import API from "@/api/Api.js";
-import HostTitleBox from "@/components/host/HostTitleBox.vue";
+import HostTitleBox from "@/components/host/HostTitleBox";
 
 export default {
   data() {
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     retrieveData(id) {
-      axios.get(API.GET_ACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
+      axios.get(API.GET_ACTIVE_BOOKINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
         console.log(this.listings);
       });

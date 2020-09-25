@@ -17,8 +17,8 @@
               >
             </li>
             <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/update' }"
-                >Update</router-link
+              <router-link :to="{ path: '/host/listing/pending' }"
+                >Pending</router-link
               >
             </li>
             <li class="breadcrumb-item active">

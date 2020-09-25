@@ -141,7 +141,7 @@ const routes = [
       ),
   },
   {
-    path: "/host/listing/update",
+    path: "/host/listing/update/:id",
     name: "ListingUpdate",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -212,7 +212,7 @@ const routes = [
       ),
   },
   {
-    path: "/customer/booking/mybookings/active",
+    path: "/mybookings/active/:id",
     name: "BookingActiveForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -223,7 +223,18 @@ const routes = [
       ),
   },
   {
-    path: "/customer/booking/mybookings/previous",
+    path: "/mybookings/pending/:id",
+    name: "BookingPendingForCustomers",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/customer/BookingPending.vue"
+      ),
+  },
+  {
+    path: "/mybookings/previous/:id",
     name: "BookingPreviousForCustomers",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -233,6 +244,7 @@ const routes = [
         /* webpackChunkName: "about" */ "../views/customer/BookingPrevious.vue"
       ),
   },
+  
   {
     path: "/messages/received/",
     name: "MessageReceived",
@@ -264,6 +276,17 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "about" */ "../views/messages/MessageDetails.vue"
+      ),
+  },
+  {
+    path: "/about",
+    name: "AboutUs",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../views/About.vue"
       ),
   },
 ];

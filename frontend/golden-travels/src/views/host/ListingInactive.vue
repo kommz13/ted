@@ -1,8 +1,7 @@
-<template
-  ><div class="about-box-main">
-    <div class="profile">
-      <HostTitleBox title="User profile"></HostTitleBox>
-    </div>
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
+
     <div class="container">
       <!-- <button @click.prevent="f">Active</button>
       <button @click.prevent="g">Inactive</button> -->
@@ -11,7 +10,37 @@
         <div class="col-12">
           <h2 class="noo-sh-title">Your Listings</h2>
         </div>
-        <div v-for="l in listings" v-bind:key="l.id" class="col-sm-6 col-lg-3">
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="add-to-btn">
+            <div class="add-comp">
+              Page {{ page }} of {{ maxpages }} - {{ listings.length }}
+              records
+            </div>
+            <div class="share-bar">
+              <a class="btn hvr-hover" href="#" @click.prevent="first">
+                |<i class="fas fa-caret-left"></i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="previous">
+                <i class="fas fa-caret-left"> </i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="next">
+                <i class="fas fa-caret-right"></i>
+              </a>
+              <a class="btn hvr-hover" href="#" @click.prevent="last">
+                <i class="fas fa-caret-right"></i>|
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-4">
+        <div
+          v-for="l in filtered_listings"
+          v-bind:key="l.id"
+          class="col-sm-6 col-lg-3"
+        >
           <div class="hover-team">
             <div class="our-team">
               <router-link
@@ -52,10 +81,8 @@
               <p>
                 {{ l.friendlyName }}
               </p>
+              <p>{{ l.cost }} + {{ l.extraCostPerPerson }} per person</p>
               <p>
-                {{ l.cost }} + {{ l.extraCostPerPerson }} per person
-              </p>
-              <p>                
                 {{ l.submittedDate }}
               </p>
             </div>
@@ -70,9 +97,9 @@
 <style scoped>
 .img_thumbnail {
   display: block;
-  max-width:100%;
-  max-height:300px;
-  min-height:300px;
+  max-width: 100%;
+  max-height: 300px;
+  min-height: 300px;
   width: auto;
   height: auto;
 }
@@ -83,12 +110,13 @@ import axios from "axios";
 import API from "@/api/Api.js";
 import HostTitleBox from "@/components/host/HostTitleBox.vue";
 import authController from "@/auth/AuthController";
+import PaginationMixin from "@/mixins/PaginationMixin";
 
 export default {
   components: {
     HostTitleBox,
   },
-
+  mixins: [PaginationMixin],
   data() {
     return {
       authController: authController,
@@ -99,13 +127,18 @@ export default {
     const id = authController.getUserID();
     this.retrieveData(id);
   },
+  computed: {
+    filtered_listings() {
+      return this.getPage(this.listings);
+    },
+  },
   methods: {
     retrieveData(id) {
       axios.get(API.GET_INACTIVE_LISTINGS_BY_USER_ID + id).then((response) => {
         this.listings = response.data;
         console.log(this.listings);
       });
-    }   
+    },
   },
 };
 </script>

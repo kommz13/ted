@@ -1,42 +1,24 @@
-<template
-  ><!-- Start About Page  -->
-  <div class="about-box-main">
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
     
     <div class="container">
-      <div class="profile">
-        <HostTitleBox title="User profile"></HostTitleBox>
-      </div>
-      <!-- <div class="row">
-        <div class="col-lg-12">
-          <h2>Listings {{ content }}</h2>
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <router-link :to="{ path: '/host/listing/active' }"
-                >Active</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/inactive' }"
-                >Inactive</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/update' }"
-                >Update</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/create' }"
-                >Create</router-link
-              >
-            </li>
-            
-            
-          </ul>
-        </div>
-      </div> -->
-      <div class="row">
-        <div class="col-lg-6">
+      <div class="row ">
+         <div class="col-lg-4">
+          <GmapMap
+      :center="{lat:listing.geolocation_lat, lng:listing.geolocation_long}"
+      :zoom="17"
+      map-type-id="roadmap"
+      style="width: 300px; height: 300px"      
+  >
+  <GmapMarker
+    key="1"
+    :position="{lat:listing.geolocation_lat, lng:listing.geolocation_long}"
+  />
+
+</GmapMap>
+</div>
+        <div class="col-lg-4">
           <h2 class="noo-sh-title">{{ listing.friendlyName }}</h2>
           <p>
             <i>Submitted at: {{ listing.submittedDate }} </i>
@@ -60,26 +42,63 @@
             {{ listing.description }}
           </p>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="banner-frame">
             <img class="img-thumbnail img-fluid" :src="getDefaultURL" alt="" />
           </div>
         </div>
       </div>
-      <div class="row my-5">
+
+      <div class="row my-4">
+        <div class="col-12">
+          <h2 class="noo-sh-title">Photos:</h2>
+        </div>
         <div
-          v-for="r in listing.rules"
-          v-bind:key="r.id"
-          class="col-sm-6 col-lg-4"
+          v-for="c in listing.photos"
+          v-bind:key="c.id"          
         >
+        <div class="col-sm-6 col-lg-3">
+          <div v-if="!c.is_default" class="hover-team">
+            <div class="our-team">
+              <img :src="c.photoUrl" alt="" />
+            </div>
+            <hr class="my-0" />
+          </div>
+          </div>
+        </div>
+      </div>
+        
+      <div class="row my-5">
+        <div class="col-sm-4 col-lg-4">
           <div class="service-block-inner">
-            <h3>We allow:</h3>
-            <p>
+            <h3>Amenities:</h3>
+            <p v-for="a in listing.amenities" v-bind:key="a.id">
+              {{ a.name }}
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+          <div class="service-block-inner">
+            <h3>Rules:</h3>
+            <p  v-for="r in listing.rules" v-bind:key="r.id">
               {{ r.rule }}
             </p>
           </div>
         </div>
+        <div class="col-sm-4 col-lg-4">
+          <div class="service-block-inner">
+            <h3>Status:</h3>
+            <p v-if="listing.active">
+              Available
+            </p>
+
+            <p v-else>
+              Not available right now
+            </p>
+          </div>
+        </div>
       </div>
+
       <div class="row my-4">
         <div class="col-12">
           <h2 class="noo-sh-title">People said for this listing:</h2>
@@ -132,8 +151,83 @@
           </div>
         </div>
       </div>
+
+
+    
+      <div class="cart-box-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+          <h2 class="noo-sh-title">Bookings:</h2>
+        </div>
+
+          <div class="col-lg-12">
+            <div class="table-main table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Checkin</th>
+                    <th>Checkout</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>People</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="b in listing.bookings" :key="b.id">
+                    <td>
+                      {{ b.id }}
+                    </td>
+                    <td>
+                      {{ b.bookingStatus }}
+                    </td>
+                    <td>
+                      {{ b.checkIn }}
+                    </td>
+                    <td>
+                      {{ b.checkOut }}
+                    </td>
+                    <td>
+                      {{ b.user.username  }}
+                    </td>
+                    <td>
+                      {{ b.user.firstname  }} {{ b.user.lastname  }}
+                    </td>
+                    <td>
+                      {{ b.user.howManyPeople  }}
+                    </td>
+                    <td class="total-pr">                      
+                      <button v-if="b.bookingStatus == 0" class="btn btn-primary" @click="acceptBooking(b.id)">
+                        Accept
+                      </button>
+                      &nbsp;
+                      <button v-if="b.bookingStatus == 0" class="btn btn-primary" @click="rejectBooking(b.id)">
+                        Reject
+                      </button>
+
+                      <div v-if="b.bookingStatus == 1" class="badge badge-success">
+                        Accepted
+                      </div>
+
+                      <div v-if="b.bookingStatus == 2" class="badge badge-error">
+                        Rejected
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    
 </template>
 
 <script>
@@ -148,6 +242,8 @@ export default {
   data() {
     return {
       listing: {
+        geolocation_lat: 0,
+        geolocation_long: 0,
         photos: [],
       },
     };
@@ -184,6 +280,23 @@ export default {
         console.log(this.listing);
       });
     },
+    acceptBooking(id) {
+      axios.post(API.POST_ACCEPT_BOOKING + id).then((response) => {
+        if (response.status == 200) {
+          id = this.$route.params.id;
+          this.retrieveData(id);
+        }
+      });
+
+    },
+    rejectBooking(id) {
+      axios.post(API.POST_REJECT_BOOKING + id).then((response) => {
+        if (response.status == 200) {
+          id = this.$route.params.id;
+          this.retrieveData(id);
+        }
+      });
+    }
   },
 };
 </script>

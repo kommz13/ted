@@ -1,8 +1,7 @@
-<template
-  ><div class="about-box-main">
-    <div class="profile">
-      <HostTitleBox title="User profile"></HostTitleBox>
-    </div>
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
+    
     <div class="container">
       <!-- <button @click.prevent="f">Active</button>
       <button @click.prevent="g">Inactive</button> -->
@@ -51,10 +50,8 @@
               <p>
                 {{ l.friendlyName }}
               </p>
+              <p>{{ l.cost }} + {{ l.extraCostPerPerson }} per person</p>
               <p>
-                {{ l.cost }} + {{ l.extraCostPerPerson }} per person
-              </p>
-              <p>                
                 {{ l.submittedDate }}
               </p>
             </div>
@@ -69,9 +66,9 @@
 <style scoped>
 .img_thumbnail {
   display: block;
-  max-width:100%;
-  max-height:300px;
-  min-height:300px;
+  max-width: 100%;
+  max-height: 300px;
+  min-height: 300px;
   width: auto;
   height: auto;
 }
@@ -104,7 +101,7 @@ export default {
         this.listings = response.data;
         console.log(this.listings);
       });
-    }   
+    },
   },
 };
 </script>

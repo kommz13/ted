@@ -67,6 +67,7 @@ public class ListingMapper {
         dto.setExtraCostPerPerson(entity.getExtraCostPerPerson());
         dto.setFriendlyName(entity.getFriendlyName());
         dto.setCost(entity.getCost());
+        dto.setSqrMeters(entity.getSqrMeters());
 
         for (Photo p : entity.getPhotoList()) {
             dto.getPhotos().add(photoMapper.toDTO(p));
