@@ -128,7 +128,7 @@ public class ListingResource {
     @Path("deactivate/{id}")
     public Response deactivate(@PathParam("id") Integer id) {
         try {
-            List listings= controller.deactivateListing(id);
+            List listings = controller.deactivateListing(id);
 
             return Response
                     .ok(listings)
@@ -170,7 +170,7 @@ public class ListingResource {
 
         }
     }
-    
+
     @GET
     @Path("accepted_bookings/customer/{id}")
     public Response with_accepted_bookings(@PathParam("id") Integer id) {
@@ -185,7 +185,7 @@ public class ListingResource {
 
         }
     }
-    
+
     @GET
     @Path("rejected_bookings/customer/{id}")
     public Response with_rejected_bookings(@PathParam("id") Integer id) {
@@ -200,12 +200,73 @@ public class ListingResource {
 
         }
     }
-    
+
     @GET
     @Path("previous_bookings/customer/{id}")
     public Response with_previous_bookings(@PathParam("id") Integer id) {
         try {
             List bookings = controller.retrieveWithPreviousBookingByUserId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+
+    /////////////////////for host=============================================
+    @GET
+    @Path("pending_bookings/host/{id}")
+    public Response with_pending_bookings_host(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithPendingBookingByHostId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+
+    @GET
+    @Path("accepted_bookings/host/{id}")
+    public Response with_accepted_bookings_host(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithAcceptedBookingByHostId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+
+    @GET
+    @Path("rejected_bookings/host/{id}")
+    public Response with_rejected_bookings_host(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithRejectedBookingByHostId(id);
+
+            return Response
+                    .ok(bookings)
+                    .build();
+        } catch (BaseValidationException ex) {
+            return Response.ok(ex.getErrors()).status(Response.Status.NOT_ACCEPTABLE).build();
+
+        }
+    }
+
+    @GET
+    @Path("previous_bookings/host/{id}")
+    public Response with_previous_bookings_host(@PathParam("id") Integer id) {
+        try {
+            List bookings = controller.retrieveWithPreviousBookingByHostId(id);
 
             return Response
                     .ok(bookings)
