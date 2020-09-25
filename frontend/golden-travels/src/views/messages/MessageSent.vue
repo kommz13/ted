@@ -1,90 +1,97 @@
 <template>
-  <!-- Start Contact Us  -->
-  <div class="contact-box-main">
-    <div class="profile">
-      <MessageTitleBox title="User profile"></MessageTitleBox>
-    </div>
-    <div class="container">
-      <div class="row">
-        <!-- Start Contact Us  -->
-        <div class="cart-box-main">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <div class="contact-info-left">
-                  <h2>Outbox</h2>
-                  <div class="table-main table-responsive">
+  <div>
+    <MessageTitleBox></MessageTitleBox>
+
+    <div class="cart-box-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <h2>Inbox</h2>
+            <div class="table-main table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>To</th>
+                    <th>&nbsp;</th>
+                    <th>From</th>
+                    <th>Content</th>
                     <th>Date</th>
+                    <th>&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="m in filtered_users" :key="m.id">
+                  <tr v-for="m in filtered_messages" v-bind:key="m.id">
                     <td class="thumbnail-img">
                       <a href="#">
-                        <img class="img-fluid" :src="m.sender.photoUrl" alt="" />
+                        <img
+                          class="img-fluid"
+                          :src="m.sender.photoUrl"
+                          alt=""
+                        />
                       </a>
-                    </td>
-                    <td>
-                      {{ u.id }}
                     </td>
                     <td class="name-pr">
                       <router-link
-                        :to="{ name: 'MessageSent', params: { id: u.id } }"
-                        >{{ u.firstname }} {{ u.lastname }}</router-link
+                        :to="{
+                          name: 'Profile',
+                          params: { id: m.sender.id },
+                        }"
                       >
+                        {{ m.sender.firstname }} {{ m.sender.lastname }}
+                      </router-link>
                     </td>
+                    <td class="name-pr">{{ m.text.substring(0, 20) }} ...</td>
                     <td class="name-pr">
-                      {{ u.username }}
-                    </td>
-                    <td class="name-pr">
-                      {{ u.email }}
+                      {{ m.dateTime }}
                     </td>
                     <!-- <td class="name-pr">
                       {{ u.birthdate }}
                     </td>                                         -->
                     <td class="total-pr">
-                      {{ u.phone }}
-                    </td>
-                    <td>
-                      <div
-                        class="badge badge-success"
-                        v-for="r in u.roles"
-                        :key="r.id"
-                      >
-                        {{ r.name }}
-                      </div>
-                    </td>
-                    <td class="total-pr">
                       <button
                         type="button"
-                        @click="rejectUser(u.id)"
+                        @click="reply(m.id)"
                         class="btn btn-primary"
                       >
                         Reply
                       </button>
-                    </td>
-                     <td class="total-pr">
+                      &nbsp;
                       <button
                         type="button"
-                        @click="rejectUser(u.id)"
+                        @click="remove(m.id)"
                         class="btn btn-primary"
                       >
-                        Reply
+                        Delete
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-                </div>
+
+            <div class="add-to-btn">
+              <div class="add-comp">
+                Page {{ page }} of {{ maxpages }} - {{ messages.length }}
+                records
               </div>
-              <div class="col-lg-8 col-sm-12">
+              <div class="share-bar">
+                <a class="btn hvr-hover" href="#" @click.prevent="first">
+                  |<i class="fas fa-caret-left"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="previous">
+                  <i class="fas fa-caret-left"> </i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="next">
+                  <i class="fas fa-caret-right"></i>
+                </a>
+                <a class="btn hvr-hover" href="#" @click.prevent="last">
+                  <i class="fas fa-caret-right"></i>|
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-8 col-sm-12">
                 <div class="contact-form-right">
-                  <h2>Send message</h2>
+                  <h2>Received message</h2>
 
                   <form id="contactForm">
                     <div class="row">
@@ -95,24 +102,10 @@
                             class="form-control"
                             id="name"
                             name="name"
-                            placeholder="Message To"
+                            placeholder="Message From"
                             required
                             data-error="Please enter your name"
-                            v-model="message.receiver.id"
-                          />
-                          <div class="help-block with-errors"></div>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="subject"
-                            name="name"
-                            placeholder="Subject"
-                            required
-                            data-error="Please enter your Subject"
+                            v-model="message.name"
                           />
                           <div class="help-block with-errors"></div>
                         </div>
@@ -148,11 +141,9 @@
                     </div>
                   </form>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div> -->
+          <!-- End Cart -->
         </div>
-        <!-- End Cart -->
       </div>
     </div>
   </div>
@@ -175,21 +166,39 @@ export default {
   data() {
     return {
       authController: authController,
-      message: [],
+      messages: [],
     };
   },
-    mounted(){
+  computed: {
+    filtered_messages() {
+      return this.getPage(this.messages);
+    },
+  },
+  mounted() {
     const id = authController.getUserID();
     this.retrieveData(id);
   },
   methods: {
     retrieveData(id) {
-      axios.get(API.GET_RECEIVED_MESSAGES + id).then((response) => {
-        this.message = response.data;
+      axios.get(API.GET_SENT_MESSAGES + id).then((response) => {
+        this.messages = response.data;
         console.log(this.message);
-      })
+      });
+    },
+    reply(id) {
+      console.log("replying to " + id);
+    },
+    remove(id) {
+      axios
+        .post(API.POST_DELETE_MESSAGE + id)
+        .then(() => {
+          const id = authController.getUserID();
+          this.retrieveData(id);
+        })
+        .catch(() => {
+          console.log("Error: message could not be deleted");
+        });
     },
   },
-  };
-
+};
 </script>

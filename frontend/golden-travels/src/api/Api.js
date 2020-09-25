@@ -22,6 +22,7 @@ let GET_INACTIVE_LISTINGS = BASE_URL + "/listing/inactive/";
 let GET_RECEIVED_MESSAGES = BASE_URL + "/messages/received/";
 let GET_SENT_MESSAGES =  BASE_URL + "/messages/sent/";
 let GET_MESSAGE_DETAILS = BASE_URL + "/messages/details/";
+let POST_DELETE_MESSAGE = BASE_URL + "/messages/delete_message/";
 let POST_LISTING_CREATE = BASE_URL + "/listing/create/";
 let CHANGE_PROFILE = BASE_URL + "/account/edit/";
 let GET_LISTING_BY_ID = BASE_URL + "/listing/";
@@ -62,5 +63,5 @@ export default {
   GET_PENDING_BOOKINGS_BY_USER_ID,
   POST_ACCEPT_BOOKING,
   POST_REJECT_BOOKING,
-
+  POST_DELETE_MESSAGE
 };

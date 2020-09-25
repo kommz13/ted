@@ -450,10 +450,16 @@
               </div>
             </div>
             <div class="col-12 d-flex shopping-box">
-              <button id="submit" type="submit" class="ml-auto btn hvr-hover">
+              <button id="submit" type="submit" class="ml-auto btn primary  ">
                 Update Room
               </button>
             </div>
+
+              <div class="col-12 d-flex shopping-box">
+                <button id="deleteRoom" class="ml-auto btn hvr-hover">
+                   Delete Room
+                </button>
+              </div>
           </div>
         </div>
       </div>

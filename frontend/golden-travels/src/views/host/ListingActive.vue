@@ -1,8 +1,7 @@
-<template
-  ><div class="about-box-main">
-    <div class="profile">
-      <HostTitleBox title="User profile"></HostTitleBox>
-    </div>
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
+
     <div class="container">
       <!-- <button @click.prevent="f">Active</button>
       <button @click.prevent="g">Inactive</button> -->

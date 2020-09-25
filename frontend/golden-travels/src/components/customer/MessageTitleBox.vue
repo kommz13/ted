@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h2>Messages {{ content }}</h2>
+          <h2>Messages</h2>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link :to="{ path: '/messages/received/' }"

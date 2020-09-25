@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({   
-    @NamedQuery(name = "Message.findByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x or m.userIdTo.id = :y"),
-    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE m.userIdTo.id = :x"),
-    @NamedQuery(name = "Message.findSentByUserId", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x"),
-    @NamedQuery(name = "Message.findDetailsByID", query = "SELECT m FROM Message m WHERE m.id = :x"),
+    @NamedQuery(name = "Message.findByUserId", query = "SELECT m FROM Message m WHERE m.active=1 and m.userIdFrom.id = :x or m.userIdTo.id = :y"),
+    @NamedQuery(name = "Message.findReceivedByUserId", query = "SELECT m FROM Message m WHERE  m.active=1 and  m.userIdTo.id = :x"),
+    @NamedQuery(name = "Message.findSentByUserId", query = "SELECT m FROM Message m WHERE  m.active=1 and m.userIdFrom.id = :x"),
+    @NamedQuery(name = "Message.findDetailsByID", query = "SELECT m FROM Message m WHERE  m.active=1 and m.id = :x"),
 //        findAllMessagesByUserID
 //    @NamedQuery(name = "Message.findAllMessagesByUserID", query = "SELECT m FROM Message m WHERE m.userIdFrom.id = :x or m.userIdTo.id = :x")
     

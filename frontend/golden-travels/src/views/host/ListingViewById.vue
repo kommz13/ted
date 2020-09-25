@@ -1,41 +1,9 @@
-<template
-  ><!-- Start About Page  -->
-  <div class="about-box-main">
+<template>
+  <div>
+    <HostTitleBox title="User profile"></HostTitleBox>
     
     <div class="container">
-      <div class="profile">
-        <HostTitleBox title="User profile"></HostTitleBox>
-      </div>
-      <!-- <div class="row">
-        <div class="col-lg-12">
-          <h2>Listings {{ content }}</h2>
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-              <router-link :to="{ path: '/host/listing/active' }"
-                >Active</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/inactive' }"
-                >Inactive</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/update' }"
-                >Update</router-link
-              >
-            </li>
-            <li class="breadcrumb-item active">
-              <router-link :to="{ path: '/host/listing/create' }"
-                >Create</router-link
-              >
-            </li>
-            
-            
-          </ul>
-        </div>
-      </div> -->
-      <div class="row">
+      <div class="row ">
          <div class="col-lg-4">
           <GmapMap
       :center="{lat:listing.geolocation_lat, lng:listing.geolocation_long}"

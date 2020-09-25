@@ -35,7 +35,9 @@
               <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" ><router-link :to="{ path: '/about' }">About</router-link> </a>
+              <router-link class="nav-link" :to="{ path: '/about' }"
+                >About</router-link
+              >
             </li>
             <li class="dropdown megamenu-fw" v-if="showAdministratorOption()">
               <a
