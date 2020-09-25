@@ -224,10 +224,39 @@ public class ListingRepository {
         Query q = em.createNamedQuery("Listing.findWithRejectedBookingsByCustomerID");
         q.setParameter("x", id);
         List<Listing> listing = q.getResultList();
-        return listing;    }
+        return listing;
+    }
 
     public List<Listing> findWithPreviousBookingsByCustomerID(Integer id) {
         Query q = em.createNamedQuery("Listing.findWithPreviousBookingsByCustomerID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithPendingBookingsByHostID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithPendingBookingsByHostID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithAcceptedBookingsByHosyID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithAcceptedBookingsByHostID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithRejectedBookingsByHostID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithRejectedBookingsByHostID");
+        q.setParameter("x", id);
+        List<Listing> listing = q.getResultList();
+        return listing;
+    }
+
+    public List<Listing> findWithPreviousBookingsByHostID(Integer id) {
+        Query q = em.createNamedQuery("Listing.findWithPreviousBookingsByHostID");
         q.setParameter("x", id);
         List<Listing> listing = q.getResultList();
         return listing;    }

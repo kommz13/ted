@@ -107,9 +107,9 @@ public class ListingMapper {
 //                        .getRule().add(rule);
             }
 
-//            for (Booking b : entity.getBookingList()) {
-//                listing.getBookings().add(bookingMapper.toDTO(b));
-//            }
+            for (Booking b : entity.getBookingList()) {
+                listing.getBookings().add(bookingMapper.toDTO(b));
+            }
             for (Critic c : entity.getCriticList()) {
                 listing.getCritics().add(criticMapper.toDTO(c));
             }
